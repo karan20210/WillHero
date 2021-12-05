@@ -13,6 +13,7 @@ public class gameGUI extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(gameGUI.class.getResource("MainMenu.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 600, 400);
         stage.setTitle("Will Hero!");
+        stage.setResizable(false);
         stage.setScene(scene);
         stage.show();
     }

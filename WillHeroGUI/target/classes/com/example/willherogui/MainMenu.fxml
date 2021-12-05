@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="602.0" stylesheets="@CSS/MainMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.MainMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/MainMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.MainMenuController">
    <children>
-      <ImageView fitHeight="402.0" fitWidth="602.0" layoutX="-2.0" layoutY="1.0" opacity="0.89" pickOnBounds="true">
+      <ImageView fitHeight="400.0" fitWidth="600.0" layoutX="1.0" layoutY="1.0" opacity="0.89" pickOnBounds="true">
          <image>
             <Image url="@finalBackgroundImage.jpeg" />
          </image>

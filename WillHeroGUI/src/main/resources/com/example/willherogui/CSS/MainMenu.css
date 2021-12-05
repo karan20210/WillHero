@@ -1,4 +1,4 @@
-#buttons
+.button
 {
     -fx-background-radius: 20;
     -fx-border-color: grey;
@@ -7,7 +7,7 @@
     -fx-text-fill: black;
 }
 
-#buttons:hover
+.button:hover
 {
     -fx-border-width: 2;
 }

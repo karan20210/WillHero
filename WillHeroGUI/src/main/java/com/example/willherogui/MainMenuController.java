@@ -17,9 +17,13 @@ public class MainMenuController {
     private Scene scene; 
 
     public void onClickLoad(ActionEvent event) throws IOException{
+        
         FXMLLoader loader = new FXMLLoader(getClass().getResource("LoadMenu.fxml"));
+        
 
         root = loader.load();
+       
+       
 
         stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
 
