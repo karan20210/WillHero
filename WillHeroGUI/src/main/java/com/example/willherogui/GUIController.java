@@ -4,12 +4,18 @@ import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.io.IOException;
 
 public class GUIController {
 
@@ -23,20 +29,26 @@ public class GUIController {
     private Label score;
 
     TranslateTransition jump, moveRight;
+    boolean firstJump = true;
 
 
 
     @FXML
     protected void heroJump()
     {
-        hero.requestFocus();
-        jump = new TranslateTransition();
-        jump.setDuration(Duration.millis(1000));
-        jump.setNode(hero);
-        jump.setByY(-100);
-        jump.setCycleCount(Animation.INDEFINITE);
-        jump.setAutoReverse(true);
-        jump.play();
+        if(firstJump)
+        {
+            firstJump = false;
+            hero.requestFocus();
+            jump = new TranslateTransition();
+            jump.setDuration(Duration.millis(1000));
+            jump.setNode(hero);
+            jump.setByY(-100);
+            jump.setCycleCount(Animation.INDEFINITE);
+            jump.setAutoReverse(true);
+            jump.play();
+        }
+
     }
 
     @FXML
@@ -96,5 +108,23 @@ public class GUIController {
 
         hero.setTranslateX(0.0);
         hero.setTranslateY(0.0);
+    }
+
+    @FXML
+    protected void saveGame(ActionEvent event)
+    {
+        System.out.println("Saving...");
+    }
+
+    @FXML
+    protected void returnToMainMenu(ActionEvent event) throws IOException
+    {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+
+        Stage stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
+
+        Scene scene = new Scene(loader.load());
+        stage.setScene(scene);
+        stage.show();
     }
 }
