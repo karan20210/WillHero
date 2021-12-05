@@ -26,7 +26,7 @@
                         <Font name="Apple Chancery" size="23.0" />
                     </font>
                 </Label>
-                <Button layoutX="65.0" layoutY="104.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="34.0" prefWidth="53.0" style="-fx-background-radius: 100;">
+                <Button id="buttons" layoutX="65.0" layoutY="104.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="34.0" prefWidth="53.0" style="-fx-background-radius: 100;">
                     <graphic>
                         <ImageView fitHeight="26.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -35,7 +35,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button layoutX="156.0" layoutY="105.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="34.0" prefWidth="53.0" style="-fx-background-radius: 100;">
+                <Button id="buttons" layoutX="156.0" layoutY="105.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="34.0" prefWidth="53.0" style="-fx-background-radius: 100;">
                     <graphic>
                         <ImageView fitHeight="26.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -44,7 +44,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-                <Button layoutX="241.0" layoutY="103.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="34.0" prefWidth="53.0" style="-fx-background-radius: 100;">
+                <Button id="buttons" layoutX="241.0" layoutY="103.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="34.0" prefWidth="53.0" style="-fx-background-radius: 100;">
                     <graphic>
                         <ImageView fitHeight="26.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
                             <image>
@@ -53,7 +53,7 @@
                         </ImageView>
                     </graphic>
                 </Button>
-            <Button layoutX="294.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="43.0" prefWidth="50.0" style="-fx-background-radius: 50;">
+            <Button id="buttons" layoutX="294.0" layoutY="14.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="43.0" prefWidth="50.0" style="-fx-background-radius: 50;">
                <graphic>
                   <ImageView fitHeight="39.0" fitWidth="39.0" pickOnBounds="true" preserveRatio="true">
                      <image>
@@ -64,7 +64,7 @@
             </Button>
             </children>
         </Pane>
-        <Button layoutX="518.0" layoutY="21.0" mnemonicParsing="false" onAction="#pauseGame" style="-fx-background-radius: 50;">
+        <Button id="buttons" layoutX="518.0" layoutY="21.0" mnemonicParsing="false" onAction="#pauseGame" style="-fx-background-radius: 50;">
             <graphic>
                 <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                     <image>
