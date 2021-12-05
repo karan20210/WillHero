@@ -9,12 +9,12 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="402.0" prefWidth="602.0" stylesheets="@CSS/MainMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.MainMenuController">
    <children>
-      <ImageView fitHeight="402.0" fitWidth="602.0" layoutX="-2.0" layoutY="1.0" opacity="0.89" pickOnBounds="true">
+      <ImageView fitHeight="402.0" fitWidth="602.0" layoutX="-2.0" layoutY="1.0" pickOnBounds="true">
          <image>
-            <Image url="@mainMenuBackground.jpg" />
+            <Image url="@finalBackgroundImage.jpg" />
          </image>
       </ImageView>
-      <Button id="buttons" alignment="CENTER" contentDisplay="CENTER" layoutX="401.0" layoutY="202.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="34.0" prefWidth="147.0" text="Start Game" textAlignment="CENTER" textFill="#cd3737">
+      <Button id="buttons" alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="229.0" mnemonicParsing="false" onAction="#onClickStart" prefHeight="34.0" prefWidth="147.0" text="Start Game" textAlignment="CENTER" textFill="#cd3737">
          <font>
             <Font name="Copperplate" size="18.0" />
          </font>
@@ -22,7 +22,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button id="buttons" alignment="CENTER" contentDisplay="CENTER" layoutX="401.0" layoutY="256.0" mnemonicParsing="false" onAction="#onClickLoad" prefHeight="34.0" prefWidth="147.0" text="Load Game" textAlignment="CENTER" textFill="#cd3737">
+      <Button id="buttons" alignment="CENTER" contentDisplay="CENTER" layoutX="243.0" layoutY="283.0" mnemonicParsing="false" onAction="#onClickLoad" prefHeight="34.0" prefWidth="147.0" text="Load Game" textAlignment="CENTER" textFill="#cd3737">
          <font>
             <Font name="Copperplate" size="18.0" />
          </font>
@@ -30,7 +30,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button id="buttons" alignment="CENTER" contentDisplay="CENTER" layoutX="401.0" layoutY="310.0" mnemonicParsing="false" onAction="#onClickQuit" prefHeight="34.0" prefWidth="146.0" text="Quit" textAlignment="CENTER" textFill="#cd3737">
+      <Button id="buttons" alignment="CENTER" contentDisplay="CENTER" layoutX="244.0" layoutY="332.0" mnemonicParsing="false" onAction="#onClickQuit" prefHeight="34.0" prefWidth="146.0" text="Quit" textAlignment="CENTER" textFill="#cd3737">
          <font>
             <Font name="Copperplate" size="18.0" />
          </font>

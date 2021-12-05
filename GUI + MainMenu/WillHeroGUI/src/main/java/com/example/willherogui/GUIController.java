@@ -1,5 +1,4 @@
 package com.example.willherogui;
-
 import javafx.animation.Animation;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
