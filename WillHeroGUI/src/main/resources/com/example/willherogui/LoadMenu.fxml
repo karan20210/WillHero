@@ -9,15 +9,11 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.Color?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
-<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@CSS/LoadMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.LoadMenuController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="800.0" stylesheets="@CSS/LoadMenu.css" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.LoadMenuController">
    <children>
-      <ImageView fitHeight="400.0" fitWidth="600.0" opacity="0.78" pickOnBounds="true">
+      <ImageView fitHeight="400.0" fitWidth="800.0" opacity="0.78" pickOnBounds="true">
          <image>
             <Image url="@finalBackgroundImage.jpeg" />
          </image>
@@ -25,49 +21,15 @@
             <DropShadow radius="24.655" width="79.62" />
          </effect>
       </ImageView>
-      <StackPane layoutX="62.0" layoutY="36.0" prefHeight="253.0" prefWidth="441.0">
+      <StackPane layoutX="180.0" layoutY="64.0" prefHeight="253.0" prefWidth="441.0" style="-fx-background-radius: 50; -fx-background-color: rgba(72,202,228, 0.5);">
          <children>
-            <Rectangle fx:id="labelbox" arcHeight="4.0" arcWidth="5.0" height="301.0" strokeType="INSIDE" width="490.0">
-               <fill>
-                  <LinearGradient endY="0.981042654028436" startY="0.009478672985781991">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.04259999841451645" green="0.3874233365058899" blue="0.7099999785423279" opacity="0.8173159956932068" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </fill>
-               <stroke>
-                  <LinearGradient endY="0.981042654028436" startY="0.009478672985781991">
-                     <stops>
-                        <Stop>
-                           <color>
-                              <Color red="0.04259999841451645" green="0.3874233365058899" blue="0.7099999785423279" opacity="0.8173159956932068" />
-                           </color>
-                        </Stop>
-                        <Stop offset="1.0">
-                           <color>
-                              <Color red="1.0" green="1.0" blue="1.0" />
-                           </color>
-                        </Stop>
-                     </stops>
-                  </LinearGradient>
-               </stroke>
-            </Rectangle>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="432.0" spacing="10.0">
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="432.0" spacing="10.0" style="-fx-background-radius: 50;">
                <children>
-                  <Button mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="400.0" text="SAM123                                 DATE" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="400.0" text="{EMPTY}" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="400.0" text="{EMPTY}" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="400.0" text="{EMPTY}" />
-                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="400.0" text="{EMPTY}" />
+                  <Button mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="226.0" style="-fx-background-radius: 40; -fx-border-radius: 40;" text="SAM123                                 DATE" />
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="226.0" style="-fx-background-radius: 40; -fx-border-radius: 40;" text="{EMPTY}" />
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="226.0" style="-fx-background-radius: 40; -fx-border-radius: 40;" text="{EMPTY}" />
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="226.0" style="-fx-background-radius: 40; -fx-border-radius: 40;" text="{EMPTY}" />
+                  <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="226.0" style="-fx-background-radius: 40; -fx-border-radius: 40;" text="{EMPTY}" />
                </children>
                <padding>
                   <Insets bottom="15.0" top="15.0" />
@@ -75,7 +37,7 @@
             </VBox>
          </children>
       </StackPane>
-      <Button fx:id="goback" alignment="CENTER" contentDisplay="CENTER" layoutX="233.0" layoutY="345.0" mnemonicParsing="false" onAction="#onClickGoBack" prefHeight="34.0" prefWidth="148.0" text="Go Back" textAlignment="CENTER" textFill="#793a3a">
+      <Button fx:id="goback" alignment="CENTER" contentDisplay="CENTER" layoutX="326.0" layoutY="356.0" mnemonicParsing="false" onAction="#onClickGoBack" prefHeight="34.0" prefWidth="148.0" text="Go Back" textAlignment="CENTER" textFill="#793a3a">
          <font>
             <Font name="Copperplate" size="18.0" />
          </font>

@@ -104,6 +104,7 @@ public class GUIController {
         hero.setTranslateX(0.0);
         hero.setTranslateY(0.0);
         firstJump = true;
+        pauseMenuActive = false;
     }
 
     @FXML

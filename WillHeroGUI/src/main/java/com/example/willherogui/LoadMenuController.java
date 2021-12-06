@@ -32,7 +32,7 @@ public class LoadMenuController {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         root = loader.load();       
         stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root,600,400);
+        scene = new Scene(root,800,400);
         stage.setScene(scene);
         stage.show(); 
 
