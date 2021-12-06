@@ -30,14 +30,12 @@ public class GUIController {
 
     TranslateTransition jump, moveRight;
     boolean firstJump = true;
-
+    boolean pauseMenuActive = false;
 
 
     @FXML
-    protected void heroJump()
-    {
-        if(firstJump)
-        {
+    protected void heroJump() {
+        if (firstJump && !pauseMenuActive) {
             firstJump = false;
             hero.requestFocus();
             jump = new TranslateTransition();
@@ -52,10 +50,8 @@ public class GUIController {
     }
 
     @FXML
-    protected void onSpace(KeyEvent event)
-    {
-        if(event.getCode() == KeyCode.SPACE)
-        {
+    protected void onSpace(KeyEvent event) {
+        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive) {
             moveRight = new TranslateTransition();
             moveRight.setDuration(Duration.millis(100));
             moveRight.setNode(hero);
@@ -70,58 +66,56 @@ public class GUIController {
     }
 
     @FXML
-    protected void pauseGame(ActionEvent event)
-    {
+    protected void pauseGame(ActionEvent event) {
+        pauseMenuActive = true;
         pausemenu.requestFocus();
         pausemenu.setOpacity(1);
         pausemenu.setDisable(false);
 
-        if(jump!=null)
+        if (jump != null)
             jump.pause();
-        if(moveRight!=null)
-        moveRight.pause();
+        if (moveRight != null)
+            moveRight.pause();
     }
 
     @FXML
-    protected void resumeGame(ActionEvent event)
-    {
+    protected void resumeGame(ActionEvent event) {
+        pauseMenuActive = false;
         game.requestFocus();
         pausemenu.setOpacity(0);
         pausemenu.setDisable(true);
 
-        if(jump!=null)
+        if (jump != null)
             jump.play();
     }
 
     @FXML
-    protected void restartGame(ActionEvent event)
-    {
+    protected void restartGame(ActionEvent event) {
         game.requestFocus();
         pausemenu.setOpacity(0);
         pausemenu.setDisable(true);
         score.setText("0");
 
-        if(jump!=null)
+        if (jump != null)
             jump.stop();
-        if(moveRight!=null)
+        if (moveRight != null)
             moveRight.stop();
 
         hero.setTranslateX(0.0);
         hero.setTranslateY(0.0);
+        firstJump = true;
     }
 
     @FXML
-    protected void saveGame(ActionEvent event)
-    {
+    protected void saveGame(ActionEvent event) {
         System.out.println("Saving...");
     }
 
     @FXML
-    protected void returnToMainMenu(ActionEvent event) throws IOException
-    {
+    protected void returnToMainMenu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
 
-        Stage stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);

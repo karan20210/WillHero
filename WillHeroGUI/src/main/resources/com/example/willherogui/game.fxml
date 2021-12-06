@@ -11,16 +11,46 @@
 
 <Pane fx:id="game" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onSpace" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.GUIController">
     <children>
-        <ImageView fx:id="hero1" fitHeight="108.0" fitWidth="70.0" layoutX="283.0" layoutY="-109.0" onMouseClicked="#heroJump" pickOnBounds="true" preserveRatio="true" scaleX="15.0" scaleY="10.0">
+        <ImageView fitHeight="108.0" fitWidth="70.0" layoutX="283.0" layoutY="-109.0" onMouseClicked="#heroJump" pickOnBounds="true" preserveRatio="true" scaleX="15.0" scaleY="10.0">
             <image>
                 <Image url="@background.jpeg" />
             </image>
         </ImageView>
+      <ImageView fitHeight="119.0" fitWidth="127.0" layoutX="28.0" layoutY="8.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@clouds.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="119.0" fitWidth="127.0" layoutX="404.0" layoutY="7.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@clouds.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="119.0" fitWidth="127.0" layoutX="236.0" layoutY="40.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@clouds.png" />
+         </image>
+      </ImageView>
         <ImageView fx:id="hero" fitHeight="92.0" fitWidth="68.0" layoutX="75.0" layoutY="166.0" onMouseClicked="#heroJump" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../../../Images/hero.png" />
             </image>
         </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@platform.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="335.0" layoutY="214.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@platform.png" />
+         </image>
+      </ImageView>
+      <ImageView fitHeight="73.0" fitWidth="94.0" layoutX="398.0" layoutY="145.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@orc.jpeg" />
+         </image>
+      </ImageView>
         <Pane fx:id="pausemenu" disable="true" layoutX="173.0" layoutY="114.0" opacity="0.0" prefHeight="188.0" prefWidth="262.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
             <children>
                 <Label layoutX="59.0" layoutY="22.0" text="Game paused" textFill="WHITE">
@@ -90,7 +120,7 @@
             </Button>
             </children>
         </Pane>
-        <Button id="buttons" layoutX="518.0" layoutY="21.0" mnemonicParsing="false" onAction="#pauseGame" style="-fx-background-radius: 50; -fx-background-color: transparent;" stylesheets="@CSS/PauseMenu.css">
+        <Button id="buttons" layoutX="534.0" layoutY="18.0" mnemonicParsing="false" onAction="#pauseGame" style="-fx-background-radius: 50; -fx-background-color: transparent;" stylesheets="@CSS/PauseMenu.css">
             <graphic>
                 <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -102,7 +132,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
         </Button>
-        <Label fx:id="score" layoutX="285.0" layoutY="35.0" text="0" textFill="WHITE">
+        <Label fx:id="score" layoutX="294.0" layoutY="13.0" text="0" textFill="WHITE">
             <font>
                 <Font name="Comic Sans MS" size="21.0" />
             </font>
