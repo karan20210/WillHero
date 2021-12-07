@@ -125,7 +125,7 @@
             </Button>
             </children>
         </Pane>
-        <Button id="buttons" layoutX="733.0" layoutY="18.0" mnemonicParsing="false" onAction="#pauseGame" style="-fx-background-radius: 50; -fx-background-color: transparent;" stylesheets="@CSS/PauseMenu.css">
+        <Button id="buttons" fx:id="pauseButton" layoutX="733.0" layoutY="18.0" mnemonicParsing="false" onAction="#pauseGame" style="-fx-background-radius: 50; -fx-background-color: transparent;" stylesheets="@CSS/PauseMenu.css">
             <graphic>
                 <ImageView fitHeight="35.0" fitWidth="58.0" pickOnBounds="true" preserveRatio="true">
                     <image>

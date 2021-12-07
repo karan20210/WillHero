@@ -49,7 +49,6 @@ public class GUIController {
             jump.setAutoReverse(true);
             jump.play();
         }
-
     }
 
     @FXML
@@ -90,8 +89,6 @@ public class GUIController {
             pauseMenuMove.setByX(100);
             pauseMenuMove.setCycleCount(1);
             pauseMenuMove.play();
-
-
         }
     }
 
