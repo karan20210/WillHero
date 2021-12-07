@@ -37,7 +37,7 @@ public class MainMenuController {
     {
         FXMLLoader loader =  new FXMLLoader(getClass().getResource("game.fxml"));
         stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(loader.load(), 800, 400);
+        scene = new Scene(loader.load(), 800, 500);
         stage.setScene(scene);
         stage.show();
 
