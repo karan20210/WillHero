@@ -57,7 +57,7 @@ public class GUIController {
             moveRight = new TranslateTransition();
             moveRight.setDuration(Duration.millis(100));
             moveRight.setNode(hero);
-            moveRight.setByX(+100);
+            moveRight.setByX(+50);
             moveRight.setCycleCount(1);
             moveRight.play();
 
@@ -72,21 +72,21 @@ public class GUIController {
             pauseButtonMove = new TranslateTransition();
             pauseButtonMove.setDuration(Duration.millis(500));
             pauseButtonMove.setNode(pauseButton);
-            pauseButtonMove.setByX(100);
+            pauseButtonMove.setByX(50);
             pauseButtonMove.setCycleCount(1);
             pauseButtonMove.play();
 
             sceneMove = new TranslateTransition();
             sceneMove.setDuration(Duration.millis(500));
             sceneMove.setNode(game);
-            sceneMove.setByX(-100);
+            sceneMove.setByX(-50);
             sceneMove.setCycleCount(1);
             sceneMove.play();
 
             pauseMenuMove = new TranslateTransition();
             pauseMenuMove.setDuration(Duration.millis(500));
             pauseMenuMove.setNode(pausemenu);
-            pauseMenuMove.setByX(100);
+            pauseMenuMove.setByX(50);
             pauseMenuMove.setCycleCount(1);
             pauseMenuMove.play();
         }

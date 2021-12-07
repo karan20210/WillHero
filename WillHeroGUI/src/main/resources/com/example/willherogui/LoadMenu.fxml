@@ -15,7 +15,7 @@
    <children>
       <ImageView fitHeight="500.0" fitWidth="800.0" opacity="0.78" pickOnBounds="true">
          <image>
-            <Image url="@background1.jpg" />
+            <Image url="@Images/final-main-background.jpg" />
          </image>
          <effect>
             <DropShadow radius="24.655" width="79.62" />
