@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -27,8 +28,10 @@ public class GUIController {
     private Pane pausemenu;
     @FXML
     private Label score;
+    @FXML
+    private Button pauseButton;
 
-    TranslateTransition jump, moveRight;
+    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove;
     boolean firstJump = true;
     boolean pauseMenuActive = false;
 
@@ -62,13 +65,39 @@ public class GUIController {
             int s = Integer.valueOf(score.getText());
             s++;
             score.setText(Integer.toString(s));
+
+//            game.setTranslateX(-1*hero.getTranslateX());
+//            pausemenu.setTranslateX(hero.getTranslateX());
+//            pauseButton.setTranslateX(hero.getTranslateX());
+
+            pauseButtonMove = new TranslateTransition();
+            pauseButtonMove.setDuration(Duration.millis(500));
+            pauseButtonMove.setNode(pauseButton);
+            pauseButtonMove.setByX(100);
+            pauseButtonMove.setCycleCount(1);
+            pauseButtonMove.play();
+
+            sceneMove = new TranslateTransition();
+            sceneMove.setDuration(Duration.millis(500));
+            sceneMove.setNode(game);
+            sceneMove.setByX(-100);
+            sceneMove.setCycleCount(1);
+            sceneMove.play();
+
+            pauseMenuMove = new TranslateTransition();
+            pauseMenuMove.setDuration(Duration.millis(500));
+            pauseMenuMove.setNode(pausemenu);
+            pauseMenuMove.setByX(100);
+            pauseMenuMove.setCycleCount(1);
+            pauseMenuMove.play();
+
+
         }
     }
 
     @FXML
     protected void pauseGame(ActionEvent event) {
         pauseMenuActive = true;
-        pausemenu.requestFocus();
         pausemenu.setOpacity(1);
         pausemenu.setDisable(false);
 
@@ -103,6 +132,9 @@ public class GUIController {
 
         hero.setTranslateX(0.0);
         hero.setTranslateY(0.0);
+        game.setTranslateX(0.0);
+        pauseButton.setTranslateX(0.0);
+        pausemenu.setTranslateX(0.0);
         firstJump = true;
         pauseMenuActive = false;
     }
