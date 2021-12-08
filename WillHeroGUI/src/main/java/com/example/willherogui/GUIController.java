@@ -21,6 +21,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -79,6 +80,7 @@ public class GUIController implements Initializable {
         orcs = new ArrayList<ImageView>();
         Collections.addAll(orcs, orc_1, orc_2, orc_3);
         pauseButton.setFocusTraversable(false);
+
     }
 
     @FXML
