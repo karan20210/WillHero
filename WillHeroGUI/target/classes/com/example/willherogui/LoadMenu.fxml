@@ -23,7 +23,7 @@
       </ImageView>
       <StackPane layoutX="174.0" layoutY="72.0" prefHeight="311.0" prefWidth="510.0" style="-fx-background-radius: 50; -fx-background-color: rgba(72,202,228, 0.5);">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="497.0" spacing="10.0" style="-fx-background-radius: 50;">
+            <VBox fx:id="Box" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="313.0" prefWidth="497.0" spacing="10.0" style="-fx-background-radius: 50;">
                <children>
                   <Button mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="226.0" style="-fx-background-radius: 40; -fx-border-radius: 40;" text="SAM123                                 DATE" />
                   <Button mnemonicParsing="false" prefHeight="37.0" prefWidth="226.0" style="-fx-background-radius: 40; -fx-border-radius: 40;" text="{EMPTY}" />

@@ -1,9 +1,13 @@
 package com.example.willherogui;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,17 +20,18 @@ import javafx.stage.Stage;
 
 
 
-public class LoadMenuController {
-    // @FXML
-    // Pane Box;
-
-
-
+public class LoadMenuController implements Initializable {
+     @FXML
+     private Pane Box;
     private Parent root;
     private Stage stage;
-    private Scene scene; 
+    private Scene scene;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
 
+    }
 
     public void onClickGoBack(ActionEvent event) throws IOException{
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
@@ -37,19 +42,16 @@ public class LoadMenuController {
         stage.show(); 
 
     }
-    
-    
 }
 
-
 // class savedGame extends StackPane{
-    
+//
 //     savedGame(String name, String date){
 //         Rectangle  r = new Rectangle();
 //         r.setId("savedGame");
 //         r.prefWidth(400);
 //         r.prefHeight(60);
-
+//
 //         HBox h = new HBox(50);
 //         Label labelname= new Label(name);
 //         labelname.prefHeight(50);
@@ -57,12 +59,9 @@ public class LoadMenuController {
 //         Label labeldate= new Label(date);
 //         labelname.prefHeight(50);
 //         labelname.prefWidth(50);
-
+//
 //         h.getChildren().addAll(labelname,labeldate);
-
-//         getChildren().addAll(r,h);       
-
-
+//
+//         getChildren().addAll(r,h);
 //     }
-
 // }

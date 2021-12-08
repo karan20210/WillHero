@@ -9,6 +9,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <Pane fx:id="game" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onSpace" onMouseClicked="#heroJump" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.GUIController">
     <children>
@@ -37,17 +38,12 @@
             <Image url="@Images/Islands/P3.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="96.0" fitWidth="131.0" layoutX="302.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_1" fitHeight="96.0" fitWidth="131.0" layoutX="302.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/GreenOrc.png" />
          </image>
       </ImageView>
-        <ImageView fx:id="hero" fitHeight="92.0" fitWidth="68.0" layoutX="75.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@Images/hero-final.png" />
-            </image>
-        </ImageView>
-      <HBox fx:id="coins" layoutX="207.0" layoutY="143.0" prefHeight="29.0" prefWidth="80.0">
+      <HBox fx:id="coins_1" layoutX="207.0" layoutY="143.0" prefHeight="29.0" prefWidth="80.0">
          <children>
             <ImageView fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
@@ -60,6 +56,25 @@
                </image>
             </ImageView>
             <ImageView fx:id="coin" fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Coin.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox fx:id="coins_2" layoutX="520.0" layoutY="143.0" prefHeight="29.0" prefWidth="80.0">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Coin.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Coin.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="coin1" fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/Coin.png" />
                </image>
@@ -147,10 +162,32 @@
             <Cursor fx:constant="HAND" />
          </cursor>
         </Button>
+        <ImageView fx:id="hero" fitHeight="92.0" fitWidth="68.0" layoutX="75.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@Images/hero-final.png" />
+            </image>
+        </ImageView>
         <Label fx:id="score" layoutX="379.0" layoutY="14.0" text="0" textFill="WHITE">
             <font>
                 <Font name="Comic Sans MS" size="21.0" />
             </font>
         </Label>
+      <Label fx:id="tapToStart" layoutX="218.0" layoutY="173.0" style="tex: black;" textFill="WHITE" translateX="-50.0" translateY="175.0">
+         <font>
+            <Font name="Copperplate" size="56.0" />
+         </font>
+         <graphic>
+            <Text fill="WHITE" stroke="#140000" strokeType="OUTSIDE" strokeWidth="2.0" text="Click To Start!">
+               <font>
+                  <Font name="Copperplate" size="58.0" />
+               </font>
+            </Text>
+         </graphic>
+      </Label>
+      <ImageView fitHeight="80.0" fitWidth="74.0" layoutX="634.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/WeaponChest.png" />
+         </image>
+      </ImageView>
     </children>
 </Pane>

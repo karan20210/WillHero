@@ -1,12 +1,10 @@
 package com.example.willherogui;
 
-import javafx.animation.Animation;
-import javafx.animation.Interpolator;
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,12 +14,20 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.ResourceBundle;
 
-public class GUIController {
+public class GUIController implements Initializable {
 
     @FXML
     private Pane game;
@@ -32,50 +38,101 @@ public class GUIController {
     @FXML
     private Label score;
     @FXML
+    private Label tapToStart;
+    @FXML
     private Button pauseButton;
     @FXML
-    private HBox coins;
+    private HBox coins_1, coins_2;
+    @FXML
+    private ImageView orc_1;
 
-    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove;
+    private ArrayList<HBox> coins;
+    private ArrayList<ImageView> orcs;
+
+    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump;
     RotateTransition rotate;
+    FadeTransition ft;
     boolean firstJump = true;
     boolean pauseMenuActive = false;
 
+    @Override
+    public void initialize(URL url, ResourceBundle rb)
+    {
+        ft = new FadeTransition(Duration.millis(1000), tapToStart);
+        ft.setFromValue(1);
+        ft.setToValue(0.6);
+        ft.setCycleCount(Animation.INDEFINITE);
+        ft.setAutoReverse(true);
+        ft.play();
+
+        coins = new ArrayList<HBox>();
+        Collections.addAll(coins, coins_1, coins_2);
+
+        orcs = new ArrayList<ImageView>();
+        Collections.addAll(orcs, orc_1);
+        pauseButton.setFocusTraversable(false);
+    }
 
     @FXML
     protected void heroJump() {
         if (firstJump && !pauseMenuActive) {
+            ft.stop();
+            tapToStart.setOpacity(0);
+
             firstJump = false;
             hero.requestFocus();
             jump = new TranslateTransition();
             jump.setDuration(Duration.millis(1000));
             jump.setNode(hero);
-            jump.setByY(-100);
+            jump.setByY(-110);
             jump.setCycleCount(Animation.INDEFINITE);
             jump.setAutoReverse(true);
             jump.setInterpolator(Interpolator.LINEAR);
             jump.play();
         }
         coinRotate();
+        orcJump();
+    }
+
+    @FXML
+    protected void orcJump()
+    {
+        for(ImageView i: orcs)
+        {
+            orcJump = new TranslateTransition();
+            orcJump.setDuration(Duration.millis(1000));
+            orcJump.setNode(i);
+            orcJump.setByY(-40);
+            orcJump.setCycleCount(Animation.INDEFINITE);
+            orcJump.setAutoReverse(true);
+            orcJump.setInterpolator(Interpolator.LINEAR);
+            orcJump.play();
+
+//            Path p = new Path();
+//            p.getElements().add(new MoveTo(150f, 70f));
+//            p.getElements().add(new CubicCurveTo(240f, 230f, 500f, 340f, 600, 50f));
+        }
     }
 
     @FXML
     protected void coinRotate()
     {
-        for(Node node: coins.getChildren())
+        for(HBox h: coins)
         {
-            rotate = new RotateTransition(Duration.millis(4000), node);
-            rotate.setByAngle(360);
-            rotate.setCycleCount(Animation.INDEFINITE);
-            rotate.setInterpolator(Interpolator.LINEAR);
-//        rotate.setAutoReverse(true);
-            rotate.play();
+            for(Node node: h.getChildren())
+            {
+                rotate = new RotateTransition(Duration.millis(4000), node);
+                rotate.setByAngle(360);
+                rotate.setCycleCount(Animation.INDEFINITE);
+                rotate.setInterpolator(Interpolator.LINEAR);
+                rotate.play();
+            }
         }
     }
 
     @FXML
     protected void onSpace(KeyEvent event) {
-        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive) {
+        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump) {
             moveRight = new TranslateTransition();
             moveRight.setDuration(Duration.millis(100));
             moveRight.setNode(hero);
@@ -88,25 +145,32 @@ public class GUIController {
             score.setText(Integer.toString(s));
 
             pauseButtonMove = new TranslateTransition();
-            pauseButtonMove.setDuration(Duration.millis(500));
+            pauseButtonMove.setDuration(Duration.millis(250));
             pauseButtonMove.setNode(pauseButton);
             pauseButtonMove.setByX(50);
             pauseButtonMove.setCycleCount(1);
             pauseButtonMove.play();
 
             sceneMove = new TranslateTransition();
-            sceneMove.setDuration(Duration.millis(500));
+            sceneMove.setDuration(Duration.millis(250));
             sceneMove.setNode(game);
             sceneMove.setByX(-50);
             sceneMove.setCycleCount(1);
             sceneMove.play();
 
             pauseMenuMove = new TranslateTransition();
-            pauseMenuMove.setDuration(Duration.millis(500));
+            pauseMenuMove.setDuration(Duration.millis(250));
             pauseMenuMove.setNode(pausemenu);
             pauseMenuMove.setByX(50);
             pauseMenuMove.setCycleCount(1);
             pauseMenuMove.play();
+
+            scoreMove = new TranslateTransition();
+            scoreMove.setDuration(Duration.millis(250));
+            scoreMove.setNode(score);
+            scoreMove.setByX(50);
+            scoreMove.setCycleCount(1);
+            scoreMove.play();
         }
     }
 
@@ -150,8 +214,12 @@ public class GUIController {
         game.setTranslateX(0.0);
         pauseButton.setTranslateX(0.0);
         pausemenu.setTranslateX(0.0);
+        score.setTranslateX(0.0);
         firstJump = true;
         pauseMenuActive = false;
+
+        tapToStart.setOpacity(1);
+        ft.play();
     }
 
     @FXML
