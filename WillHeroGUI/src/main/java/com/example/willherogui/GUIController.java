@@ -53,11 +53,13 @@ public class GUIController implements Initializable {
     private Text coinsCollected;
     @FXML
     private ImageView coinsCollectedImg;
+    @FXML
+    private Pane weaponTab;
 
     private ArrayList<HBox> coins;
     private ArrayList<ImageView> orcs;
 
-    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove;
+    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove;
     ArrayList<TranslateTransition> orcJumps = new ArrayList<TranslateTransition>();
     RotateTransition rotate;
     FadeTransition ft;
@@ -80,7 +82,6 @@ public class GUIController implements Initializable {
         orcs = new ArrayList<ImageView>();
         Collections.addAll(orcs, orc_1, orc_2, orc_3);
         pauseButton.setFocusTraversable(false);
-
     }
 
     @FXML
@@ -199,6 +200,13 @@ public class GUIController implements Initializable {
             saveMenuMove.setByX(50);
             saveMenuMove.setCycleCount(1);
             saveMenuMove.play();
+
+            weaponTabMove = new TranslateTransition();
+            weaponTabMove.setDuration(Duration.millis(250));
+            weaponTabMove.setNode(weaponTab);
+            weaponTabMove.setByX(50);
+            weaponTabMove.setCycleCount(1);
+            weaponTabMove.play();
         }
     }
 
@@ -266,7 +274,8 @@ public class GUIController implements Initializable {
         firstJump = true;
         pauseMenuActive = false;
 
-        orcJump.stop();
+        if(orcJump!=null)
+            orcJump.stop();
         tapToStart.setOpacity(1);
         ft.play();
     }

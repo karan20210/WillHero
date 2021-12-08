@@ -108,6 +108,13 @@
          <font>
             <Font name="Copperplate" size="56.0" />
          </font>
+         <graphic>
+            <Text fill="WHITE" stroke="#140000" strokeType="OUTSIDE" strokeWidth="2.0" text="Click To Start!">
+               <font>
+                  <Font name="Copperplate" size="58.0" />
+               </font>
+            </Text>
+         </graphic>
       </Label>
       <ImageView fitHeight="80.0" fitWidth="74.0" layoutX="634.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -257,6 +264,25 @@
             <Font name="Comic Sans MS" size="22.0" />
          </font>
       </Text>
+      <ImageView fitHeight="77.0" fitWidth="89.0" layoutX="4568.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Boss.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="weaponTab" layoutX="37.0" layoutY="394.0" prefHeight="96.0" prefWidth="135.0">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="55.0" layoutY="26.0" opacity="0.38" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Axe.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="77.0" fitWidth="124.0" layoutX="60.0" layoutY="14.0" opacity="0.38" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Knife.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Pane>
       <Pane fx:id="saveMenu" disable="true" opacity="0.0" prefHeight="157.0" prefWidth="262.0" style="-fx-background-color: rgba(72,202,228,0.8); -fx-background-radius: 50;" stylesheets="@CSS/MainMenu.css" translateX="275.0" translateY="200.0">
          <children>
             <Button mnemonicParsing="false" onAction="#saveGameButton" text="Save" translateX="105.0" translateY="120.0" />
@@ -341,15 +367,5 @@
             </Button>
             </children>
         </Pane>
-      <Text fill="WHITE" layoutX="239.0" layoutY="424.0" stroke="#140000" strokeType="OUTSIDE" strokeWidth="2.0" text="Click To Start!">
-         <font>
-            <Font name="Copperplate" size="58.0" />
-         </font>
-      </Text>
-      <ImageView fitHeight="77.0" fitWidth="89.0" layoutX="4568.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Boss.png" />
-         </image>
-      </ImageView>
     </children>
 </Pane>

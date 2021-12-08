@@ -34,7 +34,6 @@ public class MainMenuController implements Initializable {
         sound = new MediaPlayer(media); 
         soundStatus=true;
         sound.play();
-
     }
     
     public void onClickLoad(ActionEvent event) throws IOException{
@@ -64,8 +63,7 @@ public class MainMenuController implements Initializable {
 
     }
 
-    public void soundOnOff(ActionEvent event){        
-        // Media media = new Media("/src/main/resources/com/example/willherogui/audio.mp3");         
+    public void soundOnOff(ActionEvent event){
         soundStatus=!soundStatus;
         if(soundStatus){           
             sound.play();  
