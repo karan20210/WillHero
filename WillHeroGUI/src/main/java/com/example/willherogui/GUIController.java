@@ -17,6 +17,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -36,20 +37,27 @@ public class GUIController implements Initializable {
     @FXML
     private Pane pausemenu;
     @FXML
+    private Pane saveMenu;
+    @FXML
     private Label score;
     @FXML
     private Label tapToStart;
     @FXML
     private Button pauseButton;
     @FXML
-    private HBox coins_1, coins_2;
+    private HBox coins_1, coins_2, coins_3, coins_4;
     @FXML
-    private ImageView orc_1;
+    private ImageView orc_1, orc_2, orc_3;
+    @FXML
+    private Text coinsCollected;
+    @FXML
+    private ImageView coinsCollectedImg;
 
     private ArrayList<HBox> coins;
     private ArrayList<ImageView> orcs;
 
-    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump;
+    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove;
+    ArrayList<TranslateTransition> orcJumps = new ArrayList<TranslateTransition>();
     RotateTransition rotate;
     FadeTransition ft;
     boolean firstJump = true;
@@ -66,10 +74,10 @@ public class GUIController implements Initializable {
         ft.play();
 
         coins = new ArrayList<HBox>();
-        Collections.addAll(coins, coins_1, coins_2);
+        Collections.addAll(coins, coins_1, coins_2, coins_3, coins_4);
 
         orcs = new ArrayList<ImageView>();
-        Collections.addAll(orcs, orc_1);
+        Collections.addAll(orcs, orc_1, orc_2, orc_3);
         pauseButton.setFocusTraversable(false);
     }
 
@@ -107,10 +115,7 @@ public class GUIController implements Initializable {
             orcJump.setAutoReverse(true);
             orcJump.setInterpolator(Interpolator.LINEAR);
             orcJump.play();
-
-//            Path p = new Path();
-//            p.getElements().add(new MoveTo(150f, 70f));
-//            p.getElements().add(new CubicCurveTo(240f, 230f, 500f, 340f, 600, 50f));
+            orcJumps.add(orcJump);
         }
     }
 
@@ -171,6 +176,27 @@ public class GUIController implements Initializable {
             scoreMove.setByX(50);
             scoreMove.setCycleCount(1);
             scoreMove.play();
+
+            coinsCollectedMove = new TranslateTransition();
+            coinsCollectedMove.setDuration(Duration.millis(250));
+            coinsCollectedMove.setNode(coinsCollected);
+            coinsCollectedMove.setByX(50);
+            coinsCollectedMove.setCycleCount(1);
+            coinsCollectedMove.play();
+
+            coinsCollectedImgMove = new TranslateTransition();
+            coinsCollectedImgMove.setDuration(Duration.millis(250));
+            coinsCollectedImgMove.setNode(coinsCollectedImg);
+            coinsCollectedImgMove.setByX(50);
+            coinsCollectedImgMove.setCycleCount(1);
+            coinsCollectedImgMove.play();
+
+            saveMenuMove = new TranslateTransition();
+            saveMenuMove.setDuration(Duration.millis(250));
+            saveMenuMove.setNode(saveMenu);
+            saveMenuMove.setByX(50);
+            saveMenuMove.setCycleCount(1);
+            saveMenuMove.play();
         }
     }
 
@@ -184,6 +210,12 @@ public class GUIController implements Initializable {
             jump.pause();
         if (moveRight != null)
             moveRight.pause();
+
+        for(TranslateTransition orcJump: orcJumps)
+        {
+            if(orcJump!=null)
+                orcJump.pause();
+        }
     }
 
     @FXML
@@ -195,6 +227,11 @@ public class GUIController implements Initializable {
 
         if (jump != null)
             jump.play();
+        for(TranslateTransition orcJump: orcJumps)
+        {
+            if(orcJump!=null)
+                orcJump.play();
+        }
     }
 
     @FXML
@@ -215,9 +252,19 @@ public class GUIController implements Initializable {
         pauseButton.setTranslateX(0.0);
         pausemenu.setTranslateX(0.0);
         score.setTranslateX(0.0);
+        saveMenu.setTranslateX(0.0);
+        coinsCollectedImg.setTranslateX(0.0);
+        coinsCollected.setTranslateX(0.0);
+
+        for(ImageView i: orcs)
+        {
+            i.setTranslateY(0.0);
+        }
+
         firstJump = true;
         pauseMenuActive = false;
 
+        orcJump.stop();
         tapToStart.setOpacity(1);
         ft.play();
     }
@@ -225,6 +272,19 @@ public class GUIController implements Initializable {
     @FXML
     protected void saveGame(ActionEvent event) {
         System.out.println("Saving...");
+        pausemenu.setOpacity(0);
+        pausemenu.setDisable(true);
+        saveMenu.setDisable(false);
+        saveMenu.setOpacity(1);
+    }
+
+    @FXML
+    protected void saveGameButton(ActionEvent event)
+    {
+        pausemenu.setOpacity(1);
+        pausemenu.setDisable(false);
+        saveMenu.setDisable(true);
+        saveMenu.setOpacity(0);
     }
 
     @FXML
