@@ -1,6 +1,8 @@
 package com.example.willherogui;
 
 import javafx.animation.Animation;
+import javafx.animation.Interpolator;
+import javafx.animation.RotateTransition;
 import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -12,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -30,8 +33,11 @@ public class GUIController {
     private Label score;
     @FXML
     private Button pauseButton;
+    @FXML
+    private HBox coins;
 
     TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove;
+    RotateTransition rotate;
     boolean firstJump = true;
     boolean pauseMenuActive = false;
 
@@ -47,7 +53,23 @@ public class GUIController {
             jump.setByY(-100);
             jump.setCycleCount(Animation.INDEFINITE);
             jump.setAutoReverse(true);
+            jump.setInterpolator(Interpolator.LINEAR);
             jump.play();
+        }
+        coinRotate();
+    }
+
+    @FXML
+    protected void coinRotate()
+    {
+        for(Node node: coins.getChildren())
+        {
+            rotate = new RotateTransition(Duration.millis(4000), node);
+            rotate.setByAngle(360);
+            rotate.setCycleCount(Animation.INDEFINITE);
+            rotate.setInterpolator(Interpolator.LINEAR);
+//        rotate.setAutoReverse(true);
+            rotate.play();
         }
     }
 
@@ -64,10 +86,6 @@ public class GUIController {
             int s = Integer.valueOf(score.getText());
             s++;
             score.setText(Integer.toString(s));
-
-//            game.setTranslateX(-1*hero.getTranslateX());
-//            pausemenu.setTranslateX(hero.getTranslateX());
-//            pauseButton.setTranslateX(hero.getTranslateX());
 
             pauseButtonMove = new TranslateTransition();
             pauseButtonMove.setDuration(Duration.millis(500));

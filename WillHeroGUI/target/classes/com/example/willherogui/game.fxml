@@ -6,10 +6,11 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="game" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onSpace" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.GUIController">
+<Pane fx:id="game" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onSpace" onMouseClicked="#heroJump" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.GUIController">
     <children>
       <ImageView fitHeight="500.0" fitWidth="7000.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -41,11 +42,30 @@
             <Image url="@Images/GreenOrc.png" />
          </image>
       </ImageView>
-        <ImageView fx:id="hero" fitHeight="92.0" fitWidth="68.0" layoutX="75.0" layoutY="166.0" onMouseClicked="#heroJump" pickOnBounds="true" preserveRatio="true">
+        <ImageView fx:id="hero" fitHeight="92.0" fitWidth="68.0" layoutX="75.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@Images/hero-final.png" />
             </image>
         </ImageView>
+      <HBox fx:id="coins" layoutX="207.0" layoutY="143.0" prefHeight="29.0" prefWidth="80.0">
+         <children>
+            <ImageView fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Coin.png" />
+               </image>
+            </ImageView>
+            <ImageView fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Coin.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="coin" fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Coin.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
         <Pane fx:id="pausemenu" disable="true" layoutX="278.0" layoutY="176.0" opacity="0.0" prefHeight="188.0" prefWidth="262.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
             <children>
                 <Label layoutX="59.0" layoutY="22.0" text="Game paused" textFill="WHITE">
