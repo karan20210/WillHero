@@ -108,13 +108,6 @@
          <font>
             <Font name="Copperplate" size="56.0" />
          </font>
-         <graphic>
-            <Text fill="WHITE" stroke="#140000" strokeType="OUTSIDE" strokeWidth="2.0" text="Click To Start!">
-               <font>
-                  <Font name="Copperplate" size="58.0" />
-               </font>
-            </Text>
-         </graphic>
       </Label>
       <ImageView fitHeight="80.0" fitWidth="74.0" layoutX="634.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -348,5 +341,15 @@
             </Button>
             </children>
         </Pane>
+      <Text fill="WHITE" layoutX="239.0" layoutY="424.0" stroke="#140000" strokeType="OUTSIDE" strokeWidth="2.0" text="Click To Start!">
+         <font>
+            <Font name="Copperplate" size="58.0" />
+         </font>
+      </Text>
+      <ImageView fitHeight="77.0" fitWidth="89.0" layoutX="4568.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Boss.png" />
+         </image>
+      </ImageView>
     </children>
 </Pane>
