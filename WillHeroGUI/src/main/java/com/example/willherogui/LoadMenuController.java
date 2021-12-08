@@ -1,28 +1,29 @@
 package com.example.willherogui;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.shape.Rectangle;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
 
 public class LoadMenuController implements Initializable {
      @FXML
-     private Pane Box;
+    private Pane Box;
     private Parent root;
     private Stage stage;
     private Scene scene;
@@ -30,6 +31,12 @@ public class LoadMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        Box.getChildren().add(new slot("KARAN2","08-12-2021"));
+        Box.getChildren().add(new slot("KARAN1","10-08-2021"));
+        Box.getChildren().add(new slot("JAIN1","04-12-2021"));
+        Box.getChildren().add(new slot("JAIN2","20-10-2021"));
+        Box.getChildren().add(new slot("Baboota1","24-12-2021"));
+        Box.getChildren().add(new slot("Bhavya2","27-10-2021"));
 
     }
 
@@ -44,24 +51,26 @@ public class LoadMenuController implements Initializable {
     }
 }
 
-// class savedGame extends StackPane{
-//
-//     savedGame(String name, String date){
-//         Rectangle  r = new Rectangle();
-//         r.setId("savedGame");
-//         r.prefWidth(400);
-//         r.prefHeight(60);
-//
-//         HBox h = new HBox(50);
-//         Label labelname= new Label(name);
-//         labelname.prefHeight(50);
-//         labelname.prefWidth(200);
-//         Label labeldate= new Label(date);
-//         labelname.prefHeight(50);
-//         labelname.prefWidth(50);
-//
-//         h.getChildren().addAll(labelname,labeldate);
-//
-//         getChildren().addAll(r,h);
-//     }
-// }
+class slot extends Button{
+
+    slot (String name, String date){
+        HBox h = new HBox(50);  
+        h.setPrefWidth(200);
+        h.setPrefHeight(30);  
+        
+        Label labelname= new Label(name);
+        labelname.setFont(new Font("Copperplate", 12));
+      
+        Label labeldate= new Label(date);
+        labeldate.setFont(new Font("Copperplate", 12));
+      
+        h.getChildren().addAll(labelname,labeldate);
+        h.setAlignment(Pos.CENTER);
+
+        setAlignment(Pos.CENTER);
+        setGraphic(h);
+        setPrefWidth(226);
+        setPrefHeight(37);
+        setId("slot");
+    }
+}
