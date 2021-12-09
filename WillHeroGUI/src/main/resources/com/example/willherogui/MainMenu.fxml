@@ -43,6 +43,22 @@
             </Button>
          </children>
       </VBox>
-      <Button layoutX="14.0" layoutY="23.0" mnemonicParsing="false" onAction="#soundOnOff" text="Sound" />
+      <Button fx:id="soundOn" layoutX="95.0" layoutY="92.0" mnemonicParsing="false" onAction="#soundOnOff" prefHeight="47.0" prefWidth="63.0" style="-fx-background-color: transparent; -fx-border-color: transparent;" translateX="-63.0" translateY="-60.0">
+         <graphic>
+            <ImageView fx:id="soundImage" fitHeight="50.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/soundOn.png" />
+               </image>
+            </ImageView>
+         </graphic></Button>
+      <Button fx:id="soundOff" disable="true" layoutX="30.0" layoutY="31.0" mnemonicParsing="false" onAction="#soundOnOff" opacity="0.0" prefHeight="52.0" prefWidth="59.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+         <graphic>
+            <ImageView fx:id="soundImage1" fitHeight="50.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/soundOff.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
    </children>
 </AnchorPane>

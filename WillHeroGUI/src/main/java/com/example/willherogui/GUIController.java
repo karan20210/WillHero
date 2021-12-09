@@ -65,6 +65,7 @@ public class GUIController implements Initializable {
     FadeTransition ft;
     boolean firstJump = true;
     boolean pauseMenuActive = false;
+    MainMenuController mmc = new MainMenuController();
 
     @Override
     public void initialize(URL url, ResourceBundle rb)

@@ -7,11 +7,16 @@ import java.nio.file.Paths;
 import java.util.ResourceBundle;
 
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.media.Media;
@@ -26,12 +31,19 @@ public class MainMenuController implements Initializable {
     private MediaPlayer sound;
     private boolean soundStatus;
 
+    @FXML
+    private Button soundOn;
+    @FXML
+    private Button soundOff;
+
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
 
         Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/audio.mp3").toUri().toString());
-        sound = new MediaPlayer(media); 
+        sound = new MediaPlayer(media);
+        sound.setCycleCount(AudioClip.INDEFINITE);
         soundStatus=true;
         sound.play();
     }
@@ -53,8 +65,8 @@ public class MainMenuController implements Initializable {
         stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(loader.load(), 800, 500);
         stage.setScene(scene);
+        sound.stop();
         stage.show();
-
     }
 
     
@@ -66,13 +78,19 @@ public class MainMenuController implements Initializable {
     public void soundOnOff(ActionEvent event){
         soundStatus=!soundStatus;
         if(soundStatus){           
-            sound.play();  
+            sound.play();
+            soundOn.setDisable(false);
+            soundOn.setOpacity(1);
+            soundOff.setDisable(true);
+            soundOff.setOpacity(0);
         }
         else{
-            sound.stop();
+            sound.pause();
+            soundOn.setDisable(true);
+            soundOn.setOpacity(0);
+            soundOff.setDisable(false);
+            soundOff.setOpacity(1);
         }
-        
-        
     }
 
     
