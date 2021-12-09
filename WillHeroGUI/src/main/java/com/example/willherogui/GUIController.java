@@ -83,6 +83,7 @@ public class GUIController implements Initializable {
         orcs = new ArrayList<ImageView>();
         Collections.addAll(orcs, orc_1, orc_2, orc_3);
         pauseButton.setFocusTraversable(false);
+
     }
 
     @FXML
@@ -101,9 +102,9 @@ public class GUIController implements Initializable {
             jump.setAutoReverse(true);
             jump.setInterpolator(Interpolator.LINEAR);
             jump.play();
+            orcJump();
+            coinRotate();
         }
-        coinRotate();
-        orcJump();
     }
 
     @FXML
@@ -263,9 +264,11 @@ public class GUIController implements Initializable {
         pauseButton.setTranslateX(0.0);
         pausemenu.setTranslateX(0.0);
         score.setTranslateX(0.0);
-        saveMenu.setTranslateX(0.0);
+        saveMenu.setTranslateX(275.0);
+        saveMenu.setTranslateY(200.0);
         coinsCollectedImg.setTranslateX(0.0);
         coinsCollected.setTranslateX(0.0);
+        weaponTab.setTranslateX(0.0);
 
         for(ImageView i: orcs)
         {
@@ -283,7 +286,6 @@ public class GUIController implements Initializable {
 
     @FXML
     protected void saveGame(ActionEvent event) {
-        System.out.println("Saving...");
         pausemenu.setOpacity(0);
         pausemenu.setDisable(true);
         saveMenu.setDisable(false);
