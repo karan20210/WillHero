@@ -22,11 +22,16 @@ import javafx.stage.Stage;
 
 
 public class LoadMenuController implements Initializable {
-     @FXML
+    @FXML
     private Pane Box;
     private Parent root;
     private Stage stage;
     private Scene scene;
+
+    @FXML
+    private Button soundOn;
+    @FXML
+    private Button soundOff;
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
@@ -49,6 +54,11 @@ public class LoadMenuController implements Initializable {
         stage.show(); 
 
     }
+
+    public void soundOnOff(ActionEvent event){
+        MainMenuController.changeSound();
+
+    }
 }
 
 class slot extends Button{
@@ -59,10 +69,10 @@ class slot extends Button{
         h.setPrefHeight(30);  
         
         Label labelname= new Label(name);
-        labelname.setFont(new Font("Copperplate", 12));
+        labelname.setFont(new Font("Copperplate Gothic Bold", 12));
       
         Label labeldate= new Label(date);
-        labeldate.setFont(new Font("Copperplate", 12));
+        labeldate.setFont(new Font("Copperplate Gothic Bold", 12));
       
         h.getChildren().addAll(labelname,labeldate);
         h.setAlignment(Pos.CENTER);

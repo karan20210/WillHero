@@ -14,6 +14,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -38,7 +39,7 @@ public class GUIController implements Initializable {
     @FXML
     private Pane pausemenu;
     @FXML
-    private Pane saveMenu;
+    private VBox saveMenu;
     @FXML
     private Label score;
     @FXML
@@ -57,6 +58,10 @@ public class GUIController implements Initializable {
     private Pane weaponTab;
     @FXML
     private Text instruction;
+    @FXML
+    private Button soundOn;
+    @FXML
+    private Button soundOff;
 
     private ArrayList<HBox> coins;
     private ArrayList<ImageView> orcs;
@@ -67,14 +72,18 @@ public class GUIController implements Initializable {
     FadeTransition ft;
     boolean firstJump = true;
     boolean pauseMenuActive = false;
-    MainMenuController mmc = new MainMenuController();
+    // MainMenuController mmc = new MainMenuController();
+
+    public void soundOnOff(ActionEvent event){
+        MainMenuController.changeSound();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
         ft = new FadeTransition(Duration.millis(1000), tapToStart);
         ft.setFromValue(1);
-        ft.setToValue(0.6);
+        ft.setToValue(0.5);
         ft.setCycleCount(Animation.INDEFINITE);
         ft.setAutoReverse(true);
         ft.play();
@@ -308,11 +317,13 @@ public class GUIController implements Initializable {
     @FXML
     protected void returnToMainMenu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
+        // soundOnOff(event);
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
+
         stage.show();
     }
 }

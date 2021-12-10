@@ -9,12 +9,13 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
 <Pane fx:id="game" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onSpace" onMouseClicked="#heroJump" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.GUIController">
     <children>
-      <ImageView fitHeight="500.0" fitWidth="7000.0" layoutX="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="500.0" fitWidth="7000.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/background.jpg" />
          </image>
@@ -99,7 +100,7 @@
                 <Font name="Comic Sans MS" size="21.0" />
             </font>
         </Label>
-      <Label fx:id="tapToStart" alignment="CENTER" layoutX="218.0" layoutY="173.0" style="tex: black;" textFill="WHITE" translateX="-50.0" translateY="175.0">
+      <Label fx:id="tapToStart" alignment="CENTER" layoutX="259.0" layoutY="180.0" style="tex: black;" textFill="WHITE" translateX="-50.0" translateY="175.0">
          <font>
             <Font name="Copperplate" size="56.0" />
          </font>
@@ -283,21 +284,6 @@
             </ImageView>
          </children>
       </Pane>
-      <Pane fx:id="saveMenu" disable="true" opacity="0.0" prefHeight="157.0" prefWidth="262.0" style="-fx-background-color: rgba(72,202,228,0.8); -fx-background-radius: 50;" stylesheets="@CSS/MainMenu.css" translateX="275.0" translateY="200.0">
-         <children>
-            <Button mnemonicParsing="false" onAction="#saveGameButton" text="Save" translateX="105.0" translateY="120.0" />
-            <TextField alignment="CENTER" layoutX="43.0" layoutY="79.0" promptText="Game Name">
-               <font>
-                  <Font name="Chalkboard" size="13.0" />
-               </font>
-            </TextField>
-            <Text fill="WHITE" layoutX="58.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Game">
-               <font>
-                  <Font name="Copperplate" size="28.0" />
-               </font>
-            </Text>
-         </children>
-      </Pane>
         <Pane fx:id="pausemenu" disable="true" layoutX="278.0" layoutY="176.0" opacity="0.0" prefHeight="188.0" prefWidth="262.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
             <children>
                 <Label layoutX="59.0" layoutY="22.0" text="Game paused" textFill="WHITE">
@@ -367,5 +353,25 @@
             </Button>
             </children>
         </Pane>
+      <VBox fx:id="saveMenu" alignment="CENTER" disable="true" layoutX="220.0" layoutY="120.0" opacity="0.0" prefHeight="267.0" prefWidth="361.0" spacing="30.0" style="-fx-background-color: rgba(72,202,228,0.8); -fx-border-radius: 50; -fx-border-color: rgba(72,202,228); -fx-background-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
+         <children>
+            <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Game" textAlignment="CENTER">
+               <font>
+                  <Font name="Copperplate Gothic Light" size="36.0" />
+               </font>
+            </Text>
+            <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Game Name" style="-fx-background-radius: 20;">
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="24.0" />
+               </font>
+            </TextField>
+            <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveGameButton" prefHeight="41.0" prefWidth="147.0" style="-fx-background-color: linear-gradient(to right, #ddd6f3, #faaca8); -fx-text-fill: black; -fx-border-radius: 20; -fx-border-color: grey; -fx-background-radius: 20;" text="Save">
+               <font>
+                  <Font name="Copperplate Gothic Light" size="18.0" />
+               </font></Button>
+         </children>
+      </VBox>
+      <Button fx:id="soundOn" layoutX="9.0" layoutY="49.0" mnemonicParsing="false" onAction="#soundOnOff" text="Sound On" />
+      <Button fx:id="soundOff" layoutX="108.0" layoutY="49.0" mnemonicParsing="false" onAction="#soundOnOff" text="Sound Off" />
     </children>
 </Pane>

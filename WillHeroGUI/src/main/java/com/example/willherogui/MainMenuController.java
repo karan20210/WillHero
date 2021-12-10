@@ -28,7 +28,7 @@ public class MainMenuController implements Initializable {
     private Parent root;
     private Stage stage;
     private Scene scene; 
-    private MediaPlayer sound;
+    private static MediaPlayer sound;
     private static boolean soundStatus = true;
     private static boolean firstTime = true;
 
@@ -38,14 +38,18 @@ public class MainMenuController implements Initializable {
     private Button soundOff;
 
 
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
-    {
-        Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/audio.mp3").toUri().toString());
-        sound = new MediaPlayer(media);
-        sound.setCycleCount(AudioClip.INDEFINITE);
-        sound.setVolume(0.5);
-        sound.play();
+    {   
+        if(sound== null){
+            Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/audio2.mp3").toUri().toString());
+            sound = new MediaPlayer(media);
+            sound.setCycleCount(AudioClip.INDEFINITE);
+            sound.setVolume(0.5);
+            sound.play();
+        }
+       
     }
     
     public void onClickLoad(ActionEvent event) throws IOException{
@@ -55,7 +59,7 @@ public class MainMenuController implements Initializable {
         stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        sound.stop();
+        // sound.stop();
         stage.show();
     }
 
@@ -65,7 +69,7 @@ public class MainMenuController implements Initializable {
         stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(loader.load(), 800, 500);
         stage.setScene(scene);
-        sound.stop();
+        // sound.stop();
         stage.show();
     }
 
@@ -92,6 +96,22 @@ public class MainMenuController implements Initializable {
             soundOff.setOpacity(1);
         }
     }
+
+    public static void changeSound(){
+        soundStatus=!soundStatus;
+
+        if(soundStatus){
+            sound.play();
+
+        }
+        else{
+            sound.pause();
+
+        }
+      
+
+    }
+ 
 
     
     

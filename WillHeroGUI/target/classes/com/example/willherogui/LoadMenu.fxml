@@ -30,13 +30,15 @@
             </VBox>
          </children>
       </StackPane>
-      <Button fx:id="goback" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="401.0" mnemonicParsing="false" onAction="#onClickGoBack" prefHeight="34.0" prefWidth="148.0" text="Go Back" textAlignment="CENTER">
+      <Button fx:id="goback" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="401.0" mnemonicParsing="false" onAction="#onClickGoBack" prefHeight="41.0" prefWidth="148.0" text="Go Back" textAlignment="CENTER">
          <font>
-            <Font name="Copperplate" size="18.0" />
+            <Font name="Copperplate Gothic Light" size="18.0" />
          </font>
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
+      <Button fx:id="soundOn" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#soundOnOff" text="SoundOn" />
+      <Button fx:id="soundOff" layoutX="83.0" layoutY="14.0" mnemonicParsing="false" onAction="#soundOnOff" text="SoundOff" />
    </children>
 </AnchorPane>
