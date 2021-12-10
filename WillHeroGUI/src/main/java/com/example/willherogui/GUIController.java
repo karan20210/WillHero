@@ -55,6 +55,8 @@ public class GUIController implements Initializable {
     private ImageView coinsCollectedImg;
     @FXML
     private Pane weaponTab;
+    @FXML
+    private Text instruction;
 
     private ArrayList<HBox> coins;
     private ArrayList<ImageView> orcs;
@@ -91,7 +93,6 @@ public class GUIController implements Initializable {
         if (firstJump && !pauseMenuActive) {
             ft.stop();
             tapToStart.setOpacity(0);
-
             firstJump = false;
             hero.requestFocus();
             jump = new TranslateTransition();
@@ -142,6 +143,7 @@ public class GUIController implements Initializable {
 
     @FXML
     protected void onSpace(KeyEvent event) {
+        ft.stop();
         if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump) {
             moveRight = new TranslateTransition();
             moveRight.setDuration(Duration.millis(100));
@@ -269,6 +271,8 @@ public class GUIController implements Initializable {
         coinsCollectedImg.setTranslateX(0.0);
         coinsCollected.setTranslateX(0.0);
         weaponTab.setTranslateX(0.0);
+        tapToStart.setTranslateX(0.0);
+        instruction.setText("Click to start");
 
         for(ImageView i: orcs)
         {

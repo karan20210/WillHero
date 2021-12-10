@@ -29,7 +29,8 @@ public class MainMenuController implements Initializable {
     private Stage stage;
     private Scene scene; 
     private MediaPlayer sound;
-    private boolean soundStatus;
+    private static boolean soundStatus = true;
+    private static boolean firstTime = true;
 
     @FXML
     private Button soundOn;
@@ -40,11 +41,10 @@ public class MainMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-
         Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/audio.mp3").toUri().toString());
         sound = new MediaPlayer(media);
         sound.setCycleCount(AudioClip.INDEFINITE);
-        soundStatus=true;
+        sound.setVolume(0.5);
         sound.play();
     }
     
@@ -55,8 +55,8 @@ public class MainMenuController implements Initializable {
         stage= (Stage) ((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
-        stage.show(); 
-
+        sound.stop();
+        stage.show();
     }
 
     public void onClickStart(ActionEvent event) throws IOException

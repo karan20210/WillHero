@@ -99,12 +99,12 @@
                 <Font name="Comic Sans MS" size="21.0" />
             </font>
         </Label>
-      <Label fx:id="tapToStart" layoutX="218.0" layoutY="173.0" style="tex: black;" textFill="WHITE" translateX="-50.0" translateY="175.0">
+      <Label fx:id="tapToStart" alignment="CENTER" layoutX="218.0" layoutY="173.0" style="tex: black;" textFill="WHITE" translateX="-50.0" translateY="175.0">
          <font>
             <Font name="Copperplate" size="56.0" />
          </font>
          <graphic>
-            <Text fill="WHITE" stroke="#140000" strokeType="OUTSIDE" strokeWidth="2.0" text="Click To Start!">
+            <Text fx:id="instruction" fill="WHITE" stroke="#140000" strokeType="OUTSIDE" strokeWidth="2.0" text="Click To Start!">
                <font>
                   <Font name="Copperplate" size="58.0" />
                </font>
