@@ -43,6 +43,21 @@ public class LoadMenuController implements Initializable {
         Box.getChildren().add(new slot("Baboota1","24-12-2021"));
         Box.getChildren().add(new slot("Bhavya2","27-10-2021"));
 
+        if(MainMenuController.getSoundStatus() == true)
+        {
+            soundOff.setOpacity(0);
+            soundOff.setDisable(true);
+            soundOn.setDisable(false);
+            soundOn.setOpacity(1);
+        }
+        else
+        {
+            soundOff.setOpacity(1);
+            soundOff.setDisable(false);
+            soundOn.setDisable(true);
+            soundOn.setOpacity(0);
+        }
+
     }
 
     public void onClickGoBack(ActionEvent event) throws IOException{
@@ -57,6 +72,21 @@ public class LoadMenuController implements Initializable {
 
     public void soundOnOff(ActionEvent event){
         MainMenuController.changeSound();
+        if(MainMenuController.getSoundStatus() == true)
+        {
+            soundOff.setOpacity(0);
+            soundOff.setDisable(true);
+            soundOn.setDisable(false);
+            soundOn.setOpacity(1);
+        }
+        else
+        {
+            soundOff.setOpacity(1);
+            soundOff.setDisable(false);
+            soundOn.setDisable(true);
+            soundOn.setOpacity(0);
+        }
+
 
     }
 }

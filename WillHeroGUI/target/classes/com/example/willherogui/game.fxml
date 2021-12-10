@@ -100,7 +100,7 @@
                 <Font name="Comic Sans MS" size="21.0" />
             </font>
         </Label>
-      <Label fx:id="tapToStart" alignment="CENTER" layoutX="259.0" layoutY="180.0" style="tex: black;" textFill="WHITE" translateX="-50.0" translateY="175.0">
+      <Label fx:id="tapToStart" alignment="CENTER" layoutX="259.0" layoutY="180.0" style="tex: black;" textFill="WHITE" translateX="-80.0" translateY="175.0">
          <font>
             <Font name="Copperplate" size="56.0" />
          </font>
@@ -217,6 +217,28 @@
             <Image url="@Images/Coin.png" />
          </image>
       </ImageView>
+      <Pane fx:id="volumeButtons" prefHeight="50.0" prefWidth="74.0">
+         <children>
+            <Button fx:id="soundOn" mnemonicParsing="false" onAction="#soundOnOff" prefHeight="24.0" prefWidth="43.0" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="71.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/soundOn-new.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="soundOff" mnemonicParsing="false" onAction="#soundOnOff" style="-fx-background-color: transparent;">
+               <graphic>
+                  <ImageView fitHeight="45.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/soundOff-new.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
       <HBox fx:id="coins_3" layoutX="745.0" layoutY="143.0" prefHeight="29.0" prefWidth="80.0">
          <children>
             <ImageView fitHeight="44.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
@@ -371,7 +393,5 @@
                </font></Button>
          </children>
       </VBox>
-      <Button fx:id="soundOn" layoutX="9.0" layoutY="49.0" mnemonicParsing="false" onAction="#soundOnOff" text="Sound On" />
-      <Button fx:id="soundOff" layoutX="108.0" layoutY="49.0" mnemonicParsing="false" onAction="#soundOnOff" text="Sound Off" />
     </children>
 </Pane>

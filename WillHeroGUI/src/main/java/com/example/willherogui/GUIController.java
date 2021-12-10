@@ -62,11 +62,13 @@ public class GUIController implements Initializable {
     private Button soundOn;
     @FXML
     private Button soundOff;
+    @FXML
+    private Pane volumeButtons;
 
     private ArrayList<HBox> coins;
     private ArrayList<ImageView> orcs;
 
-    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove;
+    TranslateTransition jump, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove;
     ArrayList<TranslateTransition> orcJumps = new ArrayList<TranslateTransition>();
     RotateTransition rotate;
     FadeTransition ft;
@@ -76,6 +78,23 @@ public class GUIController implements Initializable {
 
     public void soundOnOff(ActionEvent event){
         MainMenuController.changeSound();
+        if(MainMenuController.getSoundStatus() == true)
+        {
+            soundOff.setOpacity(0);
+            soundOff.setDisable(true);
+            soundOn.setDisable(false);
+            soundOn.setOpacity(1);
+        }
+        else
+        {
+            soundOff.setOpacity(1);
+            soundOff.setDisable(false);
+            soundOn.setDisable(true);
+            soundOn.setOpacity(0);
+        }
+        soundOn.setFocusTraversable(false);
+        soundOff.setFocusTraversable(false);
+        game.requestFocus();
     }
 
     @Override
@@ -93,8 +112,26 @@ public class GUIController implements Initializable {
 
         orcs = new ArrayList<ImageView>();
         Collections.addAll(orcs, orc_1, orc_2, orc_3);
-        pauseButton.setFocusTraversable(false);
 
+
+        if(MainMenuController.getSoundStatus() == true)
+        {
+            soundOff.setOpacity(0);
+            soundOff.setDisable(true);
+            soundOn.setDisable(false);
+            soundOn.setOpacity(1);
+        }
+        else
+        {
+            soundOff.setOpacity(1);
+            soundOff.setDisable(false);
+            soundOn.setDisable(true);
+            soundOn.setOpacity(0);
+        }
+
+        pauseButton.setFocusTraversable(false);
+        soundOn.setFocusTraversable(false);
+        soundOff.setFocusTraversable(false);
     }
 
     @FXML
@@ -220,6 +257,13 @@ public class GUIController implements Initializable {
             weaponTabMove.setByX(50);
             weaponTabMove.setCycleCount(1);
             weaponTabMove.play();
+
+            volOnMove = new TranslateTransition();
+            volOnMove.setDuration(Duration.millis(250));
+            volOnMove.setNode(volumeButtons);
+            volOnMove.setByX(50);
+            volOnMove.setCycleCount(1);
+            volOnMove.play();
         }
     }
 
@@ -281,7 +325,10 @@ public class GUIController implements Initializable {
         coinsCollected.setTranslateX(0.0);
         weaponTab.setTranslateX(0.0);
         tapToStart.setTranslateX(0.0);
-        instruction.setText("Click to start");
+//        soundOn.setTranslateX(0.0);
+//        soundOff.setTranslateX(0.0);
+        volumeButtons.setTranslateX(0.0);
+        instruction.setText("Click to start!");
 
         for(ImageView i: orcs)
         {

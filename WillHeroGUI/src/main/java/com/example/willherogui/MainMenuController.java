@@ -108,8 +108,11 @@ public class MainMenuController implements Initializable {
             sound.pause();
 
         }
-      
+    }
 
+    public static boolean getSoundStatus()
+    {
+        return soundStatus;
     }
  
 
