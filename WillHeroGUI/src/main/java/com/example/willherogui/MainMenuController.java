@@ -49,6 +49,23 @@ public class MainMenuController implements Initializable {
             sound.setVolume(0.5);
             sound.play();
         }
+
+        if(soundStatus)
+        {
+            soundOff.setOpacity(0);
+            soundOff.setDisable(true);
+            soundOn.setDisable(false);
+            soundOn.setOpacity(1);
+        }
+        else
+        {
+            soundOff.setOpacity(1);
+            soundOff.setDisable(false);
+            soundOn.setDisable(true);
+            soundOn.setOpacity(0);
+        }
+
+        
        
     }
     
