@@ -386,7 +386,7 @@
                   <Font name="Copperplate Gothic Light" size="36.0" />
                </font>
             </Text>
-            <TextField alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Game Name" style="-fx-background-radius: 20;">
+            <TextField fx:id="saveGameName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Game Name" style="-fx-background-radius: 20;">
                <font>
                   <Font name="Copperplate Gothic Bold" size="24.0" />
                </font>
@@ -399,13 +399,57 @@
          </children>
       </VBox>
       <Pane fx:id="a1" layoutX="205.0" layoutY="284.0" prefHeight="200.0" prefWidth="13.0" translateX="60.0" translateY="-55.0" />
-      <Pane fx:id="a11" layoutX="575.0" layoutY="230.0" prefHeight="200.0" prefWidth="27.0" />
-      <Pane fx:id="a111" layoutX="585.0" layoutY="240.0" prefHeight="200.0" prefWidth="27.0" translateX="220.0" translateY="-10.0" />
-      <Pane fx:id="a1111" layoutX="1113.0" layoutY="209.0" prefHeight="200.0" prefWidth="27.0" />
-      <Pane fx:id="a11111" layoutX="1415.0" layoutY="218.0" prefHeight="200.0" prefWidth="27.0" />
-      <Pane fx:id="a111111" layoutX="1741.0" layoutY="224.0" prefHeight="200.0" prefWidth="67.0" />
-      <Pane fx:id="a1111111" layoutX="2016.0" layoutY="224.0" prefHeight="200.0" prefWidth="42.0" />
-      <Pane fx:id="a11111111" layoutX="2598.0" layoutY="225.0" prefHeight="200.0" prefWidth="55.0" />
-      <Pane fx:id="a111111111" layoutX="2939.0" layoutY="225.0" prefHeight="200.0" prefWidth="85.0" />
+      <Pane fx:id="a2" layoutX="575.0" layoutY="230.0" prefHeight="200.0" prefWidth="27.0" />
+      <Pane fx:id="a3" layoutX="585.0" layoutY="240.0" prefHeight="200.0" prefWidth="27.0" translateX="220.0" translateY="-10.0" />
+      <Pane fx:id="a4" layoutX="1113.0" layoutY="209.0" prefHeight="200.0" prefWidth="27.0" />
+      <Pane fx:id="a5" layoutX="1415.0" layoutY="218.0" prefHeight="200.0" prefWidth="27.0" />
+      <Pane fx:id="a6" layoutX="1741.0" layoutY="224.0" prefHeight="200.0" prefWidth="67.0" />
+      <Pane fx:id="a7" layoutX="2016.0" layoutY="224.0" prefHeight="200.0" prefWidth="42.0" />
+      <Pane fx:id="a8" layoutX="2598.0" layoutY="225.0" prefHeight="200.0" prefWidth="55.0" />
+      <Pane fx:id="a9" layoutX="2939.0" layoutY="225.0" prefHeight="200.0" prefWidth="85.0" />
+      <Pane fx:id="a10" layoutX="3722.0" layoutY="217.0" prefHeight="200.0" prefWidth="68.0" />
+      <Pane fx:id="a11" layoutX="3980.0" layoutY="224.0" prefHeight="200.0" prefWidth="68.0" />
+      <Pane fx:id="a12" layoutX="4334.0" layoutY="229.0" prefHeight="200.0" prefWidth="13.0" />
+      <Pane fx:id="a14" layoutX="4597.0" layoutY="225.0" prefHeight="200.0" prefWidth="33.0" />
+      <Pane fx:id="a13" layoutX="4899.0" layoutY="219.0" prefHeight="200.0" prefWidth="81.0" />
+      <Pane fx:id="gameOverMenu" disable="true" layoutX="273.0" layoutY="186.0" opacity="0.0" prefHeight="127.0" prefWidth="277.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
+         <children>
+            <Label layoutX="68.0" layoutY="22.0" text="Game Over :(" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate" size="23.0" />
+               </font>
+            </Label>
+            <Button id="buttons" layoutX="76.0" layoutY="53.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/restart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Button id="buttons" layoutX="141.0" layoutY="55.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css" translateY="3.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/returnToMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+         </children>
+      </Pane>
     </children>
 </Pane>

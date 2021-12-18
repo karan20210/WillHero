@@ -9,6 +9,7 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -24,12 +25,15 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 
-import java.io.IOException;
+import java.io.*;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class GUIController implements Initializable {
+public class GUIController implements Initializable, Serializable {
+
+    private String gameName;
+    private ArrayList<GUIController> savedGames = new ArrayList<>();
 
     // Game elements
     @FXML
@@ -40,6 +44,8 @@ public class GUIController implements Initializable {
     private Pane pausemenu;
     @FXML
     private VBox saveMenu;
+    @FXML
+    private Pane gameOverMenu;
     @FXML
     private Label score;
     @FXML
@@ -75,14 +81,16 @@ public class GUIController implements Initializable {
     @FXML
     private ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20;
     @FXML
-    private Pane a1, a11, a111, a1111, a11111, a111111, a1111111,a11111111, a111111111;
+    private Pane a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14;
+    @FXML
+    private TextField saveGameName;
 
     @FXML
     private Pane heroBox;
 
 
     //Transitions
-    TranslateTransition jump,fall, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove;
+    TranslateTransition jump,fall, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove;
     ArrayList<TranslateTransition> orcJumps = new ArrayList<TranslateTransition>();
     RotateTransition rotate;
     FadeTransition ft;
@@ -126,7 +134,7 @@ public class GUIController implements Initializable {
                     {
                         weaponChestsInGame.get(i).setOpen(true);
                         System.out.println(weaponChestsInGame.get(i).getProvidedWeapon().getClass().toString());
-                        if(weaponChestsInGame.get(i).getProvidedWeapon().getClass().toString(). equals("class com.example.willherogui.Axe"))
+                        if(weaponChestsInGame.get(i).getProvidedWeapon().getClass().toString().equals("class com.example.willherogui.Axe"))
                         {
                             AxeTab.setOpacity(1);
                             KnifeTab.setOpacity(0.38);
@@ -154,10 +162,11 @@ public class GUIController implements Initializable {
                     fall = new TranslateTransition();
                     fall.setDuration(Duration.millis(100));
                     fall.setNode(heroBox);
-                    fall.setByY(80);
+                    fall.setByY(100);
                     fall.setCycleCount(1);
                     fall.setInterpolator(Interpolator.LINEAR);
                     fall.play();
+                    gameOver();
                 }
             }
         }
@@ -210,15 +219,19 @@ public class GUIController implements Initializable {
         islandsInGame.put(p20, new Island(p20.getLayoutX(), p20.getLayoutY()));
 
         abyssInGame.put(a1, new Abyss(a1.getLayoutX(), a1.getLayoutY()));
+        abyssInGame.put(a2, new Abyss(a2.getLayoutX(), a2.getLayoutY()));
+        abyssInGame.put(a3, new Abyss(a3.getLayoutX(), a3.getLayoutY()));
+        abyssInGame.put(a4, new Abyss(a4.getLayoutX(), a4.getLayoutY()));
+        abyssInGame.put(a5, new Abyss(a5.getLayoutX(), a5.getLayoutY()));
+        abyssInGame.put(a6, new Abyss(a6.getLayoutX(), a5.getLayoutY()));
+        abyssInGame.put(a7, new Abyss(a7.getLayoutX(), a7.getLayoutY()));
+        abyssInGame.put(a8, new Abyss(a8.getLayoutX(), a8.getLayoutY()));
+        abyssInGame.put(a9, new Abyss(a9.getLayoutX(), a9.getLayoutY()));
+        abyssInGame.put(a10, new Abyss(a10.getLayoutX(), a10.getLayoutY()));
         abyssInGame.put(a11, new Abyss(a11.getLayoutX(), a11.getLayoutY()));
-        abyssInGame.put(a111, new Abyss(a111.getLayoutX(), a111.getLayoutY()));
-        abyssInGame.put(a1111, new Abyss(a1111.getLayoutX(), a1111.getLayoutY()));
-        abyssInGame.put(a11111, new Abyss(a11111.getLayoutX(), a11111.getLayoutY()));
-        abyssInGame.put(a111111, new Abyss(a111111.getLayoutX(), a11111.getLayoutY()));
-        abyssInGame.put(a1111111, new Abyss(a1111111.getLayoutX(), a1111111.getLayoutY()));
-        abyssInGame.put(a1111111, new Abyss(a1111111.getLayoutX(), a1111111.getLayoutY()));
-        abyssInGame.put(a11111111, new Abyss(a11111111.getLayoutX(), a11111111.getLayoutY()));
-        abyssInGame.put(a111111111, new Abyss(a111111111.getLayoutX(), a111111111.getLayoutY()));
+        abyssInGame.put(a12, new Abyss(a12.getLayoutX(), a12.getLayoutY()));
+        abyssInGame.put(a13, new Abyss(a13.getLayoutX(), a13.getLayoutY()));
+        abyssInGame.put(a14, new Abyss(a14.getLayoutX(), a14.getLayoutY()));
 
         if (MainMenuController.getSoundStatus() == true) {
             soundOff.setOpacity(0);
@@ -235,6 +248,8 @@ public class GUIController implements Initializable {
         pauseButton.setFocusTraversable(false);
         soundOn.setFocusTraversable(false);
         soundOff.setFocusTraversable(false);
+        gameOverMenu.setDisable(true);
+        gameOverMenu.setOpacity(0);
         chestCollision.start();
         abyssCollision.start();
     }
@@ -390,6 +405,13 @@ public class GUIController implements Initializable {
             volOnMove.setByX(50);
             volOnMove.setCycleCount(1);
             volOnMove.play();
+
+            gameOverMenuMove = new TranslateTransition();
+            gameOverMenuMove.setDuration(Duration.millis(150));
+            gameOverMenuMove.setNode(gameOverMenu);
+            gameOverMenuMove.setByX(50);
+            gameOverMenuMove.setCycleCount(1);
+            gameOverMenuMove.play();
         }
     }
 
@@ -435,6 +457,9 @@ public class GUIController implements Initializable {
         pausemenu.setDisable(true);
         score.setText("0");
 
+        gameOverMenu.setDisable(true);
+        gameOverMenu.setOpacity(0);
+
         if (jump != null)
             jump.stop();
         if (moveRight != null)
@@ -445,9 +470,10 @@ public class GUIController implements Initializable {
         game.setTranslateX(0.0);
         pauseButton.setTranslateX(0.0);
         pausemenu.setTranslateX(0.0);
+        gameOverMenu.setTranslateX(0.0);
         score.setTranslateX(0.0);
-        saveMenu.setTranslateX(275.0);
-        saveMenu.setTranslateY(200.0);
+        saveMenu.setTranslateX(0.0);
+        saveMenu.setTranslateY(0.0);
         coinsCollectedImg.setTranslateX(0.0);
         coinsCollected.setTranslateX(0.0);
         weaponTab.setTranslateX(0.0);
@@ -492,6 +518,62 @@ public class GUIController implements Initializable {
         pausemenu.setDisable(false);
         saveMenu.setDisable(true);
         saveMenu.setOpacity(0);
+
+
+        //SERIALIZING
+//        gameName = saveGameName.getText();
+//
+//        GUIController object = null;
+//        try
+//        {
+//            try
+//            {
+//                FileInputStream file = new FileInputStream("save.txt");
+//                ObjectInputStream in = new ObjectInputStream(file);
+//                object = (GUIController)in.readObject();
+//                if(object == null)
+//                    this.savedGames.add(this);
+//                this.savedGames.add(object);
+//                in.close();
+//                file.close();
+//
+//                System.out.println("Deserialized then serialized");
+//            }
+//
+//            catch (Exception e)
+//            {
+//                System.out.println(e);
+//                this.savedGames.add(this);
+//            }
+//
+//            FileOutputStream file = new FileOutputStream
+//                    ("save.txt");
+//
+//            ObjectOutputStream out = new ObjectOutputStream
+//                    (file);
+//
+//            out.writeObject(object);
+//            out.close();
+//            file.close();
+//            System.out.println("Serialized");
+//        }
+//
+//        catch (Exception e)
+//        {
+//            System.out.println(e);
+//        }
+//
+//        try
+//        {
+//            FileInputStream file = new FileInputStream("save.txt");
+//            ObjectInputStream in = new ObjectInputStream(file);
+//            object = (GUIController)in.readObject();
+//            System.out.println(object.getSavedGames());
+//        }
+//        catch (Exception e)
+//        {
+//            System.out.println(e);
+//        }
     }
 
     @FXML
@@ -505,5 +587,22 @@ public class GUIController implements Initializable {
         stage.setScene(scene);
 
         stage.show();
+    }
+
+    @FXML
+    protected void gameOver()
+    {
+        gameOverMenu.setOpacity(1);
+        gameOverMenu.setDisable(false);
+    }
+
+    public String getGameName()
+    {
+        return gameName;
+    }
+
+    public ArrayList<GUIController> getSavedGames()
+    {
+        return savedGames;
     }
 }

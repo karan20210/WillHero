@@ -1,6 +1,9 @@
 package com.example.willherogui;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -57,6 +60,27 @@ public class LoadMenuController implements Initializable {
             soundOn.setDisable(true);
             soundOn.setOpacity(0);
         }
+
+//        try
+//        {
+//            GUIController obj = null;
+//            FileInputStream file = new FileInputStream("save.txt");
+//            ObjectInputStream in = new ObjectInputStream(file);
+//
+//            obj = (GUIController)in.readObject();
+//            in.close();
+//            file.close();
+//
+//            ArrayList<GUIController> savedGames = obj.getSavedGames();
+//
+//            for(GUIController i: savedGames)
+//                System.out.println(i.getGameName());
+//        }
+//
+//        catch (Exception e)
+//        {
+//            System.out.println(e);
+//        }
 
     }
 
