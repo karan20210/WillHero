@@ -48,6 +48,8 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private VBox saveMenu;
     @FXML
+    private Pane resurrectMenu;
+    @FXML
     private Pane gameOverMenu;
     @FXML
     private Label score;
@@ -56,9 +58,7 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private Button pauseButton;
     @FXML
-    private HBox coins_1, coins_2, coins_3, coins_4;
-    @FXML
-    private ImageView orc_1, orc_2, orc_3;
+    private ImageView orc_1, orc_2, orc_3, orc_4, orc_5, orc_6;
     @FXML
     private Text coinsCollected;
     @FXML
@@ -80,6 +80,8 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private ImageView boss;
     @FXML
+    private ImageView c1, c2, c3;
+    @FXML
     private ImageView coinChest, coinChest1, coinChest11, coinChest111;
     @FXML
     private ImageView weaponChest, weaponChest1, weaponChest11;
@@ -90,25 +92,27 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private TextField saveGameName;
     @FXML
-    private Pane orcBox_1, orcBox_2, orcBox_3;
+    private Pane orcBox_1, orcBox_2, orcBox_3, orcBox_4, orcBox_5, orcBox_6;
 
     @FXML
     private Pane heroBox;
 
 
     //Transitions
-    TranslateTransition jump,fall, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove;
-    ArrayList<TranslateTransition> orcJumps = new ArrayList<TranslateTransition>();
+    TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove;
+    HashMap<Orcs, TranslateTransition> orcJumps = new HashMap<>();
+    ArrayList<TranslateTransition> orcBoxJumps = new ArrayList<TranslateTransition>();
     RotateTransition rotate;
     FadeTransition ft;
 
     //Useful boolean values
     boolean firstJump = true;
     boolean pauseMenuActive = false;
-    static boolean over = false;
+    boolean over = false;
+
+//    private double heroXbeforeFalling;
 
     // Collections
-    private ArrayList<HBox> coins;
     HashMap<ImageView, Coin> coinsInGame = new HashMap<>();
     HashMap<ImageView, CoinChest> coinChestsInGame = new HashMap<>();
     HashMap<ImageView, WeaponChest> weaponChestsInGame = new HashMap<>();
@@ -116,6 +120,7 @@ public class GUIController implements Initializable, Serializable {
     HashMap<Pane, Abyss> abyssInGame = new HashMap<>();
     HashMap<ImageView, Orcs> orcsInGame = new HashMap<>();
     HashMap<ImageView, Pane> orcBoxesInGame = new HashMap<>();
+    HashMap<ImageView, Hero> heroInGame = new HashMap<>();
 
     // Collisions
     AnimationTimer chestCollision = new AnimationTimer() {
@@ -167,15 +172,29 @@ public class GUIController implements Initializable, Serializable {
         public void handle(long l) {
             for (Pane i : abyssInGame.keySet()) {
                 if (i.getBoundsInParent().intersects(heroBox.getBoundsInParent())) {
-                    jump.stop();
-                    fall = new TranslateTransition();
-                    fall.setDuration(Duration.millis(100));
-                    fall.setNode(heroBox);
-                    fall.setByY(100);
-                    fall.setCycleCount(1);
-                    fall.setInterpolator(Interpolator.LINEAR);
-                    fall.play();
-                    gameOver();
+                    if(heroInGame.get(hero).isAlive())
+                    {
+                        heroInGame.get(hero).setAlive(false);
+                        hJump.stop();
+                        fall = new TranslateTransition();
+                        fall.setDuration(Duration.millis(200));
+                        fall.setNode(hero);
+                        fall.setByY(400);
+                        fall.setCycleCount(1);
+                        fall.setInterpolator(Interpolator.LINEAR);
+                        fall.play();
+
+                        TranslateTransition fallBox = new TranslateTransition();
+                        jump.stop();
+                        fallBox.setDuration(Duration.millis(100));
+                        fallBox.setNode(heroBox);
+                        fallBox.setByY(500);
+                        fallBox.setCycleCount(1);
+                        fallBox.setInterpolator(Interpolator.LINEAR);
+                        fallBox.play();
+                        gameOver();
+                    }
+
                 }
 
                 for(ImageView o: orcsInGame.keySet())
@@ -184,9 +203,11 @@ public class GUIController implements Initializable, Serializable {
                         if(orcsInGame.get(o).isAlive())
                         {
                             orcsInGame.get(o).setAlive(false);
-                            for(TranslateTransition a: orcJumps)
-                                a.stop();
-                            orcJump();
+                            for(Orcs a: orcJumps.keySet()) {
+                                if(!a.isAlive())
+                                    orcJumps.get(a).pause();
+                            }
+//                            orcJump();
                             fall = new TranslateTransition();
                             fall.setDuration(Duration.millis(400));
                             fall.setNode(o);
@@ -243,6 +264,25 @@ public class GUIController implements Initializable, Serializable {
         }
     };
 
+    AnimationTimer coinCollision = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            for(ImageView i: coinsInGame.keySet())
+            {
+                if(i.getBoundsInParent().intersects(heroBox.getBoundsInParent()))
+                {
+                    if(!coinsInGame.get(i).isCollected())
+                    {
+                        int c = 1 + Integer.valueOf(coinsCollected.getText());
+                        coinsCollected.setText(Integer.toString(c));
+                        coinsInGame.get(i).setCollected(true);
+                        i.setImage(null);
+                    }
+                }
+            }
+        }
+    };
+
     private static URL u;
     private static ResourceBundle r;
 
@@ -257,20 +297,28 @@ public class GUIController implements Initializable, Serializable {
         ft.setAutoReverse(true);
         ft.play();
 
-        coins = new ArrayList<HBox>();
-        Collections.addAll(coins, coins_1, coins_2, coins_3, coins_4);
+        heroInGame.put(hero, new Hero(hero.getLayoutX(), hero.getLayoutY()));
 
         orcsInGame.put(orc_1, new GreenOrc(orc_1.getTranslateX(), orc_1.getLayoutY()));
         orcsInGame.put(orc_2, new RedOrc(orc_2.getLayoutX(), orc_2.getLayoutY()));
         orcsInGame.put(orc_3, new RedOrc(orc_3.getLayoutX(), orc_3.getLayoutY()));
+        orcsInGame.put(orc_4, new GreenOrc(orc_4.getLayoutX(), orc_4.getLayoutY()));
+        orcsInGame.put(orc_5, new GreenOrc(orc_5.getLayoutX(), orc_5.getLayoutY()));
+        orcsInGame.put(orc_6, new RedOrc(orc_6.getLayoutX(), orc_6.getLayoutY()));
 
         orcBoxesInGame.put(orc_1, orcBox_1);
         orcBoxesInGame.put(orc_2, orcBox_2);
         orcBoxesInGame.put(orc_3, orcBox_3);
+        orcBoxesInGame.put(orc_4, orcBox_4);
+        orcBoxesInGame.put(orc_5, orcBox_5);
+        orcBoxesInGame.put(orc_6, orcBox_6);
 
         AxeTab.setOpacity(0.38);
         KnifeTab.setOpacity(0.38);
 
+        coinsInGame.put(c1, new Coin(c1.getLayoutX(), c1.getLayoutY()));
+        coinsInGame.put(c2, new Coin(c2.getLayoutX(), c2.getLayoutY()));
+        coinsInGame.put(c3, new Coin(c3.getLayoutX(), c3.getLayoutY()));
 
         coinChestsInGame.put(coinChest, new CoinChest(coinChest.getLayoutX(), coinChest.getLayoutY()));
         coinChestsInGame.put(coinChest1, new CoinChest(coinChest1.getLayoutX(), coinChest1.getLayoutY()));
@@ -334,6 +382,7 @@ public class GUIController implements Initializable, Serializable {
         soundOff.setFocusTraversable(false);
         gameOverMenu.setDisable(true);
         gameOverMenu.setOpacity(0);
+        coinCollision.start();
         chestCollision.start();
         abyssCollision.start();
         orcCollision.start();
@@ -362,11 +411,12 @@ public class GUIController implements Initializable, Serializable {
 
     @FXML
     protected void heroJump() {
-        if (firstJump && !pauseMenuActive) {
+        if (firstJump && !pauseMenuActive && heroInGame.get(hero).isAlive()) {
             ft.stop();
             tapToStart.setOpacity(0);
             firstJump = false;
             hero.requestFocus();
+
             jump = new TranslateTransition();
             jump.setDuration(Duration.millis(800));
             jump.setNode(heroBox);
@@ -375,6 +425,16 @@ public class GUIController implements Initializable, Serializable {
             jump.setAutoReverse(true);
             jump.setInterpolator(Interpolator.LINEAR);
             jump.play();
+
+            hJump = new TranslateTransition();
+            hJump.setDuration(Duration.millis(800));
+            hJump.setNode(hero);
+            hJump.setByY(-110);
+            hJump.setCycleCount(Animation.INDEFINITE);
+            hJump.setAutoReverse(true);
+            hJump.setInterpolator(Interpolator.LINEAR);
+            hJump.play();
+
             orcJump();
             coinRotate();
         }
@@ -395,7 +455,19 @@ public class GUIController implements Initializable, Serializable {
                 orcJump.setAutoReverse(true);
                 orcJump.setInterpolator(Interpolator.LINEAR);
                 orcJump.play();
-                orcJumps.add(orcJump);
+                orcJumps.put(orcsInGame.get(i),orcJump);
+
+                TranslateTransition orcBoxJump = new TranslateTransition();
+                orcBoxJump.setDuration(Duration.millis(1000));
+                orcBoxJump.setNode(orcBoxesInGame.get(i));
+                orcBoxJump.setByY(-40);
+                orcBoxJump.setCycleCount(Animation.INDEFINITE);
+                orcBoxJump.setAutoReverse(true);
+                orcBoxJump.setInterpolator(Interpolator.LINEAR);
+                orcBoxJump.play();
+                orcBoxJumps.add(orcBoxJump);
+
+
             }
 
         }
@@ -404,29 +476,33 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     protected void coinRotate()
     {
-        for(HBox h: coins)
+        for(ImageView i: coinsInGame.keySet())
         {
-            for(Node node: h.getChildren())
-            {
-                rotate = new RotateTransition(Duration.millis(4000), node);
-                rotate.setByAngle(360);
-                rotate.setCycleCount(Animation.INDEFINITE);
-                rotate.setInterpolator(Interpolator.LINEAR);
-                rotate.play();
-            }
+            rotate = new RotateTransition(Duration.millis(4000), i);
+            rotate.setByAngle(360);
+            rotate.setCycleCount(Animation.INDEFINITE);
+            rotate.setInterpolator(Interpolator.LINEAR);
+            rotate.play();
         }
     }
 
     @FXML
     protected void onSpace(KeyEvent event) {
         ft.stop();
-        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump) {
+        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump && !over) {
             moveRight = new TranslateTransition();
             moveRight.setDuration(Duration.millis(100));
             moveRight.setNode(heroBox);
             moveRight.setByX(+50);
             moveRight.setCycleCount(1);
             moveRight.play();
+
+            hmoveRight = new TranslateTransition();
+            hmoveRight.setDuration(Duration.millis(100));
+            hmoveRight.setNode(hero);
+            hmoveRight.setByX(+50);
+            hmoveRight.setCycleCount(1);
+            hmoveRight.play();
 
             int s = Integer.valueOf(score.getText());
             s++;
@@ -501,6 +577,13 @@ public class GUIController implements Initializable, Serializable {
             gameOverMenuMove.setByX(50);
             gameOverMenuMove.setCycleCount(1);
             gameOverMenuMove.play();
+
+            resurrectMenuMove = new TranslateTransition();
+            resurrectMenuMove.setDuration(Duration.millis(150));
+            resurrectMenuMove.setNode(resurrectMenu);
+            resurrectMenuMove.setByX(50);
+            resurrectMenuMove.setCycleCount(1);
+            resurrectMenuMove.play();
         }
     }
 
@@ -512,10 +595,14 @@ public class GUIController implements Initializable, Serializable {
 
         if (jump != null)
             jump.pause();
+        if(hJump!=null)
+            hJump.pause();
         if (moveRight != null)
             moveRight.pause();
+        if(hmoveRight!=null)
+            hmoveRight.pause();
 
-        for(TranslateTransition orcJump: orcJumps)
+        for(TranslateTransition orcJump: orcJumps.values())
         {
             if(orcJump!=null)
                 orcJump.pause();
@@ -531,10 +618,12 @@ public class GUIController implements Initializable, Serializable {
 
         if (jump != null)
             jump.play();
-        for(TranslateTransition orcJump: orcJumps)
+        if (hJump != null)
+            hJump.play();
+        for(Orcs o: orcJumps.keySet())
         {
-            if(orcJump!=null)
-                orcJump.play();
+            if(o.isAlive())
+                orcJumps.get(o).play();
         }
     }
 
@@ -639,19 +728,67 @@ public class GUIController implements Initializable, Serializable {
     {
         if(!over)
         {
-            gameOverMenu.setOpacity(1);
-            gameOverMenu.setDisable(false);
-            for(TranslateTransition orcJump: orcJumps)
-                orcJump.pause();
-            Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/GameOverSound.mp3").toUri().toString());
-            MediaPlayer sound = new MediaPlayer(media);
-            sound.setCycleCount(1);
-            sound.setVolume(0.5);
-            sound.play();
-            System.out.print(1);
+            askForResurrect();
+//            gameOverMenu.setOpacity(1);
+//            gameOverMenu.setDisable(false);
+//            for(TranslateTransition orcJump: orcJumps.values())
+//                orcJump.pause();
+//            Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/GameOverSound.mp3").toUri().toString());
+//            MediaPlayer sound = new MediaPlayer(media);
+//            sound.setCycleCount(1);
+//            sound.setVolume(0.5);
+//            sound.play();
             over = true;
         }
+    }
 
+    @FXML
+    protected void askForResurrect()
+    {
+        resurrectMenu.setOpacity(1);
+        resurrectMenu.setDisable(false);
+    }
+
+    @FXML
+    protected void notResurrect(ActionEvent event)
+    {
+        gameOverMenu.setOpacity(1);
+        gameOverMenu.setDisable(false);
+        resurrectMenu.setOpacity(0);
+        resurrectMenu.setDisable(true);
+        pauseGame(event);
+        pausemenu.setDisable(true);
+        pausemenu.setOpacity(0);
+//        for(TranslateTransition orcJump: orcJumps.values())
+//            orcJump.pause();
+        Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/GameOverSound.mp3").toUri().toString());
+        MediaPlayer sound = new MediaPlayer(media);
+        sound.setCycleCount(1);
+        sound.setVolume(0.5);
+        sound.play();
+    }
+
+    @FXML
+    protected void resurrect(ActionEvent event)
+    {
+        int c = Integer.valueOf(coinsCollected.getText());
+        if(c > 2)
+        {
+            c = c-2;
+            coinsCollected.setText(Integer.toString(c));
+            resurrectMenu.setOpacity(0);
+            resurrectMenu.setDisable(true);
+            hero.setTranslateY(0.0);
+            heroBox.setTranslateY(0.0);
+//            System.out.println(hero.getTranslateX());
+            hero.setTranslateX(hero.getTranslateX() + 30);
+            heroBox.setTranslateX(heroBox.getTranslateX() + 30);
+            over = false;
+            heroInGame.get(hero).setAlive(true);
+            resumeGame(event);
+        }
+        else
+            notResurrect(event);
     }
 
     public String getGameName()
