@@ -30,13 +30,12 @@ public class MainMenuController implements Initializable {
     private Scene scene; 
     private static MediaPlayer sound;
     private static boolean soundStatus = true;
-    private static boolean firstTime = true;
+//    private static boolean firstTime = true;
 
     @FXML
     private Button soundOn;
     @FXML
     private Button soundOff;
-
 
 
     @Override

@@ -10,6 +10,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
@@ -20,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.shape.CubicCurveTo;
 import javafx.scene.shape.MoveTo;
 import javafx.scene.shape.Path;
@@ -93,13 +95,17 @@ public class GUIController implements Initializable, Serializable {
     private TextField saveGameName;
     @FXML
     private Pane orcBox_1, orcBox_2, orcBox_3, orcBox_4, orcBox_5, orcBox_6;
+    @FXML
+    private ImageView tnt1, tnt2, tnt3;
+    @FXML
+    private ImageView Axe, Knife;
 
     @FXML
     private Pane heroBox;
 
 
     //Transitions
-    TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove;
+    TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove, axeMove, knifeMove, axeJump, knifeJump;
     HashMap<Orcs, TranslateTransition> orcJumps = new HashMap<>();
     ArrayList<TranslateTransition> orcBoxJumps = new ArrayList<TranslateTransition>();
     RotateTransition rotate;
@@ -110,7 +116,7 @@ public class GUIController implements Initializable, Serializable {
     boolean pauseMenuActive = false;
     boolean over = false;
 
-//    private double heroXbeforeFalling;
+    private double heroXbeforeFalling, heroBoxXbeforeFalling;
 
     // Collections
     HashMap<ImageView, Coin> coinsInGame = new HashMap<>();
@@ -121,6 +127,7 @@ public class GUIController implements Initializable, Serializable {
     HashMap<ImageView, Orcs> orcsInGame = new HashMap<>();
     HashMap<ImageView, Pane> orcBoxesInGame = new HashMap<>();
     HashMap<ImageView, Hero> heroInGame = new HashMap<>();
+    HashMap<ImageView, Weapon> weaponsInGame = new HashMap<>();
 
     // Collisions
     AnimationTimer chestCollision = new AnimationTimer() {
@@ -136,6 +143,9 @@ public class GUIController implements Initializable, Serializable {
                         int c = coinChestsInGame.get(i).getAmount() + Integer.valueOf(coinsCollected.getText());
                         coinsCollected.setText(Integer.toString(c));
                         i.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/OpenCoinChest.png").toUri().toString()));
+                        Glow glow = new Glow();
+                        glow.setLevel(1);
+                        i.setEffect(glow);
                     }
                 }
             }
@@ -152,12 +162,20 @@ public class GUIController implements Initializable, Serializable {
                         {
                             AxeTab.setOpacity(1);
                             KnifeTab.setOpacity(0.38);
+                            Axe.setOpacity(1);
+                            Axe.setDisable(false);
+                            Knife.setOpacity(0);
+                            Knife.setDisable(true);
                         }
 
                         else if(weaponChestsInGame.get(i).getProvidedWeapon().getClass().toString().equals("class com.example.willherogui.Knife"))
                         {
                             AxeTab.setOpacity(0.38);
                             KnifeTab.setOpacity(1);
+                            Axe.setOpacity(0);
+                            Axe.setDisable(true);
+                            Knife.setOpacity(1);
+                            Knife.setDisable(false);
                         }
                         i.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/OpenWeaponChest.png").toUri().toString()));
                     }
@@ -218,6 +236,20 @@ public class GUIController implements Initializable, Serializable {
 
                         }
                     }
+                }
+            }
+        }
+    };
+
+    AnimationTimer islandCollision = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            for(ImageView i: islandsInGame.keySet())
+            {
+                if(i.getBoundsInParent().intersects(heroBox.getBoundsInParent()))
+                {
+                    heroXbeforeFalling = hero.getTranslateX();
+                    heroBoxXbeforeFalling = heroBox.getTranslateX();
                 }
 
             }
@@ -297,6 +329,7 @@ public class GUIController implements Initializable, Serializable {
         ft.setAutoReverse(true);
         ft.play();
 
+        heroBox.setOpacity(0);
         heroInGame.put(hero, new Hero(hero.getLayoutX(), hero.getLayoutY()));
 
         orcsInGame.put(orc_1, new GreenOrc(orc_1.getTranslateX(), orc_1.getLayoutY()));
@@ -315,6 +348,9 @@ public class GUIController implements Initializable, Serializable {
 
         AxeTab.setOpacity(0.38);
         KnifeTab.setOpacity(0.38);
+
+        weaponsInGame.put(Knife, new Knife(Knife.getLayoutX(), Knife.getLayoutY()));
+        weaponsInGame.put(Axe, new Axe(Axe.getLayoutX(), Axe.getLayoutY()));
 
         coinsInGame.put(c1, new Coin(c1.getLayoutX(), c1.getLayoutY()));
         coinsInGame.put(c2, new Coin(c2.getLayoutX(), c2.getLayoutY()));
@@ -385,6 +421,7 @@ public class GUIController implements Initializable, Serializable {
         coinCollision.start();
         chestCollision.start();
         abyssCollision.start();
+        islandCollision.start();
         orcCollision.start();
     }
 
@@ -434,6 +471,24 @@ public class GUIController implements Initializable, Serializable {
             hJump.setAutoReverse(true);
             hJump.setInterpolator(Interpolator.LINEAR);
             hJump.play();
+
+            axeJump = new TranslateTransition();
+            axeJump.setDuration(Duration.millis(800));
+            axeJump.setNode(Axe);
+            axeJump.setByY(-110);
+            axeJump.setCycleCount(Animation.INDEFINITE);
+            axeJump.setAutoReverse(true);
+            axeJump.setInterpolator(Interpolator.LINEAR);
+            axeJump.play();
+
+            knifeJump = new TranslateTransition();
+            knifeJump.setDuration(Duration.millis(800));
+            knifeJump.setNode(Knife);
+            knifeJump.setByY(-110);
+            knifeJump.setCycleCount(Animation.INDEFINITE);
+            knifeJump.setAutoReverse(true);
+            knifeJump.setInterpolator(Interpolator.LINEAR);
+            knifeJump.play();
 
             orcJump();
             coinRotate();
@@ -508,83 +563,179 @@ public class GUIController implements Initializable, Serializable {
             s++;
             score.setText(Integer.toString(s));
 
-            pauseButtonMove = new TranslateTransition();
-            pauseButtonMove.setDuration(Duration.millis(150));
-            pauseButtonMove.setNode(pauseButton);
-            pauseButtonMove.setByX(50);
-            pauseButtonMove.setCycleCount(1);
-            pauseButtonMove.play();
-
-            sceneMove = new TranslateTransition();
-            sceneMove.setDuration(Duration.millis(150));
-            sceneMove.setNode(game);
-            sceneMove.setByX(-50);
-            sceneMove.setCycleCount(1);
-            sceneMove.play();
-
-            pauseMenuMove = new TranslateTransition();
-            pauseMenuMove.setDuration(Duration.millis(150));
-            pauseMenuMove.setNode(pausemenu);
-            pauseMenuMove.setByX(50);
-            pauseMenuMove.setCycleCount(1);
-            pauseMenuMove.play();
-
-            scoreMove = new TranslateTransition();
-            scoreMove.setDuration(Duration.millis(150));
-            scoreMove.setNode(score);
-            scoreMove.setByX(50);
-            scoreMove.setCycleCount(1);
-            scoreMove.play();
-
-            coinsCollectedMove = new TranslateTransition();
-            coinsCollectedMove.setDuration(Duration.millis(150));
-            coinsCollectedMove.setNode(coinsCollected);
-            coinsCollectedMove.setByX(50);
-            coinsCollectedMove.setCycleCount(1);
-            coinsCollectedMove.play();
-
-            coinsCollectedImgMove = new TranslateTransition();
-            coinsCollectedImgMove.setDuration(Duration.millis(150));
-            coinsCollectedImgMove.setNode(coinsCollectedImg);
-            coinsCollectedImgMove.setByX(50);
-            coinsCollectedImgMove.setCycleCount(1);
-            coinsCollectedImgMove.play();
-
-            saveMenuMove = new TranslateTransition();
-            saveMenuMove.setDuration(Duration.millis(150));
-            saveMenuMove.setNode(saveMenu);
-            saveMenuMove.setByX(50);
-            saveMenuMove.setCycleCount(1);
-            saveMenuMove.play();
-
-            weaponTabMove = new TranslateTransition();
-            weaponTabMove.setDuration(Duration.millis(150));
-            weaponTabMove.setNode(weaponTab);
-            weaponTabMove.setByX(50);
-            weaponTabMove.setCycleCount(1);
-            weaponTabMove.play();
-
-            volOnMove = new TranslateTransition();
-            volOnMove.setDuration(Duration.millis(150));
-            volOnMove.setNode(volumeButtons);
-            volOnMove.setByX(50);
-            volOnMove.setCycleCount(1);
-            volOnMove.play();
-
-            gameOverMenuMove = new TranslateTransition();
-            gameOverMenuMove.setDuration(Duration.millis(150));
-            gameOverMenuMove.setNode(gameOverMenu);
-            gameOverMenuMove.setByX(50);
-            gameOverMenuMove.setCycleCount(1);
-            gameOverMenuMove.play();
-
-            resurrectMenuMove = new TranslateTransition();
-            resurrectMenuMove.setDuration(Duration.millis(150));
-            resurrectMenuMove.setNode(resurrectMenu);
-            resurrectMenuMove.setByX(50);
-            resurrectMenuMove.setCycleCount(1);
-            resurrectMenuMove.play();
+            moveMenus(50);
+//            pauseButtonMove = new TranslateTransition();
+//            pauseButtonMove.setDuration(Duration.millis(150));
+//            pauseButtonMove.setNode(pauseButton);
+//            pauseButtonMove.setByX(x);
+//            pauseButtonMove.setCycleCount(1);
+//            pauseButtonMove.play();
+//
+//            sceneMove = new TranslateTransition();
+//            sceneMove.setDuration(Duration.millis(150));
+//            sceneMove.setNode(game);
+//            sceneMove.setByX(-x);
+//            sceneMove.setCycleCount(1);
+//            sceneMove.play();
+//
+//            pauseMenuMove = new TranslateTransition();
+//            pauseMenuMove.setDuration(Duration.millis(150));
+//            pauseMenuMove.setNode(pausemenu);
+//            pauseMenuMove.setByX(x);
+//            pauseMenuMove.setCycleCount(1);
+//            pauseMenuMove.play();
+//
+//            scoreMove = new TranslateTransition();
+//            scoreMove.setDuration(Duration.millis(150));
+//            scoreMove.setNode(score);
+//            scoreMove.setByX(x);
+//            scoreMove.setCycleCount(1);
+//            scoreMove.play();
+//
+//            coinsCollectedMove = new TranslateTransition();
+//            coinsCollectedMove.setDuration(Duration.millis(150));
+//            coinsCollectedMove.setNode(coinsCollected);
+//            coinsCollectedMove.setByX(x);
+//            coinsCollectedMove.setCycleCount(1);
+//            coinsCollectedMove.play();
+//
+//            coinsCollectedImgMove = new TranslateTransition();
+//            coinsCollectedImgMove.setDuration(Duration.millis(150));
+//            coinsCollectedImgMove.setNode(coinsCollectedImg);
+//            coinsCollectedImgMove.setByX(x);
+//            coinsCollectedImgMove.setCycleCount(1);
+//            coinsCollectedImgMove.play();
+//
+//            saveMenuMove = new TranslateTransition();
+//            saveMenuMove.setDuration(Duration.millis(150));
+//            saveMenuMove.setNode(saveMenu);
+//            saveMenuMove.setByX(x);
+//            saveMenuMove.setCycleCount(1);
+//            saveMenuMove.play();
+//
+//            weaponTabMove = new TranslateTransition();
+//            weaponTabMove.setDuration(Duration.millis(150));
+//            weaponTabMove.setNode(weaponTab);
+//            weaponTabMove.setByX(x);
+//            weaponTabMove.setCycleCount(1);
+//            weaponTabMove.play();
+//
+//            volOnMove = new TranslateTransition();
+//            volOnMove.setDuration(Duration.millis(150));
+//            volOnMove.setNode(volumeButtons);
+//            volOnMove.setByX(x);
+//            volOnMove.setCycleCount(1);
+//            volOnMove.play();
+//
+//            gameOverMenuMove = new TranslateTransition();
+//            gameOverMenuMove.setDuration(Duration.millis(150));
+//            gameOverMenuMove.setNode(gameOverMenu);
+//            gameOverMenuMove.setByX(x);
+//            gameOverMenuMove.setCycleCount(1);
+//            gameOverMenuMove.play();
+//
+//            resurrectMenuMove = new TranslateTransition();
+//            resurrectMenuMove.setDuration(Duration.millis(150));
+//            resurrectMenuMove.setNode(resurrectMenu);
+//            resurrectMenuMove.setByX(x);
+//            resurrectMenuMove.setCycleCount(1);
+//            resurrectMenuMove.play();
         }
+    }
+
+    @FXML
+    private void moveMenus(int x)
+    {
+        pauseButtonMove = new TranslateTransition();
+        pauseButtonMove.setDuration(Duration.millis(150));
+        pauseButtonMove.setNode(pauseButton);
+        pauseButtonMove.setByX(x);
+        pauseButtonMove.setCycleCount(1);
+        pauseButtonMove.play();
+
+        sceneMove = new TranslateTransition();
+        sceneMove.setDuration(Duration.millis(150));
+        sceneMove.setNode(game);
+        sceneMove.setByX(-1*x);
+        sceneMove.setCycleCount(1);
+        sceneMove.play();
+
+        pauseMenuMove = new TranslateTransition();
+        pauseMenuMove.setDuration(Duration.millis(150));
+        pauseMenuMove.setNode(pausemenu);
+        pauseMenuMove.setByX(x);
+        pauseMenuMove.setCycleCount(1);
+        pauseMenuMove.play();
+
+        scoreMove = new TranslateTransition();
+        scoreMove.setDuration(Duration.millis(150));
+        scoreMove.setNode(score);
+        scoreMove.setByX(x);
+        scoreMove.setCycleCount(1);
+        scoreMove.play();
+
+        coinsCollectedMove = new TranslateTransition();
+        coinsCollectedMove.setDuration(Duration.millis(150));
+        coinsCollectedMove.setNode(coinsCollected);
+        coinsCollectedMove.setByX(x);
+        coinsCollectedMove.setCycleCount(1);
+        coinsCollectedMove.play();
+
+        coinsCollectedImgMove = new TranslateTransition();
+        coinsCollectedImgMove.setDuration(Duration.millis(150));
+        coinsCollectedImgMove.setNode(coinsCollectedImg);
+        coinsCollectedImgMove.setByX(x);
+        coinsCollectedImgMove.setCycleCount(1);
+        coinsCollectedImgMove.play();
+
+        saveMenuMove = new TranslateTransition();
+        saveMenuMove.setDuration(Duration.millis(150));
+        saveMenuMove.setNode(saveMenu);
+        saveMenuMove.setByX(x);
+        saveMenuMove.setCycleCount(1);
+        saveMenuMove.play();
+
+        weaponTabMove = new TranslateTransition();
+        weaponTabMove.setDuration(Duration.millis(150));
+        weaponTabMove.setNode(weaponTab);
+        weaponTabMove.setByX(x);
+        weaponTabMove.setCycleCount(1);
+        weaponTabMove.play();
+
+        volOnMove = new TranslateTransition();
+        volOnMove.setDuration(Duration.millis(150));
+        volOnMove.setNode(volumeButtons);
+        volOnMove.setByX(x);
+        volOnMove.setCycleCount(1);
+        volOnMove.play();
+
+        gameOverMenuMove = new TranslateTransition();
+        gameOverMenuMove.setDuration(Duration.millis(150));
+        gameOverMenuMove.setNode(gameOverMenu);
+        gameOverMenuMove.setByX(x);
+        gameOverMenuMove.setCycleCount(1);
+        gameOverMenuMove.play();
+
+        resurrectMenuMove = new TranslateTransition();
+        resurrectMenuMove.setDuration(Duration.millis(150));
+        resurrectMenuMove.setNode(resurrectMenu);
+        resurrectMenuMove.setByX(x);
+        resurrectMenuMove.setCycleCount(1);
+        resurrectMenuMove.play();
+
+        axeMove = new TranslateTransition();
+        axeMove.setDuration(Duration.millis(150));
+        axeMove.setNode(Axe);
+        axeMove.setByX(x);
+        axeMove.setCycleCount(1);
+        axeMove.play();
+
+        knifeMove = new TranslateTransition();
+        knifeMove.setDuration(Duration.millis(150));
+        knifeMove.setNode(Knife);
+        knifeMove.setByX(x);
+        knifeMove.setCycleCount(1);
+        knifeMove.play();
     }
 
     @FXML
@@ -729,15 +880,6 @@ public class GUIController implements Initializable, Serializable {
         if(!over)
         {
             askForResurrect();
-//            gameOverMenu.setOpacity(1);
-//            gameOverMenu.setDisable(false);
-//            for(TranslateTransition orcJump: orcJumps.values())
-//                orcJump.pause();
-//            Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/GameOverSound.mp3").toUri().toString());
-//            MediaPlayer sound = new MediaPlayer(media);
-//            sound.setCycleCount(1);
-//            sound.setVolume(0.5);
-//            sound.play();
             over = true;
         }
     }
@@ -780,9 +922,23 @@ public class GUIController implements Initializable, Serializable {
             resurrectMenu.setDisable(true);
             hero.setTranslateY(0.0);
             heroBox.setTranslateY(0.0);
-//            System.out.println(hero.getTranslateX());
-            hero.setTranslateX(hero.getTranslateX() + 30);
-            heroBox.setTranslateX(heroBox.getTranslateX() + 30);
+
+            game.setTranslateX(-1 * heroXbeforeFalling);
+            pauseButton.setTranslateX(heroXbeforeFalling);
+            pausemenu.setTranslateX(heroXbeforeFalling);
+            gameOverMenu.setTranslateX(heroXbeforeFalling);
+            saveMenu.setTranslateX(heroXbeforeFalling);
+            resurrectMenu.setTranslateX(heroXbeforeFalling);
+            weaponTab.setTranslateX(heroXbeforeFalling);
+            volumeButtons.setTranslateX(heroXbeforeFalling);
+            coinsCollected.setTranslateX(heroXbeforeFalling);
+            coinsCollectedImg.setTranslateX(heroXbeforeFalling);
+            Knife.setTranslateX(heroXbeforeFalling);
+            Axe.setTranslateX(heroXbeforeFalling);
+            score.setTranslateX(heroXbeforeFalling);
+            hero.setTranslateX(heroXbeforeFalling - 70);
+            heroBox.setTranslateX(heroBoxXbeforeFalling - 70);
+
             over = false;
             heroInGame.get(hero).setAlive(true);
             resumeGame(event);

@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Glow?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
@@ -173,6 +174,9 @@
          <image>
             <Image url="@Images/CoinChest.png" />
          </image>
+         <effect>
+            <Glow level="0.0" />
+         </effect>
       </ImageView>
       <ImageView fx:id="coinsCollectedImg" fitHeight="55.0" fitWidth="55.0" layoutX="342.0" layoutY="414.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -216,7 +220,7 @@
                 <Image url="@Images/hero-final.png" />
             </image>
         </ImageView>
-      <Pane fx:id="heroBox" layoutX="127.0" layoutY="168.0" prefHeight="68.0" prefWidth="42.0" style="-fx-background-color: lightblue;" />
+      <Pane fx:id="heroBox" disable="true" layoutX="127.0" layoutY="168.0" opacity="0.0" prefHeight="68.0" prefWidth="42.0" style="-fx-background-color: lightblue;" />
       <Pane fx:id="weaponTab" layoutX="534.0" layoutY="394.0" prefHeight="96.0" prefWidth="135.0">
          <children>
             <ImageView fx:id="AxeTab" fitHeight="44.0" fitWidth="68.0" layoutY="26.0" opacity="0.38" pickOnBounds="true" preserveRatio="true">
@@ -471,5 +475,30 @@
             </Button>
          </children>
       </Pane>
+      <ImageView fx:id="tnt1" fitHeight="77.0" fitWidth="55.0" layoutX="1611.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/TnT.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="tnt2" fitHeight="77.0" fitWidth="55.0" layoutX="2417.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/TnT.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="tnt3" fitHeight="77.0" fitWidth="55.0" layoutX="3281.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/TnT.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Axe" disable="true" fitHeight="44.0" fitWidth="42.0" layoutX="160.0" layoutY="152.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Axe.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="Knife" disable="true" fitHeight="50.0" fitWidth="67.0" layoutX="153.0" layoutY="164.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Knife.png" />
+         </image>
+      </ImageView>
     </children>
 </Pane>
