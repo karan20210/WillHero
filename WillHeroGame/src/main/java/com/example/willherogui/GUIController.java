@@ -128,6 +128,7 @@ public class GUIController implements Initializable, Serializable {
     HashMap<ImageView, Pane> orcBoxesInGame = new HashMap<>();
     HashMap<ImageView, Hero> heroInGame = new HashMap<>();
     HashMap<ImageView, Weapon> weaponsInGame = new HashMap<>();
+    HashMap<ImageView, Obstacles> obstaclesInGame = new HashMap<>();
 
     // Collisions
     AnimationTimer chestCollision = new AnimationTimer() {
@@ -177,8 +178,8 @@ public class GUIController implements Initializable, Serializable {
                             Knife.setOpacity(1);
                             Knife.setDisable(false);
                         }
-                        i.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/OpenWeaponChest.png").toUri().toString()));
                     }
+                    i.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/OpenWeaponChest.png").toUri().toString()));
                 }
             }
         }
@@ -296,6 +297,52 @@ public class GUIController implements Initializable, Serializable {
         }
     };
 
+    AnimationTimer obstacleCollision = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            for(ImageView i: obstaclesInGame.keySet())
+            {
+                if(i.getBoundsInParent().intersects(heroBox.getBoundsInParent()))
+                {
+                    TnT t = (TnT)obstaclesInGame.get(i);
+                    if(!t.isBlast())
+                    {
+                        FadeTransition blast = new FadeTransition(Duration.millis(500), i);
+                        blast.setCycleCount(4);
+                        blast.setFromValue(1);
+                        blast.setToValue(0.5);
+                        blast.setAutoReverse(true);
+                        blast.play();
+                        t.setBlast(true);
+
+                        new java.util.Timer().schedule(
+                                new java.util.TimerTask() {
+                                    @Override
+                                    public void run() {
+                                        System.out.println("Blast");
+                                        i.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/blast.png").toUri().toString()));
+                                        i.setScaleX(3);
+                                        i.setScaleY(1);
+
+                                        if(hero.getTranslateX() - i.getLayoutX() < 100)
+                                        {
+//                                            System.out.println("BOOM");
+//                                            System.out.println(hero.getTranslateX() + " " + i.getLayoutX());
+                                            gameOver();
+                                        }
+
+                                    }
+                                },
+                                2000
+                        );
+
+//                        System.out.println(hero.getTranslateX() + " " + i.getLayoutX() + " " + i.getTranslateX());
+                    }
+                }
+            }
+        }
+    };
+
     AnimationTimer coinCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -345,6 +392,10 @@ public class GUIController implements Initializable, Serializable {
         orcBoxesInGame.put(orc_4, orcBox_4);
         orcBoxesInGame.put(orc_5, orcBox_5);
         orcBoxesInGame.put(orc_6, orcBox_6);
+
+        obstaclesInGame.put(tnt1, new TnT(tnt1.getLayoutX(), tnt1.getLayoutY()));
+        obstaclesInGame.put(tnt2, new TnT(tnt2.getLayoutX(), tnt2.getLayoutY()));
+        obstaclesInGame.put(tnt3, new TnT(tnt3.getLayoutX(), tnt3.getLayoutY()));
 
         AxeTab.setOpacity(0.38);
         KnifeTab.setOpacity(0.38);
@@ -423,6 +474,7 @@ public class GUIController implements Initializable, Serializable {
         abyssCollision.start();
         islandCollision.start();
         orcCollision.start();
+        obstacleCollision.start();
     }
 
     public void soundOnOff(ActionEvent event){
@@ -564,82 +616,6 @@ public class GUIController implements Initializable, Serializable {
             score.setText(Integer.toString(s));
 
             moveMenus(50);
-//            pauseButtonMove = new TranslateTransition();
-//            pauseButtonMove.setDuration(Duration.millis(150));
-//            pauseButtonMove.setNode(pauseButton);
-//            pauseButtonMove.setByX(x);
-//            pauseButtonMove.setCycleCount(1);
-//            pauseButtonMove.play();
-//
-//            sceneMove = new TranslateTransition();
-//            sceneMove.setDuration(Duration.millis(150));
-//            sceneMove.setNode(game);
-//            sceneMove.setByX(-x);
-//            sceneMove.setCycleCount(1);
-//            sceneMove.play();
-//
-//            pauseMenuMove = new TranslateTransition();
-//            pauseMenuMove.setDuration(Duration.millis(150));
-//            pauseMenuMove.setNode(pausemenu);
-//            pauseMenuMove.setByX(x);
-//            pauseMenuMove.setCycleCount(1);
-//            pauseMenuMove.play();
-//
-//            scoreMove = new TranslateTransition();
-//            scoreMove.setDuration(Duration.millis(150));
-//            scoreMove.setNode(score);
-//            scoreMove.setByX(x);
-//            scoreMove.setCycleCount(1);
-//            scoreMove.play();
-//
-//            coinsCollectedMove = new TranslateTransition();
-//            coinsCollectedMove.setDuration(Duration.millis(150));
-//            coinsCollectedMove.setNode(coinsCollected);
-//            coinsCollectedMove.setByX(x);
-//            coinsCollectedMove.setCycleCount(1);
-//            coinsCollectedMove.play();
-//
-//            coinsCollectedImgMove = new TranslateTransition();
-//            coinsCollectedImgMove.setDuration(Duration.millis(150));
-//            coinsCollectedImgMove.setNode(coinsCollectedImg);
-//            coinsCollectedImgMove.setByX(x);
-//            coinsCollectedImgMove.setCycleCount(1);
-//            coinsCollectedImgMove.play();
-//
-//            saveMenuMove = new TranslateTransition();
-//            saveMenuMove.setDuration(Duration.millis(150));
-//            saveMenuMove.setNode(saveMenu);
-//            saveMenuMove.setByX(x);
-//            saveMenuMove.setCycleCount(1);
-//            saveMenuMove.play();
-//
-//            weaponTabMove = new TranslateTransition();
-//            weaponTabMove.setDuration(Duration.millis(150));
-//            weaponTabMove.setNode(weaponTab);
-//            weaponTabMove.setByX(x);
-//            weaponTabMove.setCycleCount(1);
-//            weaponTabMove.play();
-//
-//            volOnMove = new TranslateTransition();
-//            volOnMove.setDuration(Duration.millis(150));
-//            volOnMove.setNode(volumeButtons);
-//            volOnMove.setByX(x);
-//            volOnMove.setCycleCount(1);
-//            volOnMove.play();
-//
-//            gameOverMenuMove = new TranslateTransition();
-//            gameOverMenuMove.setDuration(Duration.millis(150));
-//            gameOverMenuMove.setNode(gameOverMenu);
-//            gameOverMenuMove.setByX(x);
-//            gameOverMenuMove.setCycleCount(1);
-//            gameOverMenuMove.play();
-//
-//            resurrectMenuMove = new TranslateTransition();
-//            resurrectMenuMove.setDuration(Duration.millis(150));
-//            resurrectMenuMove.setNode(resurrectMenu);
-//            resurrectMenuMove.setByX(x);
-//            resurrectMenuMove.setCycleCount(1);
-//            resurrectMenuMove.play();
         }
     }
 
@@ -752,6 +728,10 @@ public class GUIController implements Initializable, Serializable {
             moveRight.pause();
         if(hmoveRight!=null)
             hmoveRight.pause();
+        if(axeJump!=null)
+            axeJump.pause();
+        if(knifeJump!=null)
+            knifeJump.pause();
 
         for(TranslateTransition orcJump: orcJumps.values())
         {
@@ -776,6 +756,10 @@ public class GUIController implements Initializable, Serializable {
             if(o.isAlive())
                 orcJumps.get(o).play();
         }
+        if(axeJump!=null)
+            axeJump.play();
+        if(knifeJump!=null)
+            knifeJump.play();
     }
 
     @FXML
@@ -887,6 +871,9 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     protected void askForResurrect()
     {
+        pauseGame(new ActionEvent());
+        pausemenu.setOpacity(0);
+        pausemenu.setDisable(true);
         resurrectMenu.setOpacity(1);
         resurrectMenu.setDisable(false);
     }
@@ -933,8 +920,8 @@ public class GUIController implements Initializable, Serializable {
             volumeButtons.setTranslateX(heroXbeforeFalling);
             coinsCollected.setTranslateX(heroXbeforeFalling);
             coinsCollectedImg.setTranslateX(heroXbeforeFalling);
-            Knife.setTranslateX(heroXbeforeFalling);
-            Axe.setTranslateX(heroXbeforeFalling);
+            Knife.setTranslateX(heroXbeforeFalling-70);
+            Axe.setTranslateX(heroXbeforeFalling-70);
             score.setTranslateX(heroXbeforeFalling);
             hero.setTranslateX(heroXbeforeFalling - 70);
             heroBox.setTranslateX(heroBoxXbeforeFalling - 70);
