@@ -1,6 +1,8 @@
 package com.example.willherogui;
 
-public abstract class GameObjects {
+import java.io.Serializable;
+
+public abstract class GameObjects implements Serializable {
     private double x, y;
 
     GameObjects(double x, double y)

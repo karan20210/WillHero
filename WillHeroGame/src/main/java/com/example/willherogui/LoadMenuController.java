@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -39,12 +40,12 @@ public class LoadMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        Box.getChildren().add(new slot("KARAN2","08-12-2021"));
-        Box.getChildren().add(new slot("KARAN1","10-08-2021"));
-        Box.getChildren().add(new slot("JAIN1","04-12-2021"));
-        Box.getChildren().add(new slot("JAIN2","20-10-2021"));
-        Box.getChildren().add(new slot("Baboota1","24-12-2021"));
-        Box.getChildren().add(new slot("Bhavya2","27-10-2021"));
+//        Box.getChildren().add(new slot("KARAN2","08-12-2021"));
+//        Box.getChildren().add(new slot("KARAN1","10-08-2021"));
+//        Box.getChildren().add(new slot("JAIN1","04-12-2021"));
+//        Box.getChildren().add(new slot("JAIN2","20-10-2021"));
+//        Box.getChildren().add(new slot("Baboota1","24-12-2021"));
+//        Box.getChildren().add(new slot("Bhavya2","27-10-2021"));
 
         if(MainMenuController.getSoundStatus() == true)
         {
@@ -61,26 +62,24 @@ public class LoadMenuController implements Initializable {
             soundOn.setOpacity(0);
         }
 
-//        try
-//        {
-//            GUIController obj = null;
-//            FileInputStream file = new FileInputStream("save.txt");
-//            ObjectInputStream in = new ObjectInputStream(file);
-//
-//            obj = (GUIController)in.readObject();
-//            in.close();
-//            file.close();
-//
-//            ArrayList<GUIController> savedGames = obj.getSavedGames();
-//
-//            for(GUIController i: savedGames)
-//                System.out.println(i.getGameName());
-//        }
-//
-//        catch (Exception e)
-//        {
-//            System.out.println(e);
-//        }
+        try
+        {
+            FileInputStream file = new FileInputStream("save.txt");
+            ObjectInputStream in = new ObjectInputStream(file);
+            ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
+//            System.out.println(s);
+            for(HashMap<String, ArrayList<GameObjects>> a: s) {
+                for(String i: a.keySet())
+                    Box.getChildren().add(new slot(i));
+            }
+            in.close();
+            file.close();
+        }
+
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
 
     }
 
@@ -110,14 +109,12 @@ public class LoadMenuController implements Initializable {
             soundOn.setDisable(true);
             soundOn.setOpacity(0);
         }
-
-
     }
 }
 
 class slot extends Button{
 
-    slot (String name, String date){
+    slot (String name){
         HBox h = new HBox(50);  
         h.setPrefWidth(200);
         h.setPrefHeight(30);  
@@ -125,10 +122,7 @@ class slot extends Button{
         Label labelname= new Label(name);
         labelname.setFont(new Font("Copperplate Gothic Bold", 12));
       
-        Label labeldate= new Label(date);
-        labeldate.setFont(new Font("Copperplate Gothic Bold", 12));
-      
-        h.getChildren().addAll(labelname,labeldate);
+        h.getChildren().addAll(labelname);
         h.setAlignment(Pos.CENTER);
 
         setAlignment(Pos.CENTER);

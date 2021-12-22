@@ -38,7 +38,6 @@ import java.util.*;
 public class GUIController implements Initializable, Serializable {
 
     private String gameName;
-    private ArrayList<GUIController> savedGames = new ArrayList<>();
 
     // Game elements
     @FXML
@@ -103,6 +102,9 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private Pane heroBox;
 
+    private static final long serialversionUID =
+            129348938L;
+
 
     //Transitions
     TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove, axeMove, knifeMove, axeJump, knifeJump;
@@ -115,6 +117,7 @@ public class GUIController implements Initializable, Serializable {
     boolean firstJump = true;
     boolean pauseMenuActive = false;
     boolean over = false;
+    boolean jumpOver = true;
 
     private double heroXbeforeFalling, heroBoxXbeforeFalling;
 
@@ -129,6 +132,10 @@ public class GUIController implements Initializable, Serializable {
     HashMap<ImageView, Hero> heroInGame = new HashMap<>();
     HashMap<ImageView, Weapon> weaponsInGame = new HashMap<>();
     HashMap<ImageView, Obstacles> obstaclesInGame = new HashMap<>();
+
+    ArrayList<GameObjects> gameObjectsInGame = new ArrayList<>();
+    HashMap<String, ArrayList<GameObjects>> savedGame = new HashMap<>();
+    ArrayList<HashMap<String, ArrayList<GameObjects>>> savedGames = new ArrayList<>();
 
     // Collisions
     AnimationTimer chestCollision = new AnimationTimer() {
@@ -326,8 +333,6 @@ public class GUIController implements Initializable, Serializable {
 
                                         if(hero.getTranslateX() - i.getLayoutX() < 100)
                                         {
-//                                            System.out.println("BOOM");
-//                                            System.out.println(hero.getTranslateX() + " " + i.getLayoutX());
                                             gameOver();
                                         }
 
@@ -335,8 +340,6 @@ public class GUIController implements Initializable, Serializable {
                                 },
                                 2000
                         );
-
-//                        System.out.println(hero.getTranslateX() + " " + i.getLayoutX() + " " + i.getTranslateX());
                     }
                 }
             }
@@ -358,6 +361,26 @@ public class GUIController implements Initializable, Serializable {
                         i.setImage(null);
                     }
                 }
+            }
+        }
+    };
+
+    AnimationTimer updateCoordinates = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            heroInGame.get(hero).setX(hero.getTranslateX());
+            heroInGame.get(hero).setY(hero.getTranslateY());
+
+            for(ImageView i: orcsInGame.keySet())
+            {
+                orcsInGame.get(i).setX(i.getTranslateX());
+                orcsInGame.get(i).setY(i.getTranslateY());
+            }
+
+            for(ImageView i: weaponsInGame.keySet())
+            {
+                weaponsInGame.get(i).setX(i.getTranslateX());
+                weaponsInGame.get(i).setY(i.getTranslateY());
             }
         }
     };
@@ -475,6 +498,7 @@ public class GUIController implements Initializable, Serializable {
         islandCollision.start();
         orcCollision.start();
         obstacleCollision.start();
+        updateCoordinates.start();
     }
 
     public void soundOnOff(ActionEvent event){
@@ -596,7 +620,7 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     protected void onSpace(KeyEvent event) {
         ft.stop();
-        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump && !over) {
+        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump && !over && jumpOver) {
             moveRight = new TranslateTransition();
             moveRight.setDuration(Duration.millis(100));
             moveRight.setNode(heroBox);
@@ -611,17 +635,28 @@ public class GUIController implements Initializable, Serializable {
             hmoveRight.setCycleCount(1);
             hmoveRight.play();
 
-            int s = Integer.valueOf(score.getText());
-            s++;
-            score.setText(Integer.toString(s));
-
             moveMenus(50);
+            jumpOver = false;
+
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            jumpOver = true;
+                        }
+                    },
+                    150
+            );
         }
     }
 
     @FXML
     private void moveMenus(int x)
     {
+        int s = Integer.valueOf(score.getText());
+        s++;
+        score.setText(Integer.toString(s));
+
         pauseButtonMove = new TranslateTransition();
         pauseButtonMove.setDuration(Duration.millis(150));
         pauseButtonMove.setNode(pauseButton);
@@ -700,14 +735,14 @@ public class GUIController implements Initializable, Serializable {
         resurrectMenuMove.play();
 
         axeMove = new TranslateTransition();
-        axeMove.setDuration(Duration.millis(150));
+        axeMove.setDuration(Duration.millis(100));
         axeMove.setNode(Axe);
         axeMove.setByX(x);
         axeMove.setCycleCount(1);
         axeMove.play();
 
         knifeMove = new TranslateTransition();
-        knifeMove.setDuration(Duration.millis(150));
+        knifeMove.setDuration(Duration.millis(100));
         knifeMove.setNode(Knife);
         knifeMove.setByX(x);
         knifeMove.setCycleCount(1);
@@ -781,68 +816,67 @@ public class GUIController implements Initializable, Serializable {
     }
 
     @FXML
-    protected void saveGameButton(ActionEvent event)
-    {
+    protected void saveGameButton(ActionEvent event) {
         pausemenu.setOpacity(1);
         pausemenu.setDisable(false);
         saveMenu.setDisable(true);
         saveMenu.setOpacity(0);
 
+        try
+        {
 
-        //SERIALIZING
-//        gameName = saveGameName.getText();
-//
-//        GUIController object = null;
-//        try
-//        {
-//            try
-//            {
-//                FileInputStream file = new FileInputStream("save.txt");
-//                ObjectInputStream in = new ObjectInputStream(file);
-//                object = (GUIController)in.readObject();
-//                if(object == null)
-//                    this.savedGames.add(this);
-//                this.savedGames.add(object);
-//                in.close();
-//                file.close();
-//
-//                System.out.println("Deserialized then serialized");
-//            }
-//
-//            catch (Exception e)
-//            {
-//                System.out.println(e);
-//                this.savedGames.add(this);
-//            }
-//
-//            FileOutputStream file = new FileOutputStream
-//                    ("save.txt");
-//
-//            ObjectOutputStream out = new ObjectOutputStream
-//                    (file);
-//
-//            out.writeObject(object);
-//            out.close();
-//            file.close();
-//            System.out.println("Serialized");
-//        }
-//
-//        catch (Exception e)
-//        {
-//            System.out.println(e);
-//        }
-//
-//        try
-//        {
-//            FileInputStream file = new FileInputStream("save.txt");
-//            ObjectInputStream in = new ObjectInputStream(file);
-//            object = (GUIController)in.readObject();
-//            System.out.println(object.getSavedGames());
-//        }
-//        catch (Exception e)
-//        {
-//            System.out.println(e);
-//        }
+            try
+            {
+                FileInputStream file = new FileInputStream("save.txt");
+                ObjectInputStream in = new ObjectInputStream(file);
+                ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
+                for(HashMap<String, ArrayList<GameObjects>> sg: s)
+                {
+                    savedGames.add(sg);
+                }
+                in.close();
+                file.close();
+            }
+
+            catch (Exception e)
+            {
+                System.out.println(e);
+            }
+
+            gameName = saveGameName.getText() + " " + new java.util.Date();
+            FileOutputStream file = new FileOutputStream("save.txt");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+
+            for(GameObjects i: coinsInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: coinChestsInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: weaponChestsInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: islandsInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: abyssInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: orcsInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: heroInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: weaponsInGame.values())
+                gameObjectsInGame.add(i);
+            for(GameObjects i: obstaclesInGame.values())
+                gameObjectsInGame.add(i);
+
+            savedGame.put(gameName, gameObjectsInGame);
+            savedGames.add(savedGame);
+            out.writeObject(savedGames);
+            out.close();
+            file.close();
+        }
+
+        catch (Exception e)
+        {
+            System.out.println(e);
+        }
     }
 
     @FXML
@@ -939,8 +973,4 @@ public class GUIController implements Initializable, Serializable {
         return gameName;
     }
 
-    public ArrayList<GUIController> getSavedGames()
-    {
-        return savedGames;
-    }
 }
