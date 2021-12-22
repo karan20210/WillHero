@@ -323,6 +323,26 @@ public class GUIController implements Initializable, Serializable {
         }
     };
 
+    AnimationTimer updateCoordinates = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            hero1.setX(hero.getTranslateX());
+            hero1.setY(hero.getTranslateY());
+
+            for(ImageView i: orcsInGame.keySet())
+            {
+                orcsInGame.get(i).setX(i.getTranslateX());
+                orcsInGame.get(i).setY(i.getTranslateY());
+            }
+
+            for(ImageView i: weaponsInGame.keySet())
+            {
+                weaponsInGame.get(i).setX(i.getTranslateX());
+                weaponsInGame.get(i).setY(i.getTranslateY());
+            }
+        }
+    };
+
     private static URL u;
     private static ResourceBundle r;
 
@@ -449,6 +469,7 @@ public class GUIController implements Initializable, Serializable {
         islandCollision.start();
         orcCollision.start();
         obstacleCollision.start();
+        updateCoordinates.start();
     }
 
     public void soundOnOff(ActionEvent event){
@@ -731,7 +752,6 @@ public class GUIController implements Initializable, Serializable {
         pausemenu.setDisable(false);
         saveMenu.setDisable(true);
         saveMenu.setOpacity(0);
-
 
         try
         {
