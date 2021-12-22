@@ -11,23 +11,23 @@ import javafx.scene.text.Text;
 public class Hero extends GameObjects implements Movable
 {   
     // private Pane heroBox;
-    private ImageView heroImg;
+    private transient ImageView heroImg;
     private boolean alive;
     private int currentCoins;
     private int score;
 
-    private Text coinsCollected;
+    private transient Text coinsCollected;
 
-    private ImageView tab1;
-    private ImageView tab2;
+    private transient ImageView tab1;
+    private transient ImageView tab2;
 
     private Helmet currentHelmet;
     private Weapon currentWeapon=null;
 
-    private TranslateTransition moveRight;
-    private TranslateTransition hmoveRight;
+//    private TranslateTransition moveRight;
+    private transient TranslateTransition hmoveRight, helmetJump, helmetMoveRight;
 
-    private TranslateTransition hJump;
+    private transient TranslateTransition hJump;
 
     Hero(double x, double y)
     {
@@ -135,14 +135,7 @@ public class Hero extends GameObjects implements Movable
 
     
 
-    public void jump(){
-        // moveRight = new TranslateTransition();
-        // moveRight.setDuration(Duration.millis(100));
-        // moveRight.setNode(heroBox);
-        // moveRight.setByX(+50);
-        // moveRight.setCycleCount(1);
-        // moveRight.play();
-
+    public void moveRight(){
         hmoveRight = new TranslateTransition();
         hmoveRight.setDuration(Duration.millis(100));
         hmoveRight.setNode(heroImg);
@@ -150,12 +143,19 @@ public class Hero extends GameObjects implements Movable
         hmoveRight.setCycleCount(1);
         hmoveRight.play();
 
+        helmetMoveRight = new TranslateTransition();
+        helmetMoveRight.setDuration(Duration.millis(100));
+        helmetMoveRight.setNode(currentHelmet.getHelmetImg());
+        helmetMoveRight.setByX(+50);
+        helmetMoveRight.setCycleCount(1);
+        helmetMoveRight.play();
+
     }
 
     public void resumeJump(){
         hJump.play();
-        
-
+        if(helmetJump!=null)
+            helmetJump.play();
     }
 
     public void pauseJump(){
@@ -163,9 +163,10 @@ public class Hero extends GameObjects implements Movable
         if(hmoveRight!=null){
             hmoveRight.pause();
         }
-      
-        
-
+        if(helmetMoveRight!=null)
+            helmetMoveRight.pause();
+        if(helmetJump!=null)
+            helmetJump.pause();
     }
 
     @Override
@@ -189,24 +190,13 @@ public class Hero extends GameObjects implements Movable
         hJump.setAutoReverse(true);
         hJump.setInterpolator(Interpolator.LINEAR);
         hJump.play();
-
-        // axeJump = new TranslateTransition();
-        // axeJump.setDuration(Duration.millis(800));
-        // axeJump.setNode(axe);
-        // axeJump.setByY(-110);
-        // axeJump.setCycleCount(Animation.INDEFINITE);
-        // axeJump.setAutoReverse(true);
-        // axeJump.setInterpolator(Interpolator.LINEAR);
-        // axeJump.play();
-
-        // knifeJump = new TranslateTransition();
-        // knifeJump.setDuration(Duration.millis(800));
-        // knifeJump.setNode(knife);
-        // knifeJump.setByY(-110);
-        // knifeJump.setCycleCount(Animation.INDEFINITE);
-        // knifeJump.setAutoReverse(true);
-        // knifeJump.setInterpolator(Interpolator.LINEAR);
-        // knifeJump.play();
+        
+        helmetJump = new TranslateTransition(Duration.millis(800), currentHelmet.getHelmetImg());
+        helmetJump.setByY(-110);
+        helmetJump.setCycleCount(Animation.INDEFINITE);
+        helmetJump.setAutoReverse(true);
+        helmetJump.setInterpolator(Interpolator.LINEAR);
+        helmetJump.play();
     }
 
     @Override

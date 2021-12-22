@@ -9,7 +9,7 @@ import javafx.scene.image.ImageView;
 public abstract class Chests extends GameObjects implements Collision
 {
     private boolean open;
-    private ImageView chest;
+    private transient ImageView chest;
 
     Chests(double x, double y,ImageView Chest)
     {

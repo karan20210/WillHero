@@ -6,7 +6,7 @@ public abstract class Weapon extends GameObjects
 {
     private int level;
     private int damage;
-    private ImageView weapon;
+    private transient ImageView weapon;
 
     Weapon(ImageView weap, int damage)
     {

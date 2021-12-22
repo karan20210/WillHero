@@ -1,8 +1,11 @@
 package com.example.willherogui;
 
-public abstract class GameObjects {
-    private double x, y;
+import java.io.Serializable;
 
+public abstract class GameObjects implements Serializable {
+    private double x, y;
+    protected static final long serialversionUID =
+            129348938L;
     GameObjects(double x, double y)
     {
         this.x = x;

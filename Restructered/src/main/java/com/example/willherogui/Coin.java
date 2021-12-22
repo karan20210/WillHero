@@ -9,7 +9,7 @@ import javafx.util.Duration;
 
 public class Coin extends GameObjects implements Collision {
     private boolean collected;
-    private ImageView coinImg;
+    private transient ImageView coinImg;
 
     Coin(ImageView coinImg)
     {
@@ -35,12 +35,11 @@ public class Coin extends GameObjects implements Collision {
     }
 
     public void collide(Hero hero){
-        if(isCollected())
-            {
+
                 hero.addCoins(1);
                 setCollected(true);
                 coinImg.setOpacity(0);
                 coinImg.setDisable(true);
-            }
+
     }
 }

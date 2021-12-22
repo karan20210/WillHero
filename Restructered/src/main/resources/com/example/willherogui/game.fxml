@@ -317,13 +317,13 @@
          </children>
       </VBox>
       <Pane fx:id="a1" layoutX="205.0" layoutY="275.0" prefHeight="209.0" prefWidth="13.0" translateX="60.0" translateY="-55.0" />
-      <Pane fx:id="a2" layoutX="575.0" layoutY="221.0" prefHeight="209.0" prefWidth="27.0" />
-      <Pane fx:id="a3" layoutX="585.0" layoutY="231.0" prefHeight="209.0" prefWidth="27.0" translateX="220.0" translateY="-10.0" />
+      <Pane fx:id="a2" layoutX="575.0" layoutY="209.0" prefHeight="209.0" prefWidth="27.0" />
+      <Pane fx:id="a3" layoutX="580.0" layoutY="219.0" prefHeight="209.0" prefWidth="27.0" translateX="220.0" translateY="-10.0" />
       <Pane fx:id="a4" layoutX="1113.0" layoutY="221.0" prefHeight="188.0" prefWidth="27.0" />
       <Pane fx:id="a5" layoutX="1415.0" layoutY="218.0" prefHeight="200.0" prefWidth="27.0" />
-      <Pane fx:id="a6" layoutX="1741.0" layoutY="224.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="68.0" style="-fx-background-color: grey;" />
-      <Pane fx:id="a7" layoutX="2016.0" layoutY="224.0" prefHeight="200.0" prefWidth="42.0" />
-      <Pane fx:id="a8" layoutX="2598.0" layoutY="225.0" prefHeight="200.0" prefWidth="55.0" />
+      <Pane fx:id="a6" layoutX="1741.0" layoutY="217.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="68.0" style="-fx-background-color: grey;" />
+      <Pane fx:id="a7" layoutX="2015.0" layoutY="213.0" prefHeight="200.0" prefWidth="42.0" />
+      <Pane fx:id="a8" layoutX="2597.0" layoutY="213.0" prefHeight="200.0" prefWidth="55.0" />
       <Pane fx:id="a9" layoutX="2939.0" layoutY="225.0" prefHeight="200.0" prefWidth="85.0" />
       <Pane fx:id="a10" layoutX="3722.0" layoutY="217.0" prefHeight="200.0" prefWidth="68.0" />
       <Pane fx:id="a11" layoutX="3980.0" layoutY="224.0" prefHeight="200.0" prefWidth="68.0" />

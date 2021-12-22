@@ -8,7 +8,7 @@ public class Helmet extends GameObjects{
 
     private Weapon Weapon1;
     private Weapon Weapon2;
-    private Pane helmetImg;
+    private transient Pane helmetImg;
 
     Helmet(double x, double y)
     {
@@ -18,6 +18,14 @@ public class Helmet extends GameObjects{
     public void addWeapons(Weapon Weapon1,Weapon Weapon2){
         this.Weapon1=Weapon1;
         this.Weapon2=Weapon2;
+    }
+
+    public Pane getHelmetImg() {
+        return helmetImg;
+    }
+
+    public void setHelmetImg(Pane helmetImg) {
+        this.helmetImg = helmetImg;
     }
 
     public Weapon getWeapon1(){
