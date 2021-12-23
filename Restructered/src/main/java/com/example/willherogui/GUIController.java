@@ -118,7 +118,7 @@ public class GUIController implements Initializable, Serializable {
 
     //Chests
     @FXML
-    private ImageView c1, c2, c3;
+    private ImageView c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15;
     @FXML
     private ImageView coinChest, coinChest1, coinChest11, coinChest111;
     @FXML
@@ -151,13 +151,11 @@ public class GUIController implements Initializable, Serializable {
     boolean over = false;
     boolean jumpOver = true;
 
-    private double heroXbeforeFalling, heroBoxXbeforeFalling;
+    private double heroXbeforeFalling;
 
     // Collections
     HashMap<ImageView, Coin> coinsInGame = new HashMap<>();
     HashMap<ImageView, Chests> ChestsInGame= new HashMap<>();
-    // HashMap<ImageView, CoinChest> coinChestsInGame = new HashMap<>();
-    // HashMap<ImageView, WeaponChest> weaponChestsInGame = new HashMap<>();
     HashMap<ImageView, Island> islandsInGame = new HashMap<>();
     HashMap<Pane, Abyss> abyssInGame = new HashMap<>();
     HashMap<ImageView, Orcs> orcsInGame = new HashMap<>();
@@ -167,6 +165,7 @@ public class GUIController implements Initializable, Serializable {
     HashMap<Pane,Helmet> helmetsInGame= new HashMap<>();
     HashMap<ImageView, Obstacles> obstaclesInGame = new HashMap<>();
 
+    // Collections required for saving
     ArrayList<GameObjects> gameObjectsInGame = new ArrayList<>();
     HashMap<String, ArrayList<GameObjects>> savedGame = new HashMap<>();
     ArrayList<HashMap<String, ArrayList<GameObjects>>> savedGames = new ArrayList<>();
@@ -401,6 +400,18 @@ public class GUIController implements Initializable, Serializable {
         coinsInGame.put(c1, new Coin(c1));
         coinsInGame.put(c2, new Coin(c2));
         coinsInGame.put(c3, new Coin(c3));
+        coinsInGame.put(c4, new Coin(c4));
+        coinsInGame.put(c5, new Coin(c5));
+        coinsInGame.put(c6, new Coin(c6));
+        coinsInGame.put(c7, new Coin(c7));
+        coinsInGame.put(c8, new Coin(c8));
+        coinsInGame.put(c9, new Coin(c9));
+        coinsInGame.put(c10, new Coin(c10));
+        coinsInGame.put(c11, new Coin(c11));
+        coinsInGame.put(c12, new Coin(c12));
+        coinsInGame.put(c13, new Coin(c13));
+        coinsInGame.put(c14, new Coin(c14));
+        coinsInGame.put(c15, new Coin(c15));
 
         ChestsInGame.put(coinChest, new CoinChest(coinChest));
         ChestsInGame.put(coinChest1, new CoinChest(coinChest1));
@@ -500,24 +511,6 @@ public class GUIController implements Initializable, Serializable {
             tapToStart.setOpacity(0);
             hero1.startMove();
             firstJump = false;
-            
-            // axeJump = new TranslateTransition();
-            // axeJump.setDuration(Duration.millis(800));
-            // axeJump.setNode(axe);
-            // axeJump.setByY(-110);
-            // axeJump.setCycleCount(Animation.INDEFINITE);
-            // axeJump.setAutoReverse(true);
-            // axeJump.setInterpolator(Interpolator.LINEAR);
-            // axeJump.play();
-
-            // knifeJump = new TranslateTransition();
-            // knifeJump.setDuration(Duration.millis(800));
-            // knifeJump.setNode(knife);
-            // knifeJump.setByY(-110);
-            // knifeJump.setCycleCount(Animation.INDEFINITE);
-            // knifeJump.setAutoReverse(true);
-            // knifeJump.setInterpolator(Interpolator.LINEAR);
-            // knifeJump.play();
 
             orcJump();
             coinRotate();
@@ -755,7 +748,6 @@ public class GUIController implements Initializable, Serializable {
 
         try
         {
-
             try
             {
                 FileInputStream file = new FileInputStream("save.txt");
@@ -792,7 +784,7 @@ public class GUIController implements Initializable, Serializable {
                 gameObjectsInGame.add(i);
             for(GameObjects i: heroInGame.values())
                 gameObjectsInGame.add(i);
-            for(GameObjects i: weaponsInGame.values())
+            for(GameObjects i: helmetsInGame.values())
                 gameObjectsInGame.add(i);
             for(GameObjects i: obstaclesInGame.values())
                 gameObjectsInGame.add(i);
@@ -810,12 +802,28 @@ public class GUIController implements Initializable, Serializable {
         }
     }
 
+    public void loadSavedGame(ArrayList<GameObjects> g, ActionEvent e) throws IOException {
+        System.out.println(g);
+        int i = 0;
+        for(GameObjects go: g)
+            System.out.println(go.getX() + " " + go.getY());
+
+//        FXMLLoader loader =  new FXMLLoader(getClass().getResource("game.fxml"));
+//        Stage stage= (Stage) ((Node)e.getSource()).getScene().getWindow();
+//        Scene scene = new Scene(loader.load(), 800, 500);
+//        stage.setScene(scene);
+//        stage.show();
+
+        hero.setTranslateX(((Hero)g.get(i)).getX());
+        hero.setTranslateY(((Hero)g.get(i)).getY());
+    }
+
     @FXML
     protected void returnToMainMenu(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("MainMenu.fxml"));
         // soundOnOff(event);
 
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Stage stage = (Stage)((Node) event.getSource()).getScene().getWindow();
 
         Scene scene = new Scene(loader.load());
         stage.setScene(scene);
@@ -885,8 +893,6 @@ public class GUIController implements Initializable, Serializable {
             volumeButtons.setTranslateX(heroXbeforeFalling);
             coinsCollected.setTranslateX(heroXbeforeFalling);
             coinsCollectedImg.setTranslateX(heroXbeforeFalling);
-//            knife.setTranslateX(heroXbeforeFalling);
-//            axe.setTranslateX(heroXbeforeFalling);
             score.setTranslateX(heroXbeforeFalling);
             hero.setTranslateX(heroXbeforeFalling - 70);
             helmet.setTranslateX(heroXbeforeFalling-70);

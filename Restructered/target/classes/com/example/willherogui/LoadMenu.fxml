@@ -30,7 +30,7 @@
             </VBox>
          </children>
       </StackPane>
-      <Button fx:id="goback" alignment="CENTER" contentDisplay="CENTER" layoutX="355.0" layoutY="401.0" mnemonicParsing="false" onAction="#onClickGoBack" prefHeight="41.0" prefWidth="148.0" text="Go Back" textAlignment="CENTER">
+      <Button fx:id="goback" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="401.0" mnemonicParsing="false" onAction="#onClickGoBack" prefHeight="0.0" prefWidth="142.0" text="Go Back" textAlignment="CENTER">
          <font>
             <Font name="Copperplate Gothic Light" size="18.0" />
          </font>
@@ -54,6 +54,14 @@
                </image>
             </ImageView>
          </graphic>
+      </Button>
+      <Button fx:id="Clear" alignment="CENTER" contentDisplay="CENTER" layoutX="361.0" layoutY="451.0" mnemonicParsing="false" onAction="#onClickClearAll" prefHeight="0.0" prefWidth="142.0" text="Clear All" textAlignment="CENTER">
+         <font>
+            <Font name="Copperplate Gothic Light" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </children>
 </AnchorPane>

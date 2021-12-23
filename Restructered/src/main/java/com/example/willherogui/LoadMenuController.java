@@ -1,4 +1,5 @@
 package com.example.willherogui;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -6,7 +7,10 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -37,16 +41,11 @@ public class LoadMenuController implements Initializable {
     @FXML
     private Button soundOff;
 
+    private ArrayList<HashMap<String, ArrayList<GameObjects>>> s;
+
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-//        Box.getChildren().add(new slot("KARAN2","08-12-2021"));
-//        Box.getChildren().add(new slot("KARAN1","10-08-2021"));
-//        Box.getChildren().add(new slot("JAIN1","04-12-2021"));
-//        Box.getChildren().add(new slot("JAIN2","20-10-2021"));
-//        Box.getChildren().add(new slot("Baboota1","24-12-2021"));
-//        Box.getChildren().add(new slot("Bhavya2","27-10-2021"));
-
         if(MainMenuController.getSoundStatus() == true)
         {
             soundOff.setOpacity(0);
@@ -67,10 +66,9 @@ public class LoadMenuController implements Initializable {
             FileInputStream file = new FileInputStream("save.txt");
             ObjectInputStream in = new ObjectInputStream(file);
             ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
-//            System.out.println(s);
             for(HashMap<String, ArrayList<GameObjects>> a: s) {
                 for(String i: a.keySet())
-                    Box.getChildren().add(new slot(i));
+                    Box.getChildren().add(new slot(i, s));
             }
             in.close();
             file.close();
@@ -90,7 +88,6 @@ public class LoadMenuController implements Initializable {
         scene = new Scene(root,800,500);
         stage.setScene(scene);
         stage.show();
-
     }
 
     public void soundOnOff(ActionEvent event){
@@ -110,17 +107,50 @@ public class LoadMenuController implements Initializable {
             soundOn.setOpacity(0);
         }
     }
+
+    @FXML
+    protected void onClickClearAll(ActionEvent event)
+    {
+        Box.getChildren().clear();
+        File savedFile = new File("save.txt");
+        savedFile.delete();
+    }
 }
 
 class slot extends Button {
 
-    slot(String name) {
+    slot(String name, ArrayList<HashMap<String, ArrayList<GameObjects>>> s) {
         HBox h = new HBox(50);
         h.setPrefWidth(200);
         h.setPrefHeight(30);
 
-        Label labelname = new Label(name);
+        Button labelname = new Button(name);
         labelname.setFont(new Font("Copperplate Gothic Bold", 12));
+        labelname.setId("slot");
+
+        labelname.setOnAction(new EventHandler<ActionEvent>() {
+                                  @Override
+                                  public void handle(ActionEvent event) {
+                                      for (HashMap<String, ArrayList<GameObjects>> a : s) {
+                                          for (String i : a.keySet()) {
+                                              if (i.equals(labelname.getText()))
+                                              {
+                                                  System.out.println("Loading... " + i);
+                                                  for(ArrayList<GameObjects> go: a.values())
+                                                  {
+//                                                      GUIController.loadSavedGame(go);
+                                                      try {
+                                                          new GUIController().loadSavedGame(go, event);
+                                                      } catch (IOException e) {
+                                                          e.printStackTrace();
+                                                      }
+                                                  }
+
+                                              }
+                                          }
+                                      }
+                                  }
+                              });
 
         h.getChildren().addAll(labelname);
         h.setAlignment(Pos.CENTER);

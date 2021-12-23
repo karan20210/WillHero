@@ -7,8 +7,6 @@
     -fx-background-color: linear-gradient(to right, #ddd6f3, #faaca8);
     -fx-text-fill: black;
     -fx-font-weight:bold;
-  
- 
 }
 
 
@@ -17,7 +15,7 @@
     -fx-border-width: 2;
 }
 
-#goback{
+#goback, #Clear{
     -fx-border-radius: 20;
     -fx-background-radius: 20;    
     -fx-border-color: grey;  
