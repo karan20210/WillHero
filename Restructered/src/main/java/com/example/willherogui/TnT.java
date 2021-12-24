@@ -1,7 +1,15 @@
 package com.example.willherogui;
 
+import java.nio.file.Paths;
+
+import javafx.animation.FadeTransition;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+
 public class TnT extends Obstacles{
     private boolean blast = false;
+    private ImageView TnTImg;
 
     public boolean isBlast() {
         return blast;
@@ -11,8 +19,14 @@ public class TnT extends Obstacles{
         this.blast = blast;
     }
 
-    TnT(double x, double y)
+    TnT(ImageView TnTImg)
     {
-        super(x,y);
+        super(TnTImg.getLayoutX(),TnTImg.getLayoutY());
+        this.TnTImg=TnTImg;
+    }
+
+    @Override
+    public void collide(Hero hero1){        
+            
     }
 }

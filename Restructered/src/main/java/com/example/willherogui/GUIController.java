@@ -242,23 +242,31 @@ public class GUIController implements Initializable, Serializable {
     AnimationTimer orcCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
+            
             for(ImageView i: orcsInGame.keySet())
             {
                 if (i.getBoundsInParent().intersects(hero.getBoundsInParent())) {
                     orcsInGame.get(i).collide(hero1);
                 }
 
+                boolean collidedwithOrc=false;
+
                 for(ImageView iv: orcsInGame.keySet())
                 {
                     if (i.getBoundsInParent().intersects(iv.getBoundsInParent()))
-                    {
+                    {                          
                         if(i != iv)
                         {
-//                            orcsInGame.get(iv).collideWithOrc();
+                            collidedwithOrc=true;
+                            orcsInGame.get(iv).collideWithOrc();
                         }
                     }
                 }
+                if(collidedwithOrc){
+                    break;
+                }
             }
+            
         }
     };
 
@@ -280,6 +288,8 @@ public class GUIController implements Initializable, Serializable {
             }
         }
     };
+
+    //Obstacle Collision
 
     AnimationTimer obstacleCollision = new AnimationTimer() {
         @Override
@@ -339,6 +349,9 @@ public class GUIController implements Initializable, Serializable {
                 weaponsInGame.get(i).setX(i.getTranslateX());
                 weaponsInGame.get(i).setY(i.getTranslateY());
             }
+
+           
+
         }
     };
 
@@ -356,6 +369,7 @@ public class GUIController implements Initializable, Serializable {
         ft.setAutoReverse(true);
         ft.play();
 
+        //Adding Objects
 
         //Hero1 Attributes
         hero1= new Hero(hero.getLayoutX(), hero.getLayoutY());
@@ -386,10 +400,6 @@ public class GUIController implements Initializable, Serializable {
         orcsInGame.put(orc_5, new GreenOrc(orc_5));
         orcsInGame.put(orc_6, new RedOrc(orc_6));
 
-        obstaclesInGame.put(tnt1, new TnT(tnt1.getLayoutX(), tnt1.getLayoutY()));
-        obstaclesInGame.put(tnt2, new TnT(tnt2.getLayoutX(), tnt2.getLayoutY()));
-        obstaclesInGame.put(tnt3, new TnT(tnt3.getLayoutX(), tnt3.getLayoutY()));
-
         // orcBoxesInGame.put(orc_1, orcBox_1);
         // orcBoxesInGame.put(orc_2, orcBox_2);
         // orcBoxesInGame.put(orc_3, orcBox_3);
@@ -397,6 +407,12 @@ public class GUIController implements Initializable, Serializable {
         // orcBoxesInGame.put(orc_5, orcBox_5);
         // orcBoxesInGame.put(orc_6, orcBox_6);
 
+        //Obstacles
+        obstaclesInGame.put(tnt1, new TnT(tnt1));
+        obstaclesInGame.put(tnt2, new TnT(tnt2));
+        obstaclesInGame.put(tnt3, new TnT(tnt3));
+
+        //Floating Coins
         coinsInGame.put(c1, new Coin(c1));
         coinsInGame.put(c2, new Coin(c2));
         coinsInGame.put(c3, new Coin(c3));
@@ -413,6 +429,7 @@ public class GUIController implements Initializable, Serializable {
         coinsInGame.put(c14, new Coin(c14));
         coinsInGame.put(c15, new Coin(c15));
 
+        //Chests
         ChestsInGame.put(coinChest, new CoinChest(coinChest));
         ChestsInGame.put(coinChest1, new CoinChest(coinChest1));
         ChestsInGame.put(coinChest11, new CoinChest(coinChest11));
@@ -421,6 +438,7 @@ public class GUIController implements Initializable, Serializable {
         ChestsInGame.put(weaponChest1, new WeaponChest(weaponChest1));
         ChestsInGame.put(weaponChest11, new WeaponChest(weaponChest11));
 
+        //Islands
         islandsInGame.put(p1, new Island(p1.getLayoutX(), p1.getLayoutY()));
         islandsInGame.put(p2, new Island(p2.getLayoutX(), p2.getLayoutY()));
         islandsInGame.put(p3, new Island(p3.getLayoutX(), p3.getLayoutY()));
@@ -442,6 +460,7 @@ public class GUIController implements Initializable, Serializable {
         islandsInGame.put(p19, new Island(p19.getLayoutX(), p19.getLayoutY()));
         islandsInGame.put(p20, new Island(p20.getLayoutX(), p20.getLayoutY()));
 
+        //Abyss
         abyssInGame.put(a1, new Abyss(a1.getLayoutX(), a1.getLayoutY()));
         abyssInGame.put(a2, new Abyss(a2.getLayoutX(), a2.getLayoutY()));
         abyssInGame.put(a3, new Abyss(a3.getLayoutX(), a3.getLayoutY()));
@@ -474,6 +493,8 @@ public class GUIController implements Initializable, Serializable {
         soundOff.setFocusTraversable(false);
         gameOverMenu.setDisable(true);
         gameOverMenu.setOpacity(0);
+
+        //Starting Animations
         coinCollision.start();
         chestCollision.start();
         abyssCollision.start();
@@ -556,7 +577,7 @@ public class GUIController implements Initializable, Serializable {
     protected void onSpace(KeyEvent event) {
         ft.stop();
         if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump && !over && jumpOver) {
-            hero1.moveRight();
+            hero1.moveRight(game);
 
             int s = Integer.valueOf(score.getText());
             s++;
@@ -686,6 +707,7 @@ public class GUIController implements Initializable, Serializable {
                 orcsInGame.get(i).pauseJump();
             }
         }
+        
         // if (jump != null)
         //     jump.pause();
         // if(hJump!=null)

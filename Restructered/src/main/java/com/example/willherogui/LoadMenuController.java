@@ -46,6 +46,7 @@ public class LoadMenuController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+        
         if(MainMenuController.getSoundStatus() == true)
         {
             soundOff.setOpacity(0);

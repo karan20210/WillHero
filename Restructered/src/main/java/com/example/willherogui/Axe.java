@@ -9,7 +9,5 @@ public class Axe extends Weapon
         super(axe,70);
     }
 
-    @Override
-    public void shoot()
-    {}
+   
 }

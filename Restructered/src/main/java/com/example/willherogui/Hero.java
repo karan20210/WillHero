@@ -135,7 +135,7 @@ public class Hero extends GameObjects implements Movable
 
     
 
-    public void moveRight(){
+    public void moveRight(Pane game){
         hmoveRight = new TranslateTransition();
         hmoveRight.setDuration(Duration.millis(100));
         hmoveRight.setNode(heroImg);
@@ -149,6 +149,12 @@ public class Hero extends GameObjects implements Movable
         helmetMoveRight.setByX(+50);
         helmetMoveRight.setCycleCount(1);
         helmetMoveRight.play();
+
+        if(currentWeapon!=null){
+            currentWeapon.shoot(game);
+        }
+
+        
 
     }
 
@@ -209,6 +215,16 @@ public class Hero extends GameObjects implements Movable
         fall.setCycleCount(1);
         fall.setInterpolator(Interpolator.LINEAR);
         fall.play();
+
+        // helmetJump.stop();
+
+        // TranslateTransition helmetfall = new TranslateTransition();
+        // helmetfall.setDuration(Duration.millis(200));
+        // helmetfall.setNode(currentHelmet.getHelmetImg());
+        // helmetfall.setByY(400);
+        // helmetfall.setCycleCount(1);
+        // helmetfall.setInterpolator(Interpolator.LINEAR);
+        // helmetfall.play();
 
 
          // TranslateTransition fallBox = new TranslateTransition();

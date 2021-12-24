@@ -1,6 +1,7 @@
 package com.example.willherogui;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 
 public class Knife extends Weapon
 {
@@ -9,7 +10,5 @@ public class Knife extends Weapon
         super(knife,70);
     }
 
-    @Override
-    public void shoot()
-    {}
+   
 }
