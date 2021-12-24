@@ -283,7 +283,6 @@ public class GUIController implements Initializable, Serializable {
                         coinsInGame.get(i).collide(hero1);
                         coinsInGame.get(i).setCollected(true);
                     }
-
                 }
             }
         }

@@ -85,8 +85,6 @@ public class Hero extends GameObjects implements Movable
 
     public void setCurrentHelmet(Helmet h){
         currentHelmet=h;
-
-
     }
 
     public void addCoins(int i)
@@ -151,11 +149,8 @@ public class Hero extends GameObjects implements Movable
         helmetMoveRight.play();
 
         if(currentWeapon!=null){
-            currentWeapon.shoot(game);
+            currentWeapon.shoot(this);
         }
-
-        
-
     }
 
     public void resumeJump(){
