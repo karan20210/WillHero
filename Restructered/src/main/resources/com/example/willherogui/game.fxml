@@ -15,12 +15,13 @@
 
 <Pane fx:id="game" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onKeyPressed="#onSpace" onMouseClicked="#heroJump" prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.willherogui.GUIController">
     <children>
-      <ImageView fitHeight="500.0" fitWidth="7000.0" layoutX="-1.0" layoutY="1.0" pickOnBounds="true" preserveRatio="true">
+      <Pane fx:id="abyssPane" layoutX="112.0" layoutY="217.0" prefHeight="102.0" prefWidth="6390.0" />
+      <ImageView fitHeight="500.0" fitWidth="7000.0" layoutX="-18.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/background.jpg" />
          </image>
       </ImageView>
-      <ImageView fx:id="p1" fitHeight="150.0" fitWidth="200.0" layoutX="26.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p1" fitHeight="109.0" fitWidth="203.0" layoutX="23.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/p4.png" />
          </image>
@@ -30,12 +31,12 @@
             <Image url="@Images/Islands/P2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p3" fitHeight="200.0" fitWidth="170.0" layoutX="601.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" translateX="40.0">
+      <ImageView fx:id="p3" fitHeight="156.0" fitWidth="161.0" layoutX="597.0" layoutY="179.0" pickOnBounds="true" preserveRatio="true" translateX="40.0">
          <image>
             <Image url="@Images/Islands/P1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p4" fitHeight="188.0" fitWidth="211.0" layoutX="894.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p4" fitHeight="188.0" fitWidth="211.0" layoutX="914.0" layoutY="138.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P3.png" />
          </image>
@@ -79,92 +80,92 @@
             <Image url="@Images/WeaponChest.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p5" fitHeight="150.0" fitWidth="200.0" layoutX="1180.0" layoutY="216.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p5" fitHeight="150.0" fitWidth="200.0" layoutX="1215.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/p4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p6" fitHeight="240.0" fitWidth="232.0" layoutX="1474.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p6" fitHeight="225.0" fitWidth="226.0" layoutX="1537.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p7" fitHeight="200.0" fitWidth="170.0" layoutX="1845.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p7" fitHeight="156.0" fitWidth="156.0" layoutX="1859.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p8" fitHeight="188.0" fitWidth="211.0" layoutX="2110.0" layoutY="142.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p8" fitHeight="188.0" fitWidth="211.0" layoutX="2110.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p9" fitHeight="150.0" fitWidth="200.0" layoutX="2351.0" layoutY="210.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p9" fitHeight="150.0" fitWidth="200.0" layoutX="2404.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/p4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p10" fitHeight="240.0" fitWidth="232.0" layoutX="2683.0" layoutY="120.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p10" fitHeight="232.0" fitWidth="225.0" layoutX="2736.0" layoutY="124.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p11" fitHeight="200.0" fitWidth="170.0" layoutX="3054.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p11" fitHeight="156.0" fitWidth="135.0" layoutX="3083.0" layoutY="186.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p12" fitHeight="188.0" fitWidth="211.0" layoutX="3242.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p12" fitHeight="188.0" fitWidth="211.0" layoutX="3307.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p13" fitHeight="150.0" fitWidth="200.0" layoutX="3483.0" layoutY="209.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p14" fitHeight="218.0" fitWidth="214.0" layoutX="4205.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Islands/P2.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="p15" fitHeight="156.0" fitWidth="164.0" layoutX="3903.0" layoutY="176.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Islands/P1.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="p16" fitHeight="188.0" fitWidth="211.0" layoutX="4537.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Islands/P3.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="p17" fitHeight="150.0" fitWidth="200.0" layoutX="4873.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/p4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p14" fitHeight="240.0" fitWidth="232.0" layoutX="4084.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p18" fitHeight="225.0" fitWidth="214.0" layoutX="5221.0" layoutY="143.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p15" fitHeight="200.0" fitWidth="170.0" layoutX="3818.0" layoutY="163.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p19" fitHeight="156.0" fitWidth="156.0" layoutX="5879.0" layoutY="182.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P1.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p16" fitHeight="188.0" fitWidth="211.0" layoutX="4382.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Islands/P3.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="p17" fitHeight="150.0" fitWidth="200.0" layoutX="4665.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="6206.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/p4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p18" fitHeight="240.0" fitWidth="232.0" layoutX="5008.0" layoutY="125.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Islands/P2.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="p19" fitHeight="200.0" fitWidth="170.0" layoutX="5291.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Images/Islands/P1.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="p20" fitHeight="188.0" fitWidth="211.0" layoutX="5510.0" layoutY="140.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p20" fitHeight="200.0" fitWidth="214.0" layoutX="5517.0" layoutY="135.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_2" fitHeight="96.0" fitWidth="55.0" layoutX="700.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true" translateX="200.0">
+      <ImageView fx:id="orc_2" fitHeight="96.0" fitWidth="55.0" layoutX="742.0" layoutY="173.0" pickOnBounds="true" preserveRatio="true" translateX="200.0">
          <image>
             <Image url="@Images/RedOrc.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_3" fitHeight="53.0" fitWidth="55.0" layoutX="953.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_3" fitHeight="53.0" fitWidth="55.0" layoutX="1029.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/RedOrc.png" />
          </image>
@@ -209,7 +210,7 @@
             <Font name="Comic Sans MS" size="22.0" />
          </font>
       </Text>
-      <ImageView fx:id="boss" fitHeight="77.0" fitWidth="89.0" layoutX="5093.0" layoutY="151.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="boss" fitHeight="77.0" fitWidth="89.0" layoutX="5546.0" layoutY="148.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Boss.png" />
          </image>
@@ -326,10 +327,12 @@
       <Pane fx:id="a8" layoutX="2597.0" layoutY="213.0" prefHeight="200.0" prefWidth="55.0" />
       <Pane fx:id="a9" layoutX="2939.0" layoutY="225.0" prefHeight="200.0" prefWidth="85.0" />
       <Pane fx:id="a10" layoutX="3722.0" layoutY="217.0" prefHeight="200.0" prefWidth="68.0" />
-      <Pane fx:id="a11" layoutX="3980.0" layoutY="224.0" prefHeight="200.0" prefWidth="68.0" />
+      <Pane fx:id="a11" layoutX="4087.0" layoutY="238.0" prefHeight="200.0" prefWidth="68.0" />
       <Pane fx:id="a12" layoutX="4334.0" layoutY="229.0" prefHeight="200.0" prefWidth="13.0" />
-      <Pane fx:id="a14" layoutX="4597.0" layoutY="225.0" prefHeight="200.0" prefWidth="33.0" />
-      <Pane fx:id="a13" layoutX="4899.0" layoutY="219.0" prefHeight="200.0" prefWidth="81.0" />
+      <Pane fx:id="a13" layoutX="4781.0" layoutY="238.0" prefHeight="200.0" prefWidth="81.0">
+         <children>
+            <Pane fx:id="a14" layoutX="-6.0" layoutY="39.0" prefHeight="200.0" prefWidth="33.0" />
+         </children></Pane>
       <Pane fx:id="gameOverMenu" disable="true" layoutX="273.0" layoutY="186.0" opacity="0.0" prefHeight="127.0" prefWidth="277.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
          <children>
             <Label layoutX="68.0" layoutY="22.0" text="Game Over :(" textFill="WHITE">
@@ -369,27 +372,27 @@
             </Button>
          </children>
       </Pane>
-      <ImageView fx:id="weaponChest1" fitHeight="80.0" fitWidth="74.0" layoutX="2224.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="weaponChest1" fitHeight="80.0" fitWidth="74.0" layoutX="2224.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/WeaponChest.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="weaponChest11" fitHeight="80.0" fitWidth="74.0" layoutX="3858.0" layoutY="158.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="weaponChest11" fitHeight="80.0" fitWidth="74.0" layoutX="3903.0" layoutY="156.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/WeaponChest.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="coinChest1" cache="true" cacheHint="SCALE" fitHeight="68.0" fitWidth="84.0" layoutX="2702.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="coinChest1" cache="true" cacheHint="SCALE" fitHeight="68.0" fitWidth="84.0" layoutX="2743.0" layoutY="161.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/CoinChest.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="coinChest11" cache="true" cacheHint="SCALE" fitHeight="68.0" fitWidth="84.0" layoutX="3541.0" layoutY="159.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="coinChest11" cache="true" cacheHint="SCALE" fitHeight="68.0" fitWidth="84.0" layoutX="3615.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/CoinChest.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="coinChest111" cache="true" cacheHint="SCALE" fitHeight="68.0" fitWidth="84.0" layoutX="4476.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="coinChest111" cache="true" cacheHint="SCALE" fitHeight="68.0" fitWidth="84.0" layoutX="4563.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/CoinChest.png" />
          </image>
@@ -409,60 +412,21 @@
             <Image url="@Images/Coin.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_4" fitHeight="96.0" fitWidth="55.0" layoutX="1297.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_4" fitHeight="96.0" fitWidth="55.0" layoutX="1333.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/GreenOrc.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_5" fitHeight="68.0" fitWidth="55.0" layoutX="1497.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_5" fitHeight="68.0" fitWidth="55.0" layoutX="1556.0" layoutY="168.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/GreenOrc.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_6" fitHeight="96.0" fitWidth="55.0" layoutX="1862.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_6" fitHeight="96.0" fitWidth="55.0" layoutX="1893.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/RedOrc.png" />
          </image>
       </ImageView>
-      <Pane fx:id="resurrectMenu" disable="true" layoutX="283.0" layoutY="196.0" opacity="0.0" prefHeight="127.0" prefWidth="277.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
-         <children>
-            <Label layoutX="24.0" layoutY="21.0" text="Spend 15 coins and resume?" textFill="WHITE">
-               <font>
-                  <Font name="Copperplate" size="17.0" />
-               </font>
-            </Label>
-            <Button id="buttons" layoutX="76.0" layoutY="53.0" mnemonicParsing="false" onAction="#resurrect" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/restart.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-            <Button id="buttons" layoutX="141.0" layoutY="55.0" mnemonicParsing="false" onAction="#notResurrect" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css" translateY="3.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/returnToMenu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-         </children>
-      </Pane>
       <Pane fx:id="helmet" layoutX="152.0" layoutY="162.0" prefHeight="60.0" prefWidth="51.0">
          <children>
             <ImageView fx:id="knife" disable="true" fitHeight="50.0" fitWidth="67.0" layoutX="32.0" layoutY="5.0" opacity="0.0" pickOnBounds="true" preserveRatio="true">
@@ -547,15 +511,114 @@
             <Image url="@Images/TnT.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tnt3" fitHeight="77.0" fitWidth="55.0" layoutX="3281.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tnt3" fitHeight="77.0" fitWidth="55.0" layoutX="3317.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/TnT.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tnt1" fitHeight="77.0" fitWidth="55.0" layoutX="1611.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tnt1" fitHeight="77.0" fitWidth="55.0" layoutX="1686.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/TnT.png" />
          </image>
       </ImageView>
+      <ImageView fx:id="p13" fitHeight="150.0" fitWidth="200.0" layoutX="3590.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Islands/p4.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_51" fitHeight="68.0" fitWidth="55.0" layoutX="2477.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/GreenOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_61" fitHeight="96.0" fitWidth="55.0" layoutX="2549.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/RedOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_511" fitHeight="68.0" fitWidth="55.0" layoutX="2884.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/GreenOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_611" fitHeight="96.0" fitWidth="55.0" layoutX="3123.0" layoutY="174.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/RedOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_6111" fitHeight="96.0" fitWidth="55.0" layoutX="3427.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/RedOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_5111" fitHeight="68.0" fitWidth="55.0" layoutX="3988.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/GreenOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_61111" fitHeight="96.0" fitWidth="55.0" layoutX="4267.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/RedOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_51111" fitHeight="68.0" fitWidth="55.0" layoutX="4341.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/GreenOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_611111" fitHeight="96.0" fitWidth="55.0" layoutX="4908.0" layoutY="171.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/RedOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="orc_511111" fitHeight="68.0" fitWidth="55.0" layoutX="5301.0" layoutY="180.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/GreenOrc.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="gate" fitHeight="164.0" fitWidth="214.0" layoutX="6224.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@Images/Gate.png" />
+         </image>
+      </ImageView>
+      <Pane fx:id="resurrectMenu" disable="true" layoutX="283.0" layoutY="196.0" opacity="0.0" prefHeight="127.0" prefWidth="277.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
+         <children>
+            <Label layoutX="24.0" layoutY="21.0" text="Spend 15 coins and resume?" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate" size="17.0" />
+               </font>
+            </Label>
+            <Button id="buttons" layoutX="76.0" layoutY="53.0" mnemonicParsing="false" onAction="#resurrect" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/restart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Button id="buttons" layoutX="141.0" layoutY="55.0" mnemonicParsing="false" onAction="#notResurrect" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css" translateY="3.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/returnToMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+         </children>
+      </Pane>
     </children>
 </Pane>

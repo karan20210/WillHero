@@ -9,7 +9,7 @@ import javafx.util.Duration;
 
 public class TnT extends Obstacles{
     private boolean blast = false;
-    private ImageView TnTImg;
+    private transient ImageView TnTImg;
 
     public boolean isBlast() {
         return blast;

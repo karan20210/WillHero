@@ -38,6 +38,7 @@ import java.util.*;
 public class GUIController implements Initializable, Serializable {
 
     private String gameName;
+    private Abyss abyss;
 
     // Game elements
     @FXML
@@ -93,6 +94,7 @@ public class GUIController implements Initializable, Serializable {
 
     @FXML
     private Label score;
+    private int previousScore;
     @FXML
     private Label tapToStart;
    
@@ -116,6 +118,10 @@ public class GUIController implements Initializable, Serializable {
     private Button soundOff;
     @FXML
     private Pane volumeButtons;
+
+    //Abyss
+    @FXML
+    private Pane abyssPane;
    
 
     //Chests
@@ -132,8 +138,7 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private TextField saveGameName;
 
-    private static final long serialversionUID =
-            129348938L;
+    private static final long serialversionUID = 129348938L;
   
     //Obstacle
     @FXML
@@ -159,7 +164,7 @@ public class GUIController implements Initializable, Serializable {
     HashMap<ImageView, Coin> coinsInGame = new HashMap<>();
     HashMap<ImageView, Chests> ChestsInGame= new HashMap<>();
     HashMap<ImageView, Island> islandsInGame = new HashMap<>();
-    HashMap<Pane, Abyss> abyssInGame = new HashMap<>();
+    // HashMap<Pane, Abyss> abyssInGame = new HashMap<>();
     HashMap<ImageView, Orcs> orcsInGame = new HashMap<>();
     HashMap<ImageView, Pane> orcBoxesInGame = new HashMap<>();
     HashMap<ImageView, Hero> heroInGame = new HashMap<>();
@@ -195,50 +200,111 @@ public class GUIController implements Initializable, Serializable {
     };
 
     //Abyss Collision
-    AnimationTimer abyssCollision = new AnimationTimer() {
+    // AnimationTimer abyssCollision = new AnimationTimer() {
+    //     @Override
+    //     public void handle(long l) {
+    //         for (Pane i : abyssInGame.keySet()) {
+
+    //             if (i.getBoundsInParent().intersects(hero.getBoundsInParent())) {
+                   
+    //                 if(hero1.isAlive())
+    //                 {
+    //                     abyssInGame.get(i).collide(hero1);
+    //                     gameOver();
+    //                 }
+
+    //             }
+
+    //             for(ImageView o: orcsInGame.keySet())
+    //             {
+    //                 if (i.getBoundsInParent().intersects(o.getBoundsInParent())) {
+    //                     if(orcsInGame.get(o).isAlive())
+    //                     {
+    //                        abyssInGame.get(i).collide(orcsInGame.get(o));
+
+    //                     }
+    //                 }
+    //             }
+    //         }
+    //     }
+    // };
+
+    //CombinedCollision
+    AnimationTimer combinedCollision= new AnimationTimer() {
         @Override
         public void handle(long l) {
-            for (Pane i : abyssInGame.keySet()) {
-
-                if (i.getBoundsInParent().intersects(hero.getBoundsInParent())) {
-                   
-                    if(hero1.isAlive())
-                    {
-                        abyssInGame.get(i).collide(hero1);
-                        gameOver();
-                    }
-
-                }
-
-                for(ImageView o: orcsInGame.keySet())
+            boolean heroHitIsland =false;
+            for(ImageView i: islandsInGame.keySet())
+            {
+                if(!heroHitIsland && i.getBoundsInParent().intersects(hero.getBoundsInParent()))
                 {
-                    if (i.getBoundsInParent().intersects(o.getBoundsInParent())) {
-                        if(orcsInGame.get(o).isAlive())
-                        {
-                           abyssInGame.get(i).collide(orcsInGame.get(o));
-
-                        }
-                    }
+                    heroXbeforeFalling = hero.getTranslateX();
+                    previousScore = Integer.valueOf(score.getText());
+                    
+                    // heroBoxXbeforeFalling = hero.getTranslateX();
+                    heroHitIsland=true;                    
                 }
             }
+
+            if(!heroHitIsland){
+                
+
+                    if (abyssPane.getBoundsInParent().intersects(hero.getBoundsInParent())) {
+                       
+                        if(hero1.isAlive())
+                        {
+                            abyss.collide(hero1);
+                            gameOver();
+                        }    
+                    } 
+                
+            }
+
+            for(ImageView o : orcsInGame.keySet()){
+
+                boolean OrcHitIsland=false;
+
+                for(ImageView i: islandsInGame.keySet())
+                {
+                    if(!OrcHitIsland && i.getBoundsInParent().intersects(o.getBoundsInParent()))
+                    {
+                        OrcHitIsland=true;          
+                    }   
+                }    
+                
+                if(!OrcHitIsland){
+
+                    if (abyssPane.getBoundsInParent().intersects(o.getBoundsInParent())) {
+                       
+                        
+                        {
+                            abyss.collide(orcsInGame.get(o));
+                            
+                        }    
+                    } 
+                    
+                    
+                }
+            }   
         }
+        
     };
 
     //IslandCollision
-    AnimationTimer islandCollision = new AnimationTimer() {
-        @Override
-        public void handle(long l) {
-            for(ImageView i: islandsInGame.keySet())
-            {
-                if(i.getBoundsInParent().intersects(hero.getBoundsInParent()))
-                {
-                    heroXbeforeFalling = hero.getTranslateX();
-                    // heroBoxXbeforeFalling = hero.getTranslateX();
-                }
+    // AnimationTimer islandCollision = new AnimationTimer() {
+    //     @Override
+    //     public void handle(long l) {
+    //         for(ImageView i: islandsInGame.keySet())
+    //         {
+    //             if(i.getBoundsInParent().intersects(hero.getBoundsInParent()))
+    //             {
+    //                 heroXbeforeFalling = hero.getTranslateX(); 
+    //                 // heroBoxXbeforeFalling = hero.getTranslateX();
+    //             }
 
-            }
-        }
-    };
+    //         }
+    //     }
+    // };
 
     //OrcCollision
     AnimationTimer orcCollision = new AnimationTimer() {
@@ -290,8 +356,30 @@ public class GUIController implements Initializable, Serializable {
         }
     };
 
-    //Obstacle Collision
+    //Shoot Collision
+    AnimationTimer shootCollision = new AnimationTimer() {
+        @Override
+        public void handle(long l) {
+            // System.out.println("Bhavya");
+            
+            for(ImageView i: orcsInGame.keySet())
+            {   
 
+                if(hero1.getCurrentWeapon()!=null){
+                    System.out.println("Jain");
+                    if (i.getBoundsInParent().intersects(hero1.getCurrentWeapon().getImageView().getBoundsInParent())) {
+                        orcsInGame.get(i).shot(hero1.getCurrentWeapon().getDamage());
+                        System.out.println("Karan");
+                    }     
+
+                }
+                
+            }
+            
+        }
+    };
+
+    //Obstacle Collision
     AnimationTimer obstacleCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
@@ -402,6 +490,7 @@ public class GUIController implements Initializable, Serializable {
         orcsInGame.put(orc_4, new GreenOrc(orc_4));
         orcsInGame.put(orc_5, new GreenOrc(orc_5));
         orcsInGame.put(orc_6, new RedOrc(orc_6));
+        orcsInGame.put(boss,new Boss(boss));
 
         // orcBoxesInGame.put(orc_1, orcBox_1);
         // orcBoxesInGame.put(orc_2, orcBox_2);
@@ -463,21 +552,24 @@ public class GUIController implements Initializable, Serializable {
         islandsInGame.put(p19, new Island(p19.getLayoutX(), p19.getLayoutY()));
         islandsInGame.put(p20, new Island(p20.getLayoutX(), p20.getLayoutY()));
 
+        // //Abyss
+        // abyssInGame.put(a1, new Abyss(a1.getLayoutX(), a1.getLayoutY()));
+        // abyssInGame.put(a2, new Abyss(a2.getLayoutX(), a2.getLayoutY()));
+        // abyssInGame.put(a3, new Abyss(a3.getLayoutX(), a3.getLayoutY()));
+        // abyssInGame.put(a4, new Abyss(a4.getLayoutX(), a4.getLayoutY()));
+        // abyssInGame.put(a5, new Abyss(a5.getLayoutX(), a5.getLayoutY()));
+        // abyssInGame.put(a6, new Abyss(a6.getLayoutX(), a5.getLayoutY()));
+        // abyssInGame.put(a7, new Abyss(a7.getLayoutX(), a7.getLayoutY()));
+        // abyssInGame.put(a8, new Abyss(a8.getLayoutX(), a8.getLayoutY()));
+        // abyssInGame.put(a9, new Abyss(a9.getLayoutX(), a9.getLayoutY()));
+        // abyssInGame.put(a10, new Abyss(a10.getLayoutX(), a10.getLayoutY()));
+        // abyssInGame.put(a11, new Abyss(a11.getLayoutX(), a11.getLayoutY()));
+        // abyssInGame.put(a12, new Abyss(a12.getLayoutX(), a12.getLayoutY()));
+        // abyssInGame.put(a13, new Abyss(a13.getLayoutX(), a13.getLayoutY()));
+        // abyssInGame.put(a14, new Abyss(a14.getLayoutX(), a14.getLayoutY()));
+
         //Abyss
-        abyssInGame.put(a1, new Abyss(a1.getLayoutX(), a1.getLayoutY()));
-        abyssInGame.put(a2, new Abyss(a2.getLayoutX(), a2.getLayoutY()));
-        abyssInGame.put(a3, new Abyss(a3.getLayoutX(), a3.getLayoutY()));
-        abyssInGame.put(a4, new Abyss(a4.getLayoutX(), a4.getLayoutY()));
-        abyssInGame.put(a5, new Abyss(a5.getLayoutX(), a5.getLayoutY()));
-        abyssInGame.put(a6, new Abyss(a6.getLayoutX(), a5.getLayoutY()));
-        abyssInGame.put(a7, new Abyss(a7.getLayoutX(), a7.getLayoutY()));
-        abyssInGame.put(a8, new Abyss(a8.getLayoutX(), a8.getLayoutY()));
-        abyssInGame.put(a9, new Abyss(a9.getLayoutX(), a9.getLayoutY()));
-        abyssInGame.put(a10, new Abyss(a10.getLayoutX(), a10.getLayoutY()));
-        abyssInGame.put(a11, new Abyss(a11.getLayoutX(), a11.getLayoutY()));
-        abyssInGame.put(a12, new Abyss(a12.getLayoutX(), a12.getLayoutY()));
-        abyssInGame.put(a13, new Abyss(a13.getLayoutX(), a13.getLayoutY()));
-        abyssInGame.put(a14, new Abyss(a14.getLayoutX(), a14.getLayoutY()));
+        abyss=new Abyss(abyssPane.getLayoutX(),abyssPane.getLayoutY());
 
         if (MainMenuController.getSoundStatus() == true) {
             soundOff.setOpacity(0);
@@ -500,11 +592,13 @@ public class GUIController implements Initializable, Serializable {
         //Starting Animations
         coinCollision.start();
         chestCollision.start();
-        abyssCollision.start();
-        islandCollision.start();
+        // abyssCollision.start();
+        // islandCollision.start();
+        combinedCollision.start();
         orcCollision.start();
         obstacleCollision.start();
         updateCoordinates.start();
+        shootCollision.start();
     }
 
     public void soundOnOff(ActionEvent event){
@@ -803,8 +897,8 @@ public class GUIController implements Initializable, Serializable {
                 gameObjectsInGame.add(i);
             for(GameObjects i: islandsInGame.values())
                 gameObjectsInGame.add(i);
-            for(GameObjects i: abyssInGame.values())
-                gameObjectsInGame.add(i);
+            // for(GameObjects i: abyssInGame.values())
+            //     gameObjectsInGame.add(i);
             for(GameObjects i: orcsInGame.values())
                 gameObjectsInGame.add(i);
             for(GameObjects i: heroInGame.values())
@@ -814,6 +908,7 @@ public class GUIController implements Initializable, Serializable {
             for(GameObjects i: obstaclesInGame.values())
                 gameObjectsInGame.add(i);
 
+            gameObjectsInGame.add(abyss);
             savedGame.put(gameName, gameObjectsInGame);
             savedGames.add(savedGame);
             out.writeObject(savedGames);
@@ -895,6 +990,25 @@ public class GUIController implements Initializable, Serializable {
         sound.play();
     }
 
+    public void previous(){
+        hero.setTranslateY(0.0);
+        // heroBox.setTranslateY(0.0);
+        game.setTranslateX(-1 * heroXbeforeFalling);
+        pauseButton.setTranslateX(heroXbeforeFalling);
+        pausemenu.setTranslateX(heroXbeforeFalling);
+        gameOverMenu.setTranslateX(heroXbeforeFalling);
+        saveMenu.setTranslateX(heroXbeforeFalling);
+        resurrectMenu.setTranslateX(heroXbeforeFalling);
+        weaponTab.setTranslateX(heroXbeforeFalling);
+        volumeButtons.setTranslateX(heroXbeforeFalling);
+        coinsCollected.setTranslateX(heroXbeforeFalling);
+        coinsCollectedImg.setTranslateX(heroXbeforeFalling);
+        score.setTranslateX(heroXbeforeFalling);
+        hero.setTranslateX(heroXbeforeFalling-70);
+        helmet.setTranslateX(heroXbeforeFalling-70);        
+        score.setText(Integer.toString(previousScore));
+    }
+
     @FXML
     protected void resurrect(ActionEvent event)
     {
@@ -905,24 +1019,7 @@ public class GUIController implements Initializable, Serializable {
             coinsCollected.setText(Integer.toString(c));
             resurrectMenu.setOpacity(0);
             resurrectMenu.setDisable(true);
-            hero.setTranslateY(0.0);
-            // heroBox.setTranslateY(0.0);
-
-            game.setTranslateX(-1 * heroXbeforeFalling);
-            pauseButton.setTranslateX(heroXbeforeFalling);
-            pausemenu.setTranslateX(heroXbeforeFalling);
-            gameOverMenu.setTranslateX(heroXbeforeFalling);
-            saveMenu.setTranslateX(heroXbeforeFalling);
-            resurrectMenu.setTranslateX(heroXbeforeFalling);
-            weaponTab.setTranslateX(heroXbeforeFalling);
-            volumeButtons.setTranslateX(heroXbeforeFalling);
-            coinsCollected.setTranslateX(heroXbeforeFalling);
-            coinsCollectedImg.setTranslateX(heroXbeforeFalling);
-            score.setTranslateX(heroXbeforeFalling);
-            hero.setTranslateX(heroXbeforeFalling - 70);
-            helmet.setTranslateX(heroXbeforeFalling-70);
-            // heroBox.setTranslateX(heroBoxXbeforeFalling - 70);
-
+            previous(); 
             over = false;
             heroInGame.get(hero).setAlive(true);
             resumeGame(event);

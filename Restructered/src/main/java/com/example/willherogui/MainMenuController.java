@@ -29,7 +29,7 @@ public class MainMenuController implements Initializable {
     private Stage stage;
     private Scene scene; 
     private static MediaPlayer sound;
-    private static boolean soundStatus = true;
+    private static boolean soundStatus = false;
 //    private static boolean firstTime = true;
 
     @FXML
@@ -46,7 +46,7 @@ public class MainMenuController implements Initializable {
             sound = new MediaPlayer(media);
             sound.setCycleCount(AudioClip.INDEFINITE);
             sound.setVolume(0.5);
-            sound.play();
+            
         }
 
         if(soundStatus)

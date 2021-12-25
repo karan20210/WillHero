@@ -38,9 +38,9 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
         this.alive = alive;
     }
 
-    public void shot(Weapon w)
+    public void shot(int damage)
     {
-        health = health - w.getDamage();
+        health = health - damage;
         if(health <= 0)
             alive = false;
     }
