@@ -149,11 +149,11 @@ public class Hero extends GameObjects implements Movable
         helmetMoveRight.play();
 
         if(currentWeapon!=null){
-            currentWeapon.shoot(this);
+            currentWeapon.shoot(game);
         }
     }
 
-    public void resumeJump(){
+    public void resumeJump(){   
         hJump.play();
         if(helmetJump!=null)
             helmetJump.play();

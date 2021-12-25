@@ -73,8 +73,10 @@ public class GUIController implements Initializable, Serializable {
      private ImageView axe;
      @FXML
      private ImageView knife;
+     private Image axeImg, knifeImg;
 
      private Weapon Weapon1,Weapon2;
+     
   
 
     //Menus
@@ -384,8 +386,10 @@ public class GUIController implements Initializable, Serializable {
         helmetsInGame.put(helmet,helmet1);
         hero1.setCurrentHelmet(helmet1);
         
-        Weapon1= new Axe(axe);
-        Weapon2 = new Knife(knife);
+        axeImg=axe.getImage();
+        knifeImg=knife.getImage();
+        Weapon1= new Axe(axe,axeImg);
+        Weapon2 = new Knife(knife,knifeImg);
         helmet1.addWeapons(Weapon1,Weapon2);
 
         tab1.setOpacity(0.38);
