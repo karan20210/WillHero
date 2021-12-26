@@ -150,7 +150,7 @@
             <Image url="@Images/Islands/P1.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="6206.0" layoutY="229.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p21" fitHeight="150.0" fitWidth="200.0" layoutX="6175.0" layoutY="213.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/p4.png" />
          </image>
@@ -576,7 +576,7 @@
             <Image url="@Images/GreenOrc.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="gate" fitHeight="164.0" fitWidth="214.0" layoutX="6224.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="gate" fitHeight="164.0" fitWidth="214.0" layoutX="6195.0" layoutY="59.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Gate.png" />
          </image>

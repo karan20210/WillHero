@@ -44,6 +44,11 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private Pane game;
 
+
+    //gate
+    @FXML
+    private ImageView gate;
+
     //Hero
     private Hero hero1;
     @FXML
@@ -105,6 +110,7 @@ public class GUIController implements Initializable, Serializable {
     // private Pane orcBox_1, orcBox_2, orcBox_3, orcBox_4, orcBox_5, orcBox_6;
     @FXML
     private ImageView boss;
+    private Boss boss1; 
 
     
    
@@ -132,7 +138,9 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private ImageView weaponChest, weaponChest1, weaponChest11;
     @FXML
-    private ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20;
+
+    //Platforms
+    private ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21;
     @FXML
     private Pane a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14;
     @FXML
@@ -486,6 +494,7 @@ public class GUIController implements Initializable, Serializable {
 
         tab1.setOpacity(0.38);
         tab2.setOpacity(0.38);
+        boss1 = new Boss(boss);
 
         //Orcs
         orcsInGame.put(orc_1, new GreenOrc(orc_1));
@@ -494,7 +503,7 @@ public class GUIController implements Initializable, Serializable {
         orcsInGame.put(orc_4, new GreenOrc(orc_4));
         orcsInGame.put(orc_5, new GreenOrc(orc_5));
         orcsInGame.put(orc_6, new RedOrc(orc_6));
-        orcsInGame.put(boss,new Boss(boss));
+        orcsInGame.put(boss,boss1);
 
         // orcBoxesInGame.put(orc_1, orcBox_1);
         // orcBoxesInGame.put(orc_2, orcBox_2);
@@ -555,6 +564,7 @@ public class GUIController implements Initializable, Serializable {
         islandsInGame.put(p18, new Island(p18.getLayoutX(), p18.getLayoutY()));
         islandsInGame.put(p19, new Island(p19.getLayoutX(), p19.getLayoutY()));
         islandsInGame.put(p20, new Island(p20.getLayoutX(), p20.getLayoutY()));
+        islandsInGame.put(p21, new Island(p21.getLayoutX(),p21.getLayoutY()));                                         
 
         // //Abyss
         // abyssInGame.put(a1, new Abyss(a1.getLayoutX(), a1.getLayoutY()));
@@ -680,33 +690,49 @@ public class GUIController implements Initializable, Serializable {
         }
     }
 
+    private boolean moveMenu=true;
+    private boolean notwon=true;
     @FXML
     protected void onSpace(KeyEvent event) {
-        ft.stop();
-        if(event.getCode() == KeyCode.ENTER && !pauseMenuActive && !firstJump && !over && jumpOver)
-        {
-            hero1.weaponShoot();
+        if(notwon){
+            ft.stop();
+            if(event.getCode() == KeyCode.ENTER && !pauseMenuActive && !firstJump && !over && jumpOver)
+            {
+                hero1.weaponShoot();
+            }
+            
+    
+            if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump && !over && jumpOver) {
+                hero1.moveRight(game);
+    
+                int s = Integer.valueOf(score.getText());
+                s++;
+                score.setText(Integer.toString(s));
+                if(moveMenu){
+                    moveMenus(50);
+                }
+                
+                jumpOver = false;
+    
+                new java.util.Timer().schedule(
+                        new java.util.TimerTask() {
+                            @Override
+                            public void run() {
+                                jumpOver = true;
+                            }
+                        },
+                        150
+                );
+                
+                if(s==112){
+                    moveMenu=false;
+                }
+                if(s==122){
+                    checkWin();                    
+                }
+
         }
-
-        if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump && !over && jumpOver) {
-            hero1.moveRight(game);
-
-            int s = Integer.valueOf(score.getText());
-            s++;
-            score.setText(Integer.toString(s));
-
-            moveMenus(50);
-            jumpOver = false;
-
-            new java.util.Timer().schedule(
-                    new java.util.TimerTask() {
-                        @Override
-                        public void run() {
-                            jumpOver = true;
-                        }
-                    },
-                    150
-            );
+       
         }
     }
 
@@ -1005,22 +1031,22 @@ public class GUIController implements Initializable, Serializable {
         sound.play();
     }
 
-    public void previous(){
+    public void previous(double position){
         hero.setTranslateY(0.0);
         // heroBox.setTranslateY(0.0);
-        game.setTranslateX(-1 * heroXbeforeFalling);
-        pauseButton.setTranslateX(heroXbeforeFalling);
-        pausemenu.setTranslateX(heroXbeforeFalling);
-        gameOverMenu.setTranslateX(heroXbeforeFalling);
-        saveMenu.setTranslateX(heroXbeforeFalling);
-        resurrectMenu.setTranslateX(heroXbeforeFalling);
-        weaponTab.setTranslateX(heroXbeforeFalling);
-        volumeButtons.setTranslateX(heroXbeforeFalling);
-        coinsCollected.setTranslateX(heroXbeforeFalling);
-        coinsCollectedImg.setTranslateX(heroXbeforeFalling);
-        score.setTranslateX(heroXbeforeFalling);
-        hero.setTranslateX(heroXbeforeFalling-70);
-        helmet.setTranslateX(heroXbeforeFalling-70);        
+        game.setTranslateX(-1 * position);
+        pauseButton.setTranslateX(position);
+        pausemenu.setTranslateX(position);
+        gameOverMenu.setTranslateX(position);
+        saveMenu.setTranslateX(position);
+        resurrectMenu.setTranslateX(position);
+        weaponTab.setTranslateX(position);
+        volumeButtons.setTranslateX(position);
+        coinsCollected.setTranslateX(position);
+        coinsCollectedImg.setTranslateX(position);
+        score.setTranslateX(position);
+        hero.setTranslateX(position-70);
+        helmet.setTranslateX(position-70);        
         score.setText(Integer.toString(previousScore));
     }
 
@@ -1034,10 +1060,11 @@ public class GUIController implements Initializable, Serializable {
             coinsCollected.setText(Integer.toString(c));
             resurrectMenu.setOpacity(0);
             resurrectMenu.setDisable(true);
-            previous(); 
+            previous(heroXbeforeFalling); 
             over = false;
             heroInGame.get(hero).setAlive(true);
             resumeGame(event);
+            
         }
         else
             notResurrect(event);
@@ -1046,5 +1073,18 @@ public class GUIController implements Initializable, Serializable {
     public String getGameName()
     {
         return gameName;
+    }
+
+
+    public void checkWin(){
+        if(!boss1.isAlive()){
+            System.out.println("win");
+            notwon=false;
+        }
+
+        else{
+            previous(boss.getTranslateX());
+
+        }
     }
 }
