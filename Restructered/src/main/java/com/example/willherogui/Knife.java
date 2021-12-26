@@ -6,9 +6,9 @@ import javafx.scene.layout.Pane;
 
 public class Knife extends Weapon
 {
-    Knife(ImageView knife,Image img)
+    Knife(ImageView knife, Image img, Pane helmet)
     {
-        super(knife,img,70);
+        super(knife,img,70, helmet);
     }
 
    

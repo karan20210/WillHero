@@ -4,7 +4,12 @@ import javafx.animation.Animation;
 import javafx.animation.Interpolator;
 import javafx.animation.TranslateTransition;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
+
+import java.nio.file.Paths;
 
 public abstract class Orcs extends GameObjects implements Movable, Collision
 {
@@ -40,9 +45,11 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
 
     public void shot(int damage)
     {
-        health = health - damage;
+        health = health - (damage)/2;
         if(health <= 0)
             alive = false;
+
+
     }
 
     public void resumeJump(){

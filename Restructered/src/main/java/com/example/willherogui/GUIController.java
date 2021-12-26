@@ -159,6 +159,8 @@ public class GUIController implements Initializable, Serializable {
     boolean jumpOver = true;
 
     private double heroXbeforeFalling;
+    private Media m;
+    private MediaPlayer s;
 
     // Collections
     HashMap<ImageView, Coin> coinsInGame = new HashMap<>();
@@ -363,19 +365,21 @@ public class GUIController implements Initializable, Serializable {
             // System.out.println("Bhavya");
             
             for(ImageView i: orcsInGame.keySet())
-            {   
+            {
 
                 if(hero1.getCurrentWeapon()!=null){
-                    System.out.println("Jain");
-                    if (i.getBoundsInParent().intersects(hero1.getCurrentWeapon().getImageView().getBoundsInParent())) {
+                    if (i.getBoundsInParent().intersects(hero1.getCurrentWeapon().getHelmet().getBoundsInParent()) && orcsInGame.get(i).isAlive()) {
                         orcsInGame.get(i).shot(hero1.getCurrentWeapon().getDamage());
-                        System.out.println("Karan");
-                    }     
-
+                        s.setCycleCount(MediaPlayer.INDEFINITE);
+                        s.play();
+                        if(!orcsInGame.get(i).isAlive())
+                        {
+                            i.setImage(null);
+                        }
+                    }
                 }
-                
             }
-            
+
         }
     };
 
@@ -476,8 +480,8 @@ public class GUIController implements Initializable, Serializable {
         
         axeImg=axe.getImage();
         knifeImg=knife.getImage();
-        Weapon1= new Axe(axe,axeImg);
-        Weapon2 = new Knife(knife,knifeImg);
+        Weapon1= new Axe(axe,axeImg, helmet);
+        Weapon2 = new Knife(knife,knifeImg, helmet);
         helmet1.addWeapons(Weapon1,Weapon2);
 
         tab1.setOpacity(0.38);
@@ -589,6 +593,12 @@ public class GUIController implements Initializable, Serializable {
         gameOverMenu.setDisable(true);
         gameOverMenu.setOpacity(0);
 
+        m = new Media(Paths.get("src/main/resources/com/example/willherogui/weaponSound.mp3").toUri().toString());
+        s = new MediaPlayer(m);
+        s.setCycleCount(1);
+        s.setAutoPlay(true);
+        s.setVolume(100);
+
         //Starting Animations
         coinCollision.start();
         chestCollision.start();
@@ -673,6 +683,11 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     protected void onSpace(KeyEvent event) {
         ft.stop();
+        if(event.getCode() == KeyCode.ENTER && !pauseMenuActive && !firstJump && !over && jumpOver)
+        {
+            hero1.weaponShoot();
+        }
+
         if (event.getCode() == KeyCode.SPACE && !pauseMenuActive && !firstJump && !over && jumpOver) {
             hero1.moveRight(game);
 
