@@ -16,6 +16,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
@@ -31,6 +32,10 @@ public class MainMenuController implements Initializable {
     private static MediaPlayer sound;
     private static boolean soundStatus = false;
 //    private static boolean firstTime = true;
+    @FXML
+    private Pane instructions;
+    @FXML
+    private Button helpButton;
 
     @FXML
     private Button soundOn;
@@ -63,9 +68,6 @@ public class MainMenuController implements Initializable {
             soundOn.setDisable(true);
             soundOn.setOpacity(0);
         }
-
-        
-       
     }
     
     public void onClickLoad(ActionEvent event) throws IOException{
@@ -130,8 +132,18 @@ public class MainMenuController implements Initializable {
     {
         return soundStatus;
     }
- 
 
-    
+    @FXML
+    public void showInstructionMenu(ActionEvent event)
+    {
+        instructions.setOpacity(1);
+        instructions.setDisable(false);
+    }
+
+    public void closeHelpMenu(ActionEvent event)
+    {
+        instructions.setOpacity(0);
+        instructions.setDisable(true);
+    }
     
 }

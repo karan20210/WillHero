@@ -105,7 +105,7 @@ public class GUIController implements Initializable, Serializable {
    
     //Orcs
     @FXML
-    private ImageView orc_1, orc_2, orc_3, orc_4, orc_5, orc_6;
+    private ImageView orc_1, orc_2, orc_3, orc_4, orc_5, orc_6, orc_7, orc_8, orc_9, orc_10, orc_11, orc_12, orc_13, orc_14, orc_15, orc_16;
     // @FXML
     // private Pane orcBox_1, orcBox_2, orcBox_3, orcBox_4, orcBox_5, orcBox_6;
     @FXML
@@ -370,16 +370,12 @@ public class GUIController implements Initializable, Serializable {
     AnimationTimer shootCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
-            // System.out.println("Bhavya");
-            
+
             for(ImageView i: orcsInGame.keySet())
             {
-
                 if(hero1.getCurrentWeapon()!=null){
                     if (i.getBoundsInParent().intersects(hero1.getCurrentWeapon().getHelmet().getBoundsInParent()) && orcsInGame.get(i).isAlive()) {
                         orcsInGame.get(i).shot(hero1.getCurrentWeapon().getDamage());
-                        s.setCycleCount(MediaPlayer.INDEFINITE);
-                        s.play();
                         if(!orcsInGame.get(i).isAlive())
                         {
                             i.setImage(null);
@@ -387,7 +383,6 @@ public class GUIController implements Initializable, Serializable {
                     }
                 }
             }
-
         }
     };
 
@@ -503,6 +498,16 @@ public class GUIController implements Initializable, Serializable {
         orcsInGame.put(orc_4, new GreenOrc(orc_4));
         orcsInGame.put(orc_5, new GreenOrc(orc_5));
         orcsInGame.put(orc_6, new RedOrc(orc_6));
+        orcsInGame.put(orc_7, new GreenOrc(orc_7));
+        orcsInGame.put(orc_8, new RedOrc(orc_8));
+        orcsInGame.put(orc_9, new RedOrc(orc_9));
+        orcsInGame.put(orc_10, new GreenOrc(orc_10));
+        orcsInGame.put(orc_11, new GreenOrc(orc_11));
+        orcsInGame.put(orc_12, new RedOrc(orc_12));
+        orcsInGame.put(orc_13, new RedOrc(orc_13));
+        orcsInGame.put(orc_14, new RedOrc(orc_14));
+        orcsInGame.put(orc_15, new RedOrc(orc_15));
+        orcsInGame.put(orc_16, new RedOrc(orc_16));
         orcsInGame.put(boss,boss1);
 
         // orcBoxesInGame.put(orc_1, orcBox_1);
@@ -602,12 +607,6 @@ public class GUIController implements Initializable, Serializable {
         soundOff.setFocusTraversable(false);
         gameOverMenu.setDisable(true);
         gameOverMenu.setOpacity(0);
-
-        m = new Media(Paths.get("src/main/resources/com/example/willherogui/weaponSound.mp3").toUri().toString());
-        s = new MediaPlayer(m);
-        s.setCycleCount(1);
-        s.setAutoPlay(true);
-        s.setVolume(100);
 
         //Starting Animations
         coinCollision.start();

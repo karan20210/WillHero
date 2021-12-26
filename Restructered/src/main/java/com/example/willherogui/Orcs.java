@@ -24,7 +24,14 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
         health = 100;
         alive = true;
         this.orcImg=orcImg;
-        
+    }
+
+    Orcs(double x, double y, ImageView orcImg, int h)
+    {
+        super(x,y);
+        health = h;
+        alive = true;
+        this.orcImg=orcImg;
     }
 
     public int getHealth() {
@@ -45,11 +52,9 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
 
     public void shot(int damage)
     {
-        health = health - (damage)/2;
+        health = health - (damage/20);
         if(health <= 0)
             alive = false;
-
-
     }
 
     public void resumeJump(){

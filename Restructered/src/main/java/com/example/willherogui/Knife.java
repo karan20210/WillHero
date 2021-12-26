@@ -8,7 +8,7 @@ public class Knife extends Weapon
 {
     Knife(ImageView knife, Image img, Pane helmet)
     {
-        super(knife,img,70, helmet);
+        super(knife,img,40, helmet);
     }
 
    

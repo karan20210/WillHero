@@ -2,9 +2,11 @@
 
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -56,6 +58,40 @@
             <ImageView fx:id="soundImage1" fitHeight="50.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Images/soundOff-new.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Pane fx:id="instructions" disable="true" layoutX="151.0" layoutY="16.0" opacity="0.0" prefHeight="470.0" prefWidth="501.0" style="-fx-background-color: rgba(72,202,228);">
+         <children>
+            <Label layoutX="150.0" layoutY="22.0" text="INSTRUCTIONS" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate" size="26.0" />
+               </font>
+            </Label>
+            <Label layoutX="91.0" layoutY="81.0" text="Press Space to dash to the Right">
+               <font>
+                  <Font name="Chalkboard" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="93.0" layoutY="125.0" text="Press Enter to shoot the weapon">
+               <font>
+                  <Font name="Chalkboard" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="23.0" layoutY="169.0" text="If you die, you can resurrect by spending 15 coins">
+               <font>
+                  <Font name="Chalkboard" size="20.0" />
+               </font>
+            </Label>
+            <Button layoutX="224.0" layoutY="235.0" mnemonicParsing="false" onAction="#closeHelpMenu" text="Go back" />
+         </children>
+      </Pane>
+      <Button fx:id="helpButton" layoutX="718.0" layoutY="14.0" mnemonicParsing="false" onAction="#showInstructionMenu" prefHeight="28.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
+         <graphic>
+            <ImageView fx:id="soundImage11" fitHeight="50.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Gate.png" />
                </image>
             </ImageView>
          </graphic>
