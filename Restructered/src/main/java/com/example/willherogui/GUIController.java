@@ -107,9 +107,7 @@ public class GUIController implements Initializable, Serializable {
    
     //Orcs
     @FXML
-    private transient ImageView orc_1, orc_2, orc_3, orc_4, orc_5, orc_6, orc_7, orc_8, orc_9, orc_10, orc_11, orc_12, orc_13, orc_14, orc_15, orc_16;
-    // @FXML
-    // private Pane orcBox_1, orcBox_2, orcBox_3, orcBox_4, orcBox_5, orcBox_6;
+    private transient ImageView orc_1, orc_2, orc_3, orc_4, orc_5, orc_6, orc_7, orc_8, orc_9, orc_11, orc_12, orc_13, orc_14, orc_15, orc_16;
     @FXML
     private transient ImageView boss;
     private Boss boss1; 
@@ -142,7 +140,7 @@ public class GUIController implements Initializable, Serializable {
     @FXML
 
     //Platforms
-    private transient ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21;
+    private transient ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21;
     @FXML
     private transient Pane a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14;
     @FXML
@@ -156,6 +154,11 @@ public class GUIController implements Initializable, Serializable {
 
     @FXML
     private transient Label winCoinText;
+
+    //Sounds
+    private transient MediaPlayer weaponSound;
+    private transient MediaPlayer coinChestSound;
+    private transient MediaPlayer blastSound;
    
 
     //Transitions
@@ -170,6 +173,7 @@ public class GUIController implements Initializable, Serializable {
     boolean pauseMenuActive = false;
     boolean over = false;
     boolean jumpOver = true;
+    boolean firstRessurect = true;
 
     private double heroXbeforeFalling;
 
@@ -201,12 +205,18 @@ public class GUIController implements Initializable, Serializable {
         @Override
         public void handle(long l) {
             for(ImageView i: ChestsInGame.keySet()){
-
-                if(i.getBoundsInParent().intersects(hero.getBoundsInParent())){
+                if(i.getBoundsInParent().intersects(hero.getBoundsInParent()))
+                {
                     Chests chest = ChestsInGame.get(i);
                     if(!chest.isOpen()){
-                        chest.collide(hero1);
-                        
+                        {
+                            chest.collide(hero1);
+                            Media coinChestMedia = new Media(Paths.get("src/main/resources/com/example/willherogui/coinChestSound.mp3").toUri().toString());
+                            coinChestSound = new MediaPlayer(coinChestMedia);
+                            coinChestSound.setCycleCount(1);
+                            coinChestSound.setAutoPlay(true);
+                            coinChestSound.play();
+                        }
                         break;
                     }                    
                 }
@@ -214,36 +224,6 @@ public class GUIController implements Initializable, Serializable {
            
         }
     };
-
-    //Abyss Collision
-    // AnimationTimer abyssCollision = new AnimationTimer() {
-    //     @Override
-    //     public void handle(long l) {
-    //         for (Pane i : abyssInGame.keySet()) {
-
-    //             if (i.getBoundsInParent().intersects(hero.getBoundsInParent())) {
-                   
-    //                 if(hero1.isAlive())
-    //                 {
-    //                     abyssInGame.get(i).collide(hero1);
-    //                     gameOver();
-    //                 }
-
-    //             }
-
-    //             for(ImageView o: orcsInGame.keySet())
-    //             {
-    //                 if (i.getBoundsInParent().intersects(o.getBoundsInParent())) {
-    //                     if(orcsInGame.get(o).isAlive())
-    //                     {
-    //                        abyssInGame.get(i).collide(orcsInGame.get(o));
-
-    //                     }
-    //                 }
-    //             }
-    //         }
-    //     }
-    // };
 
     //CombinedCollision
     transient AnimationTimer combinedCollision= new AnimationTimer() {
@@ -256,15 +236,11 @@ public class GUIController implements Initializable, Serializable {
                 {
                     heroXbeforeFalling = hero.getTranslateX();
                     previousScore = Integer.valueOf(score.getText());
-                    
-                    // heroBoxXbeforeFalling = hero.getTranslateX();
                     heroHitIsland=true;                    
                 }
             }
 
             if(!heroHitIsland){
-                
-
                     if (abyssPane.getBoundsInParent().intersects(hero.getBoundsInParent())) {
                        
                         if(hero1.isAlive())
@@ -272,8 +248,7 @@ public class GUIController implements Initializable, Serializable {
                             abyss.collide(hero1);
                             gameOver();
                         }    
-                    } 
-                
+                    }
             }
 
             for(ImageView o : orcsInGame.keySet()){
@@ -291,36 +266,16 @@ public class GUIController implements Initializable, Serializable {
                 if(!OrcHitIsland){
 
                     if (abyssPane.getBoundsInParent().intersects(o.getBoundsInParent())) {
-                       
-                        
                         {
-                            abyss.collide(orcsInGame.get(o));
-                            
+                            if(orcsInGame.get(o).isAlive())
+                                abyss.collide(orcsInGame.get(o), heroInGame.get(hero));
                         }    
                     }
-
-
                 }
             }   
         }
         
     };
-
-    //IslandCollision
-    // AnimationTimer islandCollision = new AnimationTimer() {
-    //     @Override
-    //     public void handle(long l) {
-    //         for(ImageView i: islandsInGame.keySet())
-    //         {
-    //             if(i.getBoundsInParent().intersects(hero.getBoundsInParent()))
-    //             {
-    //                 heroXbeforeFalling = hero.getTranslateX(); 
-    //                 // heroBoxXbeforeFalling = hero.getTranslateX();
-    //             }
-
-    //         }
-    //     }
-    // };
 
     //OrcCollision
    transient AnimationTimer orcCollision = new AnimationTimer() {
@@ -350,7 +305,6 @@ public class GUIController implements Initializable, Serializable {
                     break;
                 }
             }
-            
         }
     };
 
@@ -381,6 +335,15 @@ public class GUIController implements Initializable, Serializable {
             {
                 if(hero1.getCurrentWeapon()!=null){
                     if (i.getBoundsInParent().intersects(hero1.getCurrentWeapon().getHelmet().getBoundsInParent()) && orcsInGame.get(i).isAlive()) {
+                        if(i.getBoundsInParent().intersects(hero.getBoundsInParent()))
+                            break;
+
+//                        Media shootMedia = new Media(Paths.get("src/main/resources/com/example/willherogui/weaponSound.mp3").toUri().toString());
+//                        weaponSound = new MediaPlayer(shootMedia);
+//                        weaponSound.setCycleCount(1);
+//                        weaponSound.setVolume(0.25);
+//                        weaponSound.play();
+
                         orcsInGame.get(i).shot(hero1.getCurrentWeapon().getDamage());
                         if(!orcsInGame.get(i).isAlive())
                         {
@@ -419,6 +382,12 @@ public class GUIController implements Initializable, Serializable {
                                         i.setScaleX(3);
                                         i.setScaleY(1);
 
+                                        Media obstacleMedia = new Media(Paths.get("src/main/resources/com/example/willherogui/blast.mp3").toUri().toString());
+                                        blastSound = new MediaPlayer(obstacleMedia);
+                                        blastSound.setCycleCount(1);
+                                        blastSound.setAutoPlay(true);
+                                        blastSound.play();
+
                                         if(hero.getTranslateX() - i.getLayoutX() < 50)
                                         {
                                             gameOver();
@@ -451,9 +420,6 @@ public class GUIController implements Initializable, Serializable {
                 weaponsInGame.get(i).setX(i.getTranslateX());
                 weaponsInGame.get(i).setY(i.getTranslateY());
             }
-
-           
-
         }
     };
 
@@ -507,7 +473,6 @@ public class GUIController implements Initializable, Serializable {
         orcsInGame.put(orc_7, new GreenOrc(orc_7));
         orcsInGame.put(orc_8, new RedOrc(orc_8));
         orcsInGame.put(orc_9, new RedOrc(orc_9));
-        orcsInGame.put(orc_10, new GreenOrc(orc_10));
         orcsInGame.put(orc_11, new GreenOrc(orc_11));
         orcsInGame.put(orc_12, new RedOrc(orc_12));
         orcsInGame.put(orc_13, new RedOrc(orc_13));
@@ -565,7 +530,6 @@ public class GUIController implements Initializable, Serializable {
         islandsInGame.put(p8, new Island(p8.getLayoutX(), p8.getLayoutY()));
         islandsInGame.put(p9, new Island(p9.getLayoutX(), p9.getLayoutY()));
         islandsInGame.put(p10, new Island(p10.getLayoutX(), p10.getLayoutY()));
-        islandsInGame.put(p11, new Island(p11.getLayoutX(), p11.getLayoutY()));
         islandsInGame.put(p12, new Island(p12.getLayoutX(), p12.getLayoutY()));
         islandsInGame.put(p13, new Island(p13.getLayoutX(), p13.getLayoutY()));
         islandsInGame.put(p14, new Island(p14.getLayoutX(), p14.getLayoutY()));
@@ -617,8 +581,6 @@ public class GUIController implements Initializable, Serializable {
         //Starting Animations
         coinCollision.start();
         chestCollision.start();
-        // abyssCollision.start();
-        // islandCollision.start();
         combinedCollision.start();
         orcCollision.start();
         obstacleCollision.start();
@@ -668,17 +630,6 @@ public class GUIController implements Initializable, Serializable {
             if(orcsInGame.get(i).isAlive())
             {
                 orcsInGame.get(i).startMove();
-
-
-                // TranslateTransition orcBoxJump = new TranslateTransition();
-                // orcBoxJump.setDuration(Duration.millis(1000));
-                // orcBoxJump.setNode(orcBoxesInGame.get(i));
-                // orcBoxJump.setByY(-40);
-                // orcBoxJump.setCycleCount(Animation.INDEFINITE);
-                // orcBoxJump.setAutoReverse(true);
-                // orcBoxJump.setInterpolator(Interpolator.LINEAR);
-                // orcBoxJump.play();
-                // orcBoxJumps.add(orcBoxJump);
             }
         }
     }
@@ -818,19 +769,6 @@ public class GUIController implements Initializable, Serializable {
         resurrectMenuMove.setCycleCount(1);
         resurrectMenuMove.play();
 
-//        axeMove = new TranslateTransition();
-//        axeMove.setDuration(Duration.millis(150));
-//        axeMove.setNode(axe);
-//        axeMove.setByX(x);
-//        axeMove.setCycleCount(1);
-//        axeMove.play();
-//
-//        knifeMove = new TranslateTransition();
-//        knifeMove.setDuration(Duration.millis(150));
-//        knifeMove.setNode(knife);
-//        knifeMove.setByX(x);
-//        knifeMove.setCycleCount(1);
-//        knifeMove.play();
     }
 
     @FXML
@@ -847,17 +785,6 @@ public class GUIController implements Initializable, Serializable {
                 orcsInGame.get(i).pauseJump();
             }
         }
-        
-        // if (jump != null)
-        //     jump.pause();
-        // if(hJump!=null)
-        //     hJump.pause();
-        // if (moveRight != null)
-        //     moveRight.pause();
-        // if(hmoveRight!=null)
-        //     hmoveRight.pause();
-
-        
     }
 
     @FXML
@@ -867,18 +794,13 @@ public class GUIController implements Initializable, Serializable {
         pausemenu.setOpacity(0);
         pausemenu.setDisable(true);
 
-        // if (jump != null)
-        //     jump.play();
         hero1.resumeJump();
-        
-        // if (hJump != null)
-        //     hJump.play();
+
         for(ImageView i: orcsInGame.keySet())
         {
             if(orcsInGame.get(i).isAlive()){
                 orcsInGame.get(i).resumeJump();
             }
-                
         }
     }
 
@@ -961,13 +883,6 @@ public class GUIController implements Initializable, Serializable {
             out.writeObject(savedGames1);
             out.close();
             file.close();
-
-//            file = new FileOutputStream("saveObj.txt");
-//            out = new ObjectOutputStream(file);
-//            out.writeObject(this);
-//            out.close();
-//            file.close();
-
         }
 
         catch (Exception e)
@@ -1043,11 +958,15 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     protected void gameOver()
     {
-        if(!over)
+        if(!over && firstRessurect)
         {
             askForResurrect();
             over = true;
+            firstRessurect = false;
         }
+
+        else
+            notResurrect(new ActionEvent());
     }
 
     @FXML
@@ -1070,9 +989,7 @@ public class GUIController implements Initializable, Serializable {
         pauseGame(event);
         pausemenu.setDisable(true);
         pausemenu.setOpacity(0);
-//        for(TranslateTransition orcJump: orcJumps.values())
-//            orcJump.pause();
-        Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/GameOverSound.mp3").toUri().toString());
+        Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/gameOverSound.mp3").toUri().toString());
         MediaPlayer sound = new MediaPlayer(media);
         sound.setCycleCount(1);
         sound.setVolume(0.25);
@@ -1081,7 +998,6 @@ public class GUIController implements Initializable, Serializable {
 
     public void previous(double position){
         hero.setTranslateY(0.0);
-        // heroBox.setTranslateY(0.0);
         game.setTranslateX(-1 * position);
         pauseButton.setTranslateX(position);
         pausemenu.setTranslateX(position);
@@ -1138,6 +1054,11 @@ public class GUIController implements Initializable, Serializable {
 
     public void win()
     {
+        Media m = new Media(Paths.get("src/main/resources/com/example/willherogui/winSound.mp3").toUri().toString());
+        MediaPlayer s = new MediaPlayer(m);
+        s.setCycleCount(1);
+        s.setVolume(0.25);
+        s.play();
         winMenu.setOpacity(1);
         winMenu.setDisable(false);
         winCoinText.setText("You collected " + coinsCollected.getText() + " coins");

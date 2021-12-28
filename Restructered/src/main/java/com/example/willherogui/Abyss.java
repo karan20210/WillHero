@@ -14,8 +14,9 @@ public class Abyss extends GameObjects implements Collision
             hero.fall();
     }
 
-    public void collide(Orcs orc){
+    public void collide(Orcs orc, Hero hero){
         orc.setAlive(false);
         orc.fall();
+        hero.addCoins(5);
     }
 }
