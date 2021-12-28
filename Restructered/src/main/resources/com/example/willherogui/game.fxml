@@ -229,94 +229,6 @@
             </ImageView>
          </children>
       </Pane>
-        <Pane fx:id="pausemenu" disable="true" layoutX="278.0" layoutY="176.0" opacity="0.0" prefHeight="188.0" prefWidth="262.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
-            <children>
-                <Label layoutX="59.0" layoutY="22.0" text="Game paused" textFill="WHITE">
-                    <font>
-                        <Font name="Copperplate" size="23.0" />
-                    </font>
-                </Label>
-            <Button id="buttons" layoutX="171.0" layoutY="57.0" mnemonicParsing="false" onAction="#saveGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/save.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-            <Button id="buttons" layoutX="39.0" layoutY="55.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/resume.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-            <Button id="buttons" layoutX="106.0" layoutY="52.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/restart.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-            <Button id="buttons" layoutX="105.0" layoutY="120.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/returnToMenu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-            </children>
-        </Pane>
-      <VBox fx:id="saveMenu" alignment="CENTER" disable="true" layoutX="220.0" layoutY="120.0" opacity="0.0" prefHeight="267.0" prefWidth="361.0" spacing="30.0" style="-fx-background-color: rgba(72,202,228,0.8); -fx-border-radius: 50; -fx-border-color: rgba(72,202,228); -fx-background-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
-         <children>
-            <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Game" textAlignment="CENTER">
-               <font>
-                  <Font name="Copperplate Gothic Light" size="36.0" />
-               </font>
-            </Text>
-            <TextField fx:id="saveGameName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Game Name" style="-fx-background-radius: 20;">
-               <font>
-                  <Font name="Copperplate Gothic Bold" size="24.0" />
-               </font>
-            </TextField>
-            <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveGameButton" prefHeight="41.0" prefWidth="147.0" style="-fx-background-color: linear-gradient(to right, #ddd6f3, #faaca8); -fx-text-fill: black; -fx-border-radius: 20; -fx-border-color: grey; -fx-background-radius: 20;" text="Save">
-               <font>
-                  <Font name="Copperplate Gothic Light" size="18.0" />
-               </font>
-            </Button>
-         </children>
-      </VBox>
       <Pane fx:id="a1" layoutX="205.0" layoutY="275.0" prefHeight="209.0" prefWidth="13.0" translateX="60.0" translateY="-55.0" />
       <Pane fx:id="a2" layoutX="575.0" layoutY="209.0" prefHeight="209.0" prefWidth="27.0" />
       <Pane fx:id="a3" layoutX="580.0" layoutY="219.0" prefHeight="209.0" prefWidth="27.0" translateX="220.0" translateY="-10.0" />
@@ -333,45 +245,6 @@
          <children>
             <Pane fx:id="a14" layoutX="-6.0" layoutY="39.0" prefHeight="200.0" prefWidth="33.0" />
          </children></Pane>
-      <Pane fx:id="gameOverMenu" disable="true" layoutX="273.0" layoutY="186.0" opacity="0.0" prefHeight="127.0" prefWidth="277.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
-         <children>
-            <Label layoutX="68.0" layoutY="22.0" text="Game Over :(" textFill="WHITE">
-               <font>
-                  <Font name="Copperplate" size="23.0" />
-               </font>
-            </Label>
-            <Button id="buttons" layoutX="76.0" layoutY="53.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/restart.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-            <Button id="buttons" layoutX="141.0" layoutY="55.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css" translateY="3.0">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <graphic>
-                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@Images/returnToMenu.png" />
-                     </image>
-                  </ImageView>
-               </graphic>
-               <padding>
-                  <Insets left="-10.0" right="-10.0" />
-               </padding>
-            </Button>
-         </children>
-      </Pane>
       <ImageView fx:id="weaponChest1" fitHeight="80.0" fitWidth="74.0" layoutX="2224.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/WeaponChest.png" />
@@ -618,6 +491,177 @@
                   <Insets left="-10.0" right="-10.0" />
                </padding>
             </Button>
+         </children>
+      </Pane>
+      <VBox fx:id="saveMenu" alignment="CENTER" disable="true" layoutX="220.0" layoutY="120.0" opacity="0.0" prefHeight="267.0" prefWidth="361.0" spacing="30.0" style="-fx-background-color: rgba(72,202,228,0.8); -fx-border-radius: 50; -fx-border-color: rgba(72,202,228); -fx-background-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
+         <children>
+            <Text fill="WHITE" fontSmoothingType="LCD" strokeType="OUTSIDE" strokeWidth="0.0" text="Save Game" textAlignment="CENTER">
+               <font>
+                  <Font name="Copperplate Gothic Light" size="36.0" />
+               </font>
+            </Text>
+            <TextField fx:id="saveGameName" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="50.0" prefWidth="300.0" promptText="Game Name" style="-fx-background-radius: 20;">
+               <font>
+                  <Font name="Copperplate Gothic Bold" size="24.0" />
+               </font>
+            </TextField>
+            <Button fx:id="save" alignment="CENTER" contentDisplay="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#saveGameButton" prefHeight="41.0" prefWidth="147.0" style="-fx-background-color: linear-gradient(to right, #ddd6f3, #faaca8); -fx-text-fill: black; -fx-border-radius: 20; -fx-border-color: grey; -fx-background-radius: 20;" text="Save">
+               <font>
+                  <Font name="Copperplate Gothic Light" size="18.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+      <Pane fx:id="gameOverMenu" disable="true" layoutX="273.0" layoutY="186.0" opacity="0.0" prefHeight="127.0" prefWidth="277.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
+         <children>
+            <Label layoutX="68.0" layoutY="22.0" text="Game Over :(" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate" size="23.0" />
+               </font>
+            </Label>
+            <Button id="buttons" layoutX="76.0" layoutY="53.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/restart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Button id="buttons" layoutX="141.0" layoutY="55.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css" translateY="3.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/returnToMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+         </children>
+      </Pane>
+        <Pane fx:id="pausemenu" disable="true" layoutX="278.0" layoutY="176.0" opacity="0.0" prefHeight="188.0" prefWidth="262.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css">
+            <children>
+                <Label layoutX="59.0" layoutY="22.0" text="Game paused" textFill="WHITE">
+                    <font>
+                        <Font name="Copperplate" size="23.0" />
+                    </font>
+                </Label>
+            <Button id="buttons" layoutX="171.0" layoutY="57.0" mnemonicParsing="false" onAction="#saveGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/save.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Button id="buttons" layoutX="39.0" layoutY="55.0" mnemonicParsing="false" onAction="#resumeGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/resume.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Button id="buttons" layoutX="106.0" layoutY="52.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="62.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/restart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Button id="buttons" layoutX="105.0" layoutY="120.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="55.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="55.0" fitWidth="85.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/returnToMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            </children>
+        </Pane>
+      <Pane fx:id="winMenu" disable="true" layoutX="834.0" layoutY="131.0" opacity="0.0" prefHeight="273.0" prefWidth="361.0" style="-fx-background-color: rgba(72,202,228,0.5); -fx-background-radius: 50; -fx-border-color: rgba(72,202,228); -fx-border-radius: 50; -fx-border-width: 2;" stylesheets="@CSS/PauseMenu.css" translateX="5000.0">
+         <children>
+            <Label layoutX="59.0" layoutY="22.0" text="WOOHOO!! YOU WON" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate" size="23.0" />
+               </font>
+            </Label>
+            <Button id="buttons" layoutX="87.0" layoutY="137.0" mnemonicParsing="false" onAction="#restartGame" prefHeight="109.0" prefWidth="74.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css" translateY="-5.0">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="83.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/restart.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Button id="buttons" layoutX="182.0" layoutY="137.0" mnemonicParsing="false" onAction="#returnToMainMenu" prefHeight="109.0" prefWidth="74.0" style="-fx-background-color: transparent; -fx-background-radius: 50;" stylesheets="@CSS/PauseMenu.css">
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <graphic>
+                  <ImageView fitHeight="83.0" fitWidth="98.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Images/returnToMenu.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+               <padding>
+                  <Insets left="-10.0" right="-10.0" />
+               </padding>
+            </Button>
+            <Label fx:id="winCoinText" layoutX="59.0" layoutY="86.0" text="WOOHOO!! YOU WON" textFill="WHITE">
+               <font>
+                  <Font name="Copperplate" size="23.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
     </children>

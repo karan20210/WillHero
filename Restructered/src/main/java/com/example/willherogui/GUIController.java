@@ -42,44 +42,44 @@ public class GUIController implements Initializable, Serializable {
 
     // Game elements
     @FXML
-    private Pane game;
+    private transient Pane game;
 
 
     //gate
     @FXML
-    private ImageView gate;
+    private transient ImageView gate;
 
     //Hero
     private Hero hero1;
     @FXML
-    private ImageView hero;
+    private transient ImageView hero;
     // @FXML
     // private Pane heroBox;
     
     //Helmet
     private Helmet helmet1;
     @FXML
-    private Pane helmet;
+    private transient Pane helmet;
 
     //Coins
     @FXML
-    private Text coinsCollected;
+    private transient Text coinsCollected;
     @FXML
-    private ImageView coinsCollectedImg;
+    private transient ImageView coinsCollectedImg;
  
 
     //Weapons
      @FXML
-     private Pane weaponTab;
+     private transient Pane weaponTab;
      @FXML
-     private ImageView tab1;
+     private transient ImageView tab1;
      @FXML
-     private ImageView tab2;
+     private transient ImageView tab2;
      @FXML
-     private ImageView axe;
+     private transient ImageView axe;
      @FXML
-     private ImageView knife;
-     private Image axeImg, knifeImg;
+     private transient ImageView knife;
+     private transient Image axeImg, knifeImg;
 
      private Weapon Weapon1,Weapon2;
      
@@ -87,78 +87,83 @@ public class GUIController implements Initializable, Serializable {
 
     //Menus
     @FXML
-    private Pane pausemenu;
+    private transient Pane pausemenu;
     @FXML
-    private VBox saveMenu;
+    private transient VBox saveMenu;
     @FXML
-    private Pane resurrectMenu;
+    private transient Pane resurrectMenu;
     @FXML
-    private Pane gameOverMenu;
+    private transient Pane gameOverMenu;
     @FXML
-    private Button pauseButton;
+    private transient Button pauseButton;
+    @FXML
+    private transient Pane winMenu;
 
     @FXML
-    private Label score;
+    private transient Label score;
     private int previousScore;
     @FXML
-    private Label tapToStart;
+    private transient Label tapToStart;
    
     //Orcs
     @FXML
-    private ImageView orc_1, orc_2, orc_3, orc_4, orc_5, orc_6, orc_7, orc_8, orc_9, orc_10, orc_11, orc_12, orc_13, orc_14, orc_15, orc_16;
+    private transient ImageView orc_1, orc_2, orc_3, orc_4, orc_5, orc_6, orc_7, orc_8, orc_9, orc_10, orc_11, orc_12, orc_13, orc_14, orc_15, orc_16;
     // @FXML
     // private Pane orcBox_1, orcBox_2, orcBox_3, orcBox_4, orcBox_5, orcBox_6;
     @FXML
-    private ImageView boss;
+    private transient ImageView boss;
     private Boss boss1; 
 
     
    
     @FXML
-    private Text instruction;
+    private transient Text instruction;
 
     //Volume
     @FXML
-    private Button soundOn;
+    private transient Button soundOn;
     @FXML
-    private Button soundOff;
+    private transient Button soundOff;
     @FXML
-    private Pane volumeButtons;
+    private transient Pane volumeButtons;
 
     //Abyss
     @FXML
-    private Pane abyssPane;
+    private transient Pane abyssPane;
    
 
     //Chests
     @FXML
-    private ImageView c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15;
+    private transient ImageView c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15;
     @FXML
-    private ImageView coinChest, coinChest1, coinChest11, coinChest111;
+    private transient ImageView coinChest, coinChest1, coinChest11, coinChest111;
     @FXML
-    private ImageView weaponChest, weaponChest1, weaponChest11;
+    private transient ImageView weaponChest, weaponChest1, weaponChest11;
     @FXML
 
     //Platforms
-    private ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21;
+    private transient ImageView p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21;
     @FXML
-    private Pane a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14;
+    private transient Pane a1, a2, a3, a4, a5, a6, a7, a8, a9, a10, a11, a12, a13, a14;
     @FXML
-    private TextField saveGameName;
+    private transient TextField saveGameName;
 
     private static final long serialversionUID = 129348938L;
   
     //Obstacle
     @FXML
-    private ImageView tnt1, tnt2, tnt3;
+    private transient ImageView tnt1, tnt2, tnt3;
+
+    @FXML
+    private transient Label winCoinText;
    
 
     //Transitions
-    TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove, axeMove, knifeMove, axeJump, knifeJump;
-    HashMap<Orcs, TranslateTransition> orcJumps = new HashMap<>();
-    ArrayList<TranslateTransition> orcBoxJumps = new ArrayList<TranslateTransition>();
-    RotateTransition rotate;
-    FadeTransition ft;
+    transient TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove, axeMove, knifeMove, axeJump, knifeJump;
+    transient HashMap<Orcs, TranslateTransition> orcJumps = new HashMap<>();
+    transient ArrayList<TranslateTransition> orcBoxJumps = new ArrayList<TranslateTransition>();
+    transient RotateTransition rotate;
+    transient FadeTransition ft;
 
     //Useful boolean values
     boolean firstJump = true;
@@ -167,31 +172,32 @@ public class GUIController implements Initializable, Serializable {
     boolean jumpOver = true;
 
     private double heroXbeforeFalling;
-    private Media m;
-    private MediaPlayer s;
 
     // Collections
-    HashMap<ImageView, Coin> coinsInGame = new HashMap<>();
-    HashMap<ImageView, Chests> ChestsInGame= new HashMap<>();
-    HashMap<ImageView, Island> islandsInGame = new HashMap<>();
-    // HashMap<Pane, Abyss> abyssInGame = new HashMap<>();
-    HashMap<ImageView, Orcs> orcsInGame = new HashMap<>();
-    HashMap<ImageView, Pane> orcBoxesInGame = new HashMap<>();
-    HashMap<ImageView, Hero> heroInGame = new HashMap<>();
-    HashMap<ImageView, Weapon> weaponsInGame = new HashMap<>();
-    HashMap<Pane,Helmet> helmetsInGame= new HashMap<>();
-    HashMap<ImageView, Obstacles> obstaclesInGame = new HashMap<>();
+    transient HashMap<ImageView, Coin> coinsInGame = new HashMap<>();
+    transient HashMap<ImageView, Chests> ChestsInGame= new HashMap<>();
+    transient HashMap<ImageView, Island> islandsInGame = new HashMap<>();
+    transient HashMap<ImageView, Orcs> orcsInGame = new HashMap<>();
+    transient HashMap<ImageView, Pane> orcBoxesInGame = new HashMap<>();
+    transient HashMap<ImageView, Hero> heroInGame = new HashMap<>();
+    transient HashMap<ImageView, Weapon> weaponsInGame = new HashMap<>();
+    transient HashMap<Pane,Helmet> helmetsInGame= new HashMap<>();
+    transient HashMap<ImageView, Obstacles> obstaclesInGame = new HashMap<>();
 
     // Collections required for saving
     ArrayList<GameObjects> gameObjectsInGame = new ArrayList<>();
     HashMap<String, ArrayList<GameObjects>> savedGame = new HashMap<>();
     ArrayList<HashMap<String, ArrayList<GameObjects>>> savedGames = new ArrayList<>();
 
+    HashMap<GUIController, ArrayList<GameObjects>> savedGame1 = new HashMap<>();
+    ArrayList<HashMap<GUIController, ArrayList<GameObjects>>> savedGames1 = new ArrayList<>();
+
+
 
     // Collisions
 
     //Chest Collisions
-    AnimationTimer chestCollision = new AnimationTimer() {
+    transient AnimationTimer chestCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
             for(ImageView i: ChestsInGame.keySet()){
@@ -240,7 +246,7 @@ public class GUIController implements Initializable, Serializable {
     // };
 
     //CombinedCollision
-    AnimationTimer combinedCollision= new AnimationTimer() {
+    transient AnimationTimer combinedCollision= new AnimationTimer() {
         @Override
         public void handle(long l) {
             boolean heroHitIsland =false;
@@ -291,9 +297,9 @@ public class GUIController implements Initializable, Serializable {
                             abyss.collide(orcsInGame.get(o));
                             
                         }    
-                    } 
-                    
-                    
+                    }
+
+
                 }
             }   
         }
@@ -317,7 +323,7 @@ public class GUIController implements Initializable, Serializable {
     // };
 
     //OrcCollision
-    AnimationTimer orcCollision = new AnimationTimer() {
+   transient AnimationTimer orcCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
             
@@ -349,7 +355,7 @@ public class GUIController implements Initializable, Serializable {
     };
 
     //CoinCollision
-    AnimationTimer coinCollision = new AnimationTimer() {
+    transient AnimationTimer coinCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
             for(ImageView i: coinsInGame.keySet())
@@ -367,7 +373,7 @@ public class GUIController implements Initializable, Serializable {
     };
 
     //Shoot Collision
-    AnimationTimer shootCollision = new AnimationTimer() {
+   transient AnimationTimer shootCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
 
@@ -387,7 +393,7 @@ public class GUIController implements Initializable, Serializable {
     };
 
     //Obstacle Collision
-    AnimationTimer obstacleCollision = new AnimationTimer() {
+    transient AnimationTimer obstacleCollision = new AnimationTimer() {
         @Override
         public void handle(long l) {
             for(ImageView i: obstaclesInGame.keySet())
@@ -428,7 +434,7 @@ public class GUIController implements Initializable, Serializable {
         }
     };
 
-    AnimationTimer updateCoordinates = new AnimationTimer() {
+    transient AnimationTimer updateCoordinates = new AnimationTimer() {
         @Override
         public void handle(long l) {
             hero1.setX(hero.getTranslateX());
@@ -662,7 +668,7 @@ public class GUIController implements Initializable, Serializable {
             if(orcsInGame.get(i).isAlive())
             {
                 orcsInGame.get(i).startMove();
-                
+
 
                 // TranslateTransition orcBoxJump = new TranslateTransition();
                 // orcBoxJump.setDuration(Duration.millis(1000));
@@ -673,10 +679,7 @@ public class GUIController implements Initializable, Serializable {
                 // orcBoxJump.setInterpolator(Interpolator.LINEAR);
                 // orcBoxJump.play();
                 // orcBoxJumps.add(orcBoxJump);
-
-
             }
-
         }
     }
 
@@ -726,12 +729,12 @@ public class GUIController implements Initializable, Serializable {
                 if(s==112){
                     moveMenu=false;
                 }
-                if(s==122){
-                    checkWin();                    
-                }
-
+//                if(s==122){
+//                    checkWin();
+//                }
+                if(gate.getBoundsInParent().intersects(hero.getBoundsInParent()))
+                    checkWin();
         }
-       
         }
     }
 
@@ -911,10 +914,12 @@ public class GUIController implements Initializable, Serializable {
             {
                 FileInputStream file = new FileInputStream("save.txt");
                 ObjectInputStream in = new ObjectInputStream(file);
-                ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
-                for(HashMap<String, ArrayList<GameObjects>> sg: s)
+//                ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
+                ArrayList<HashMap<GUIController, ArrayList<GameObjects>>> s = (ArrayList<HashMap<GUIController, ArrayList<GameObjects>>>)in.readObject();
+                for(HashMap<GUIController, ArrayList<GameObjects>> sg: s)
                 {
-                    savedGames.add(sg);
+//                    savedGames.add(sg);
+                    savedGames1.add(sg);
                 }
                 in.close();
                 file.close();
@@ -949,11 +954,20 @@ public class GUIController implements Initializable, Serializable {
                 gameObjectsInGame.add(i);
 
             gameObjectsInGame.add(abyss);
-            savedGame.put(gameName, gameObjectsInGame);
-            savedGames.add(savedGame);
-            out.writeObject(savedGames);
+//            savedGame.put(gameName, gameObjectsInGame);
+//            savedGames.add(savedGame);
+            savedGame1.put(this, gameObjectsInGame);
+            savedGames1.add(savedGame1);
+            out.writeObject(savedGames1);
             out.close();
             file.close();
+
+//            file = new FileOutputStream("saveObj.txt");
+//            out = new ObjectOutputStream(file);
+//            out.writeObject(this);
+//            out.close();
+//            file.close();
+
         }
 
         catch (Exception e)
@@ -963,19 +977,54 @@ public class GUIController implements Initializable, Serializable {
     }
 
     public void loadSavedGame(ArrayList<GameObjects> g, ActionEvent e) throws IOException {
-        System.out.println(g);
         int i = 0;
         for(GameObjects go: g)
-            System.out.println(go.getX() + " " + go.getY());
+        {
+            System.out.println(i + ". " + go.getX() + " " + go.getY() + " " + go);
+            i++;
+        }
 
-//        FXMLLoader loader =  new FXMLLoader(getClass().getResource("game.fxml"));
-//        Stage stage= (Stage) ((Node)e.getSource()).getScene().getWindow();
-//        Scene scene = new Scene(loader.load(), 800, 500);
-//        stage.setScene(scene);
-//        stage.show();
 
-        hero.setTranslateX(((Hero)g.get(i)).getX());
-        hero.setTranslateY(((Hero)g.get(i)).getY());
+        FXMLLoader loader =  new FXMLLoader(getClass().getResource("game.fxml"));
+        Stage stage= (Stage) ((Node)e.getSource()).getScene().getWindow();
+        Scene scene = new Scene(loader.load(), 800, 500);
+        GUIController a = loader.getController();
+        setUpLoadedGame(a, g);
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private void setUpLoadedGame(GUIController a, ArrayList<GameObjects> g)
+    {
+        a.hero.setTranslateX(g.get(0).getX());
+        a.helmet.setTranslateX(g.get(1).getX());
+
+        int i = 45;
+        for(ImageView iv: a.orcsInGame.keySet())
+        {
+            iv.setTranslateX(g.get(i).getX());
+            i++;
+        }
+
+        a.game.setTranslateX(-1*a.hero.getTranslateX());
+        a.pausemenu.setTranslateX(a.hero.getTranslateX());
+        a.pauseButton.setTranslateX(a.hero.getTranslateX());
+        a.score.setTranslateX(a.hero.getTranslateX());
+        a.coinsCollected.setTranslateX(a.hero.getTranslateX());
+        a.coinsCollectedImg.setTranslateX(a.hero.getTranslateX());
+        a.saveMenu.setTranslateX(a.hero.getTranslateX());
+        a.weaponTab.setTranslateX(a.hero.getTranslateX());
+        a.volumeButtons.setTranslateX(a.hero.getTranslateX());
+        a.gameOverMenu.setTranslateX(a.hero.getTranslateX());
+        a.resurrectMenu.setTranslateX(a.hero.getTranslateX());
+        a.tapToStart.setTranslateX(a.hero.getTranslateX());
+
+        Hero loadedHero = (Hero)g.get(0);
+        a.heroInGame.get(a.hero).setCurrentCoins(loadedHero.getCurrentCoins());
+        a.heroInGame.get(a.hero).setScore(loadedHero.getScore());
+        a.score.setText(Integer.toString(loadedHero.getScore()));
+        a.coinsCollected.setText(Integer.toString(loadedHero.getCurrentCoins()));
+        System.out.println(loadedHero.getCurrentCoins());
     }
 
     @FXML
@@ -1053,9 +1102,9 @@ public class GUIController implements Initializable, Serializable {
     protected void resurrect(ActionEvent event)
     {
         int c = Integer.valueOf(coinsCollected.getText());
-        if(c > 2)
+        if(c >= 15)
         {
-            c = c-2;
+            c = c-15;
             coinsCollected.setText(Integer.toString(c));
             resurrectMenu.setOpacity(0);
             resurrectMenu.setDisable(true);
@@ -1063,7 +1112,6 @@ public class GUIController implements Initializable, Serializable {
             over = false;
             heroInGame.get(hero).setAlive(true);
             resumeGame(event);
-            
         }
         else
             notResurrect(event);
@@ -1079,11 +1127,19 @@ public class GUIController implements Initializable, Serializable {
         if(!boss1.isAlive()){
             System.out.println("win");
             notwon=false;
+            win();
         }
 
         else{
             previous(boss.getTranslateX());
 
         }
+    }
+
+    public void win()
+    {
+        winMenu.setOpacity(1);
+        winMenu.setDisable(false);
+        winCoinText.setText("You collected " + coinsCollected.getText() + " coins");
     }
 }

@@ -18,7 +18,7 @@ public abstract class Weapon extends GameObjects
     private transient ImageView weaponImg;
     private transient Pane helmet;
     private boolean fired;
-    private Image img;
+    private transient Image img;
 
     Weapon(ImageView weap, Image img,int damage, Pane h)
     {
@@ -65,44 +65,6 @@ public abstract class Weapon extends GameObjects
 
         
     }
-
-//    public void shoot(Pane game){
-//        Image image = new Image(Paths.get("src/main/resources/com/example/willherogui/Knife.jpg").toUri().toString());
-//        // ImageView NewWeapon= new ImageView(image);
-//         double x = weaponImg.getTranslateX();
-//         double y = weaponImg.getTranslateY();
-//        ImageView NewWeapon = new ImageView();
-//        NewWeapon.setImage(img);
-//     //    System.out.println(img.getUrl());
-//        NewWeapon.setTranslateX(x+100);
-//        NewWeapon.setTranslateY(y+100);
-//     //    NewWeapon.setLayoutX(weaponImg.getLayoutX());
-//     //    NewWeapon.setLayoutY(weaponImg.getLayoutY());
-//     //    NewWeapon.setVisible(true);
-
-//        game.getChildren().add(NewWeapon);
-//         //    NewWeapon.setViewOrder(2);
-//        // System.out.println(NewWeapon.getViewOrder());
-//        // if(game.getChildren().contains(NewWeapon)){
-//        //     System.out.println("lol");
-
-//        // }
-
-
-
-
-
-//     //    TranslateTransition move = new TranslateTransition();
-//     //    move.setDuration(Duration.millis(400));
-//     //    move.setNode(NewWeapon);
-//     //    move.setByX(+200);
-//     //    move.setCycleCount(1);
-//     //    move.play();
-
-//     //    game.getChildren().remove(NewWeapon);
-
-//    };
-
     public Pane getHelmet() {
         return helmet;
     }

@@ -64,12 +64,29 @@ public class LoadMenuController implements Initializable {
 
         try
         {
+//            FileInputStream file = new FileInputStream("save.txt");
+//            ObjectInputStream in = new ObjectInputStream(file);
+//            ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
+//            for(HashMap<String, ArrayList<GameObjects>> a: s) {
+//                for(String i: a.keySet())
+//                    Box.getChildren().add(new slot(i, s));
+//            }
+//            in.close();
+//            file.close();
+
+//            file = new FileInputStream("saveObj.txt");
+//            in = new ObjectInputStream(file);
+//            GUIController g = (GUIController) in.readObject();
+//            System.out.println(g.getGameName());
+//            in.close();
+//            file.close();
+
             FileInputStream file = new FileInputStream("save.txt");
             ObjectInputStream in = new ObjectInputStream(file);
-            ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
-            for(HashMap<String, ArrayList<GameObjects>> a: s) {
-                for(String i: a.keySet())
-                    Box.getChildren().add(new slot(i, s));
+            ArrayList<HashMap<GUIController, ArrayList<GameObjects>>> s = (ArrayList<HashMap<GUIController, ArrayList<GameObjects>>>)in.readObject();
+            for(HashMap<GUIController, ArrayList<GameObjects>> a: s) {
+                for(GUIController i: a.keySet())
+                    Box.getChildren().add(new slot(i.getGameName(), s));
             }
             in.close();
             file.close();
@@ -115,12 +132,14 @@ public class LoadMenuController implements Initializable {
         Box.getChildren().clear();
         File savedFile = new File("save.txt");
         savedFile.delete();
+        savedFile = new File("saveObj.txt");
+        savedFile.delete();
     }
 }
 
 class slot extends Button {
 
-    slot(String name, ArrayList<HashMap<String, ArrayList<GameObjects>>> s) {
+    slot(String name, ArrayList<HashMap<GUIController, ArrayList<GameObjects>>> s) {
         HBox h = new HBox(50);
         h.setPrefWidth(200);
         h.setPrefHeight(30);
@@ -132,16 +151,16 @@ class slot extends Button {
         labelname.setOnAction(new EventHandler<ActionEvent>() {
                                   @Override
                                   public void handle(ActionEvent event) {
-                                      for (HashMap<String, ArrayList<GameObjects>> a : s) {
-                                          for (String i : a.keySet()) {
-                                              if (i.equals(labelname.getText()))
+                                      for (HashMap<GUIController, ArrayList<GameObjects>> a : s) {
+                                          for (GUIController i : a.keySet()) {
+                                              if (i.getGameName().equals(labelname.getText()))
                                               {
                                                   System.out.println("Loading... " + i);
                                                   for(ArrayList<GameObjects> go: a.values())
                                                   {
 //                                                      GUIController.loadSavedGame(go);
                                                       try {
-                                                          new GUIController().loadSavedGame(go, event);
+                                                          i.loadSavedGame(go, event);
                                                       } catch (IOException e) {
                                                           e.printStackTrace();
                                                       }

@@ -147,6 +147,7 @@ public class Hero extends GameObjects implements Movable
         helmetMoveRight.setByX(+50);
         helmetMoveRight.setCycleCount(1);
         helmetMoveRight.play();
+        score++;
 
 //        if(currentWeapon!=null){
 //            currentWeapon.shoot(this);
