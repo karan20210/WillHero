@@ -62,39 +62,55 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane fx:id="instructions" disable="true" layoutX="151.0" layoutY="16.0" opacity="0.0" prefHeight="470.0" prefWidth="501.0" style="-fx-background-color: rgba(72,202,228);">
+      <Pane fx:id="instructions" disable="true" layoutX="151.0" layoutY="32.0" opacity="0.0" prefHeight="436.0" prefWidth="501.0" style="-fx-background-color: rgba(72,202,228);">
          <children>
             <Label layoutX="150.0" layoutY="22.0" text="INSTRUCTIONS" textFill="WHITE">
                <font>
                   <Font name="Copperplate" size="26.0" />
                </font>
             </Label>
-            <Label layoutX="91.0" layoutY="81.0" text="Press Space to dash to the Right">
+            <Label layoutX="99.0" layoutY="215.0" text="Press Space to dash to the Right">
                <font>
                   <Font name="Chalkboard" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="93.0" layoutY="125.0" text="Press Enter to shoot the weapon">
+            <Label layoutX="101.0" layoutY="259.0" text="Press Enter to shoot the weapon">
                <font>
                   <Font name="Chalkboard" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="23.0" layoutY="169.0" text="If you die, you can resurrect by spending 15 coins">
+            <Label layoutX="31.0" layoutY="303.0" text="If you die, you can resurrect by spending 15 coins">
                <font>
                   <Font name="Chalkboard" size="20.0" />
                </font>
             </Label>
-            <Button layoutX="224.0" layoutY="235.0" mnemonicParsing="false" onAction="#closeHelpMenu" text="Go back" />
+            <Button layoutX="221.0" layoutY="369.0" mnemonicParsing="false" onAction="#closeHelpMenu" prefHeight="41.0" prefWidth="75.0" text="Go back" />
+            <Label layoutX="33.0" layoutY="74.0" text="The aim of the game is to reach the finish line">
+               <font>
+                  <Font name="Chalkboard" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="56.0" layoutY="101.0" text="by beating the orcs and finally, the boss">
+               <font>
+                  <Font name="Chalkboard" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="36.0" layoutY="139.0" text="The orcs can be defeated by a weapon or by">
+               <font>
+                  <Font name="Chalkboard" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="124.0" layoutY="166.0" text="pushing them into the abyss">
+               <font>
+                  <Font name="Chalkboard" size="21.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
-      <Button fx:id="helpButton" layoutX="718.0" layoutY="14.0" mnemonicParsing="false" onAction="#showInstructionMenu" prefHeight="28.0" prefWidth="55.0" style="-fx-background-color: transparent; -fx-border-color: transparent;">
-         <graphic>
-            <ImageView fx:id="soundImage11" fitHeight="50.0" fitWidth="77.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Images/Gate.png" />
-               </image>
-            </ImageView>
-         </graphic>
+      <Button fx:id="helpButton" layoutX="718.0" layoutY="14.0" mnemonicParsing="false" onAction="#showInstructionMenu" prefHeight="28.0" prefWidth="55.0" style="-fx-border-color: transparent;" text="?" textFill="WHITE">
+         <font>
+            <Font size="18.0" />
+         </font>
       </Button>
    </children>
 </AnchorPane>

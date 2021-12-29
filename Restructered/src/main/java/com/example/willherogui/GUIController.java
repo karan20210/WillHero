@@ -290,17 +290,17 @@ public class GUIController implements Initializable, Serializable {
 
                 boolean collidedwithOrc=false;
 
-                for(ImageView iv: orcsInGame.keySet())
-                {
-                    if (i.getBoundsInParent().intersects(iv.getBoundsInParent()))
-                    {                          
-                        if(i != iv)
-                        {
-                            collidedwithOrc=true;
-                            orcsInGame.get(iv).collideWithOrc();
-                        }
-                    }
-                }
+//                for(ImageView iv: orcsInGame.keySet())
+//                {
+//                    if (i.getBoundsInParent().intersects(iv.getBoundsInParent()))
+//                    {
+//                        if(i != iv)
+//                        {
+//                            collidedwithOrc=true;
+//                            orcsInGame.get(iv).collideWithOrc();
+//                        }
+//                    }
+//                }
                 if(collidedwithOrc){
                     break;
                 }
@@ -348,6 +348,7 @@ public class GUIController implements Initializable, Serializable {
                         if(!orcsInGame.get(i).isAlive())
                         {
                             i.setImage(null);
+                            heroInGame.get(hero).addCoins(5);
                         }
                     }
                 }
@@ -1057,7 +1058,6 @@ public class GUIController implements Initializable, Serializable {
         Media m = new Media(Paths.get("src/main/resources/com/example/willherogui/winSound.mp3").toUri().toString());
         MediaPlayer s = new MediaPlayer(m);
         s.setCycleCount(1);
-        s.setVolume(0.25);
         s.play();
         winMenu.setOpacity(1);
         winMenu.setDisable(false);
