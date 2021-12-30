@@ -62,7 +62,7 @@
             </ImageView>
          </graphic>
       </Button>
-      <Pane fx:id="instructions" layoutX="151.0" layoutY="32.0" prefHeight="436.0" prefWidth="501.0" style="-fx-background-color: rgba(72,202,228);">
+      <Pane fx:id="instructions" disable="true" layoutX="151.0" layoutY="32.0" opacity="0.0" prefHeight="436.0" prefWidth="501.0" style="-fx-background-color: rgba(72,202,228);">
          <children>
             <Label layoutX="150.0" layoutY="22.0" text="INSTRUCTIONS" textFill="WHITE">
                <font>

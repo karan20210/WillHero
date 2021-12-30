@@ -222,6 +222,8 @@
                   <Image url="@Images/Knife.png" />
                </image>
             </ImageView>
+            <Label fx:id="axeLevel" layoutX="36.0" layoutY="10.0" text="0" />
+            <Label fx:id="knifeLevel" layoutX="117.0" layoutY="10.0" text="0" />
          </children>
       </Pane>
       <Pane fx:id="a1" layoutX="205.0" layoutY="275.0" prefHeight="209.0" prefWidth="13.0" translateX="60.0" translateY="-55.0" />

@@ -81,6 +81,9 @@ public class GUIController implements Initializable, Serializable {
      private transient ImageView knife;
      private transient Image axeImg, knifeImg;
 
+     @FXML
+     private transient Label knifeLevel, axeLevel;
+
      private Weapon Weapon1,Weapon2;
      
   
@@ -216,6 +219,17 @@ public class GUIController implements Initializable, Serializable {
                             coinChestSound.setCycleCount(1);
                             coinChestSound.setAutoPlay(true);
                             coinChestSound.play();
+                        }
+
+                        if(hero1.getCurrentWeapon()!=null)
+                        {
+                            if(hero1.getCurrentWeapon().getClass().toString().equals("class com.example.willherogui.Axe"))
+                            {
+                                axeLevel.setText(Integer.toString(hero1.getCurrentWeapon().getLevel()));
+                            }
+
+                            if(hero1.getCurrentWeapon().getClass().toString().equals("class com.example.willherogui.Knife"))
+                                knifeLevel.setText(Integer.toString(hero1.getCurrentWeapon().getLevel()));
                         }
                         break;
                     }                    
@@ -894,11 +908,11 @@ public class GUIController implements Initializable, Serializable {
 
     public void loadSavedGame(ArrayList<GameObjects> g, ActionEvent e) throws IOException {
         int i = 0;
-        for(GameObjects go: g)
-        {
-            System.out.println(i + ". " + go.getX() + " " + go.getY() + " " + go);
-            i++;
-        }
+//        for(GameObjects go: g)
+//        {
+//            System.out.println(i + ". " + go.getX() + " " + go.getY() + " " + go);
+//            i++;
+//        }
 
 
         FXMLLoader loader =  new FXMLLoader(getClass().getResource("game.fxml"));
@@ -912,8 +926,11 @@ public class GUIController implements Initializable, Serializable {
 
     private void setUpLoadedGame(GUIController a, ArrayList<GameObjects> g)
     {
-        a.hero.setTranslateX(g.get(0).getX());
-        a.helmet.setTranslateX(g.get(1).getX());
+        Hero loadedHero = (Hero)g.get(0);
+        Helmet loadedHelmet = (Helmet)g.get(1);
+
+        a.hero.setTranslateX(loadedHero.getX());
+        a.helmet.setTranslateX(loadedHero.getX());
 
         int i = 45;
         for(ImageView iv: a.orcsInGame.keySet())
@@ -935,12 +952,11 @@ public class GUIController implements Initializable, Serializable {
         a.resurrectMenu.setTranslateX(a.hero.getTranslateX());
         a.tapToStart.setTranslateX(a.hero.getTranslateX());
 
-        Hero loadedHero = (Hero)g.get(0);
+
         a.heroInGame.get(a.hero).setCurrentCoins(loadedHero.getCurrentCoins());
         a.heroInGame.get(a.hero).setScore(loadedHero.getScore());
         a.score.setText(Integer.toString(loadedHero.getScore()));
         a.coinsCollected.setText(Integer.toString(loadedHero.getCurrentCoins()));
-        System.out.println(loadedHero.getCurrentCoins());
     }
 
     @FXML
@@ -959,15 +975,22 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     protected void gameOver()
     {
-        if(!over && firstRessurect)
+        if(hero1.getCurrentCoins() >= 15)
         {
-            askForResurrect();
-            over = true;
-            firstRessurect = false;
+            if(!over && firstRessurect)
+            {
+                askForResurrect();
+                over = true;
+                firstRessurect = false;
+            }
+
+            else
+                notResurrect(new ActionEvent());
         }
 
         else
             notResurrect(new ActionEvent());
+
     }
 
     @FXML
@@ -1019,19 +1042,30 @@ public class GUIController implements Initializable, Serializable {
     protected void resurrect(ActionEvent event)
     {
         int c = Integer.valueOf(coinsCollected.getText());
-        if(c >= 15)
+        try
         {
-            c = c-15;
-            coinsCollected.setText(Integer.toString(c));
-            resurrectMenu.setOpacity(0);
-            resurrectMenu.setDisable(true);
-            previous(heroXbeforeFalling); 
-            over = false;
-            heroInGame.get(hero).setAlive(true);
-            resumeGame(event);
+            if(c >= 15)
+            {
+                c = c-15;
+                coinsCollected.setText(Integer.toString(c));
+                resurrectMenu.setOpacity(0);
+                resurrectMenu.setDisable(true);
+                previous(heroXbeforeFalling);
+                over = false;
+                heroInGame.get(hero).setAlive(true);
+                resumeGame(event);
+            }
+            else
+            {
+                throw new InsufficientCoinsException("NOT ENOUGH COINS");
+            }
         }
-        else
+
+        catch (InsufficientCoinsException e)
+        {
+            System.out.println(e.getMessage());
             notResurrect(event);
+        }
     }
 
     public String getGameName()
@@ -1042,14 +1076,12 @@ public class GUIController implements Initializable, Serializable {
 
     public void checkWin(){
         if(!boss1.isAlive()){
-            System.out.println("win");
             notwon=false;
             win();
         }
 
         else{
             previous(boss.getTranslateX());
-
         }
     }
 

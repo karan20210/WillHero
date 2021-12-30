@@ -37,6 +37,9 @@ public class LoadMenuController implements Initializable {
     private Scene scene;
 
     @FXML
+    private Label noSaveFound;
+
+    @FXML
     private Button soundOn;
     @FXML
     private Button soundOff;
@@ -81,22 +84,30 @@ public class LoadMenuController implements Initializable {
 //            in.close();
 //            file.close();
 
+            int no_of_saves = 0;
             FileInputStream file = new FileInputStream("save.txt");
             ObjectInputStream in = new ObjectInputStream(file);
             ArrayList<HashMap<GUIController, ArrayList<GameObjects>>> s = (ArrayList<HashMap<GUIController, ArrayList<GameObjects>>>)in.readObject();
             for(HashMap<GUIController, ArrayList<GameObjects>> a: s) {
                 for(GUIController i: a.keySet())
+                {
                     Box.getChildren().add(new slot(i.getGameName(), s));
+                    no_of_saves++;
+                }
             }
             in.close();
             file.close();
+
+            if(no_of_saves == 0)
+                throw new saveNotFoundException("No saves found");
         }
 
         catch (Exception e)
         {
             System.out.println(e);
+            noSaveFound.setOpacity(1);
+            noSaveFound.setDisable(false);
         }
-
     }
 
     public void onClickGoBack(ActionEvent event) throws IOException{

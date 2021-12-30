@@ -65,6 +65,11 @@ public abstract class Weapon extends GameObjects
 
         
     }
+
+    public void setHelmet(Pane helmet) {
+        this.helmet = helmet;
+    }
+
     public Pane getHelmet() {
         return helmet;
     }
