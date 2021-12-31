@@ -100,7 +100,7 @@
             <Image url="@Images/Islands/P3.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p9" fitHeight="150.0" fitWidth="200.0" layoutX="2404.0" layoutY="205.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p9" fitHeight="150.0" fitWidth="200.0" layoutX="2404.0" layoutY="208.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/p4.png" />
          </image>
@@ -110,7 +110,7 @@
             <Image url="@Images/Islands/P2.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="p12" fitHeight="188.0" fitWidth="211.0" layoutX="3307.0" layoutY="141.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="p12" fitHeight="188.0" fitWidth="211.0" layoutX="3223.0" layoutY="133.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/Islands/P3.png" />
          </image>
@@ -376,12 +376,12 @@
             <Image url="@Images/Coin.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tnt2" fitHeight="77.0" fitWidth="55.0" layoutX="2417.0" layoutY="170.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tnt2" fitHeight="77.0" fitWidth="55.0" layoutX="2417.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/TnT.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="tnt3" fitHeight="77.0" fitWidth="55.0" layoutX="3317.0" layoutY="183.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="tnt3" fitHeight="77.0" fitWidth="55.0" layoutX="3234.0" layoutY="172.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/TnT.png" />
          </image>
@@ -396,12 +396,12 @@
             <Image url="@Images/Islands/p4.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_7" fitHeight="68.0" fitWidth="55.0" layoutX="2477.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_7" fitHeight="68.0" fitWidth="55.0" layoutX="2477.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/GreenOrc.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_8" fitHeight="96.0" fitWidth="55.0" layoutX="2549.0" layoutY="162.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_8" fitHeight="96.0" fitWidth="55.0" layoutX="2549.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/RedOrc.png" />
          </image>
@@ -411,7 +411,7 @@
             <Image url="@Images/GreenOrc.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="orc_11" fitHeight="96.0" fitWidth="55.0" layoutX="3427.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="orc_11" fitHeight="96.0" fitWidth="55.0" layoutX="3329.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Images/RedOrc.png" />
          </image>

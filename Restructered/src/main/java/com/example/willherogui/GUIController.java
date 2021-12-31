@@ -214,11 +214,15 @@ public class GUIController implements Initializable, Serializable {
                     if(!chest.isOpen()){
                         {
                             chest.collide(hero1);
-                            Media coinChestMedia = new Media(Paths.get("src/main/resources/com/example/willherogui/coinChestSound.mp3").toUri().toString());
-                            coinChestSound = new MediaPlayer(coinChestMedia);
-                            coinChestSound.setCycleCount(1);
-                            coinChestSound.setAutoPlay(true);
-                            coinChestSound.play();
+
+                            if(MainMenuController.getSoundStatus()){
+                                Media coinChestMedia = new Media(Paths.get("src/main/resources/com/example/willherogui/coinChestSound.mp3").toUri().toString());
+                                coinChestSound = new MediaPlayer(coinChestMedia);
+                                coinChestSound.setCycleCount(1);
+                                coinChestSound.setAutoPlay(true);
+                                coinChestSound.play();
+                            }
+                            
                         }
 
                         if(hero1.getCurrentWeapon()!=null)
@@ -394,24 +398,56 @@ public class GUIController implements Initializable, Serializable {
                                     @Override
                                     public void run() {
                                         i.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/blast.png").toUri().toString()));
-                                        i.setScaleX(3);
-                                        i.setScaleY(1);
+                                        // i.setFitWidth(500);
+                                        // i.setTranslateY(-50);
+                                        // i.setTranslateX(-10);
+                                        // i.setFitHeight(100);
+                                        
+                                        
 
-                                        Media obstacleMedia = new Media(Paths.get("src/main/resources/com/example/willherogui/blast.mp3").toUri().toString());
-                                        blastSound = new MediaPlayer(obstacleMedia);
-                                        blastSound.setCycleCount(1);
-                                        blastSound.setAutoPlay(true);
-                                        blastSound.play();
+                                        if(MainMenuController.getSoundStatus()){
+                                            
+                                            Media obstacleMedia = new Media(Paths.get("src/main/resources/com/example/willherogui/blast.mp3").toUri().toString());
+                                            blastSound = new MediaPlayer(obstacleMedia);
+                                            blastSound.setCycleCount(1);
+                                            blastSound.setAutoPlay(true);
+                                            blastSound.play();
+
+                                        } 
 
                                         if(hero.getTranslateX() - i.getLayoutX() < 50)
                                         {
                                             gameOver();
                                         }
 
+                                        new java.util.Timer().schedule(
+                                            new java.util.TimerTask(){
+                                                @Override
+                                                public void run(){
+                                                    i.setOpacity(0);
+                                                    
+                                                }
+                                            },1000
+                
+                                        );
+                                       
+
+                                        // i.setOpacity(0);
+                                        
+
+
+                                        
+
                                     }
                                 },
                                 2000
                         );
+
+                       
+
+                      
+
+                        
                     }
                 }
             }
@@ -852,7 +888,7 @@ public class GUIController implements Initializable, Serializable {
                 FileInputStream file = new FileInputStream("save.txt");
                 ObjectInputStream in = new ObjectInputStream(file);
 //                ArrayList<HashMap<String, ArrayList<GameObjects>>> s = (ArrayList<HashMap<String, ArrayList<GameObjects>>>)in.readObject();
-                ArrayList<HashMap<GUIController, ArrayList<GameObjects>>> s = (ArrayList<HashMap<GUIController, ArrayList<GameObjects>>>)in.readObject();
+                ArrayList<HashMap <GUIController, ArrayList<GameObjects> > > s = (ArrayList <HashMap <GUIController, ArrayList<GameObjects> > >)in.readObject();
                 for(HashMap<GUIController, ArrayList<GameObjects>> sg: s)
                 {
 //                    savedGames.add(sg);
@@ -866,6 +902,7 @@ public class GUIController implements Initializable, Serializable {
             {
                 System.out.println(e);
             }
+            
 
             gameName = saveGameName.getText() + " " + new java.util.Date();
             FileOutputStream file = new FileOutputStream("save.txt");
@@ -1013,11 +1050,15 @@ public class GUIController implements Initializable, Serializable {
         pauseGame(event);
         pausemenu.setDisable(true);
         pausemenu.setOpacity(0);
-        Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/gameOverSound.mp3").toUri().toString());
-        MediaPlayer sound = new MediaPlayer(media);
-        sound.setCycleCount(1);
-        sound.setVolume(0.25);
-        sound.play();
+        if(MainMenuController.getSoundStatus()){
+            Media media = new Media(Paths.get("src/main/resources/com/example/willherogui/gameOverSound.mp3").toUri().toString());
+            MediaPlayer sound = new MediaPlayer(media);
+            sound.setCycleCount(1);
+            sound.setVolume(0.25);
+            sound.play();
+
+        }
+        
     }
 
     public void previous(double position){

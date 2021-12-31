@@ -57,7 +57,16 @@ public abstract class Weapon extends GameObjects
         timesFired = 0;
         level++;
         damage+=10;
+        if(level>=2){
+            setWeaponUprgraded2(weaponImg);
+        }
+        else{
+            setWeaponUprgraded1(weaponImg);
+        }
     }
+
+    public abstract void setWeaponUprgraded1(ImageView i);
+    public abstract void setWeaponUprgraded2(ImageView i);
 
     public void setVisibility(boolean power,double opacity){
         weaponImg.setOpacity(opacity);

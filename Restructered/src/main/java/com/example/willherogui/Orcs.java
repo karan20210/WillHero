@@ -17,6 +17,7 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
     private boolean alive;
     private transient ImageView orcImg;
     private transient TranslateTransition orcJump;
+    private int shotCount=0;
 
     Orcs(double x, double y,ImageView orcImg)
     {
@@ -53,9 +54,21 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
     public void shot(int damage)
     {
         health = health - (damage/20);
+        shotCount++;
+        
+        if(health<=70){
+            setDamageImg2(orcImg);
+        }
+        else if(health<=40){
+            setDamageImg1(orcImg);
+        }
+        
         if(health <= 0)
             alive = false;
     }
+
+    public abstract void setDamageImg1(ImageView orcImg);
+    public abstract void setDamageImg2(ImageView orcImg);
 
     public void resumeJump(){
         orcJump.play();
