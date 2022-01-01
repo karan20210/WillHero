@@ -6,5 +6,7 @@ It's a JavaFX built game based on the famous game "Will Hero"
 
 You must have JavaFX libraries imported in your IDE to run this program
 
-Made by:-
+Made with love and blood by:-
 Karan Baboota(2020210) & Bhavya Jain(2020428)
+
+Enjoy :)
