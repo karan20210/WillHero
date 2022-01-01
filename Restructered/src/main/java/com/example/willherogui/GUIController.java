@@ -696,13 +696,19 @@ public class GUIController implements Initializable, Serializable {
 
     private boolean moveMenu=true;
     private boolean notwon=true;
+    private boolean shootEnd=true;
     @FXML
     protected void onSpace(KeyEvent event) {
         if(notwon){
+           
             ft.stop();
+            if(shootEnd==false){
+                return;
+            }
             if(event.getCode() == KeyCode.ENTER && !pauseMenuActive && !firstJump && !over && jumpOver)
-            {
-                hero1.weaponShoot();
+            {   
+                shootEnd=false;
+                shootEnd=hero1.weaponShoot();
             }
             
     
@@ -1127,11 +1133,14 @@ public class GUIController implements Initializable, Serializable {
     }
 
     public void win()
-    {
-        Media m = new Media(Paths.get("src/main/resources/com/example/willherogui/winSound.mp3").toUri().toString());
-        MediaPlayer s = new MediaPlayer(m);
-        s.setCycleCount(1);
-        s.play();
+    {   
+        if(MainMenuController.getSoundStatus()){
+            Media m = new Media(Paths.get("src/main/resources/com/example/willherogui/winSound.mp3").toUri().toString());
+            MediaPlayer s = new MediaPlayer(m);
+            s.setCycleCount(1);
+            s.play();
+        }
+        
         winMenu.setOpacity(1);
         winMenu.setDisable(false);
         winCoinText.setText("You collected " + coinsCollected.getText() + " coins");

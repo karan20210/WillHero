@@ -154,11 +154,13 @@ public class Hero extends GameObjects implements Movable
 //        }
     }
 
-    public void weaponShoot()
-    {
+    public boolean weaponShoot()
+    {   
         if(currentWeapon!=null){
             currentWeapon.shoot(this);
         }
+
+        return true;
     }
     public void resumeJump(){   
         hJump.play();

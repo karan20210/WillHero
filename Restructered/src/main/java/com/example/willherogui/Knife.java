@@ -12,7 +12,7 @@ public class Knife extends Weapon
 {
     Knife(ImageView knife, Image img, Pane helmet)
     {
-        super(knife,img,40, helmet);
+        super(knife,img,20, helmet);
     }
 
     @Override
@@ -24,6 +24,8 @@ public class Knife extends Weapon
     public void setWeaponUprgraded2(ImageView i){
         i.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/KnifeUpgraded1.png").toUri().toString()));
     }
+
+   
 
    
 }

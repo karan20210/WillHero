@@ -57,7 +57,7 @@ public abstract class Weapon extends GameObjects
         timesFired = 0;
         level++;
         damage+=10;
-        if(level>=2){
+        if(level<=2){
             setWeaponUprgraded2(weaponImg);
         }
         else{
@@ -83,6 +83,16 @@ public abstract class Weapon extends GameObjects
         return helmet;
     }
 
+    public ImageView createWeapon(double h, double w,double x , double y){
+        ImageView weapon = new ImageView();
+        weapon.setFitHeight(h);
+        weapon.setFitWidth(w);
+        weapon.setLayoutX(x);
+        weapon.setLayoutY(y);
+        weapon.setImage(new Image(Paths.get("src/main/resources/com/example/willherogui/Images/Axe.png").toUri().toString()));
+        return weapon;
+    }
+
     public void shoot(Hero h)
     {
         if(!fired)
@@ -102,6 +112,7 @@ public abstract class Weapon extends GameObjects
             moveHelmet.setByX(+200);
             moveHelmet.setCycleCount(1);
             moveHelmet.play();
+            fired=true;
 
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
@@ -124,6 +135,45 @@ public abstract class Weapon extends GameObjects
                         }
                     }, 400
             );
+
+//             double he= weaponImg.getFitHeight();
+//             double w=weaponImg.getFitWidth();
+//             double x=weaponImg.getLayoutX();
+//             double y=weaponImg.getLayoutY(); 
+//             ImageView newWeapon=createWeapon(he, w, x, y);
+                
+//             TranslateTransition moveHelmet = new TranslateTransition();
+//             moveHelmet.setDuration(Duration.millis(400));
+//             moveHelmet.setNode(newWeapon);
+//             moveHelmet.setByX(+200);
+//             moveHelmet.setCycleCount(1);
+//             moveHelmet.play();
+
+//             new java.util.Timer().schedule(
+//                 new java.util.TimerTask() {
+//                     @Override
+//                     public void run() {
+// //                            TranslateTransition moveBack = new TranslateTransition();
+// //                            moveBack.setDuration(Duration.millis(10));
+// //                            moveBack.setNode(weaponImg);
+// //                            moveBack.setByX(-200);
+// //                            moveBack.setCycleCount(1);
+// //                            moveBack.play();
+
+//                         TranslateTransition moveBackHelmet = new TranslateTransition();
+//                         moveBackHelmet.setDuration(Duration.millis(10));
+//                         moveBackHelmet.setNode(newWeapon);
+//                         moveBackHelmet.setByX(-200);
+//                         moveBackHelmet.setCycleCount(1);
+//                         moveBackHelmet.play();
+//                         fired = false;
+//                     }
+//                 }, 400
+//             );
+
+
+
+            
         }
 
 
