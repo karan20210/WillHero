@@ -467,7 +467,7 @@ public class GUIController implements Initializable, Serializable {
         //Adding Objects
 
         //Hero1 Attributes
-        hero1= new Hero(hero.getLayoutX(), hero.getLayoutY());
+        hero1 = Hero.getInstance(hero.getLayoutX(), hero.getLayoutY());
         hero1.setImg(hero);
         hero1.setWeaponsTab(tab1,tab2);
         hero1.addCoinsText(coinsCollected);       

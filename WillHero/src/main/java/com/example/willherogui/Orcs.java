@@ -17,7 +17,6 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
     private boolean alive;
     private transient ImageView orcImg;
     private transient TranslateTransition orcJump;
-    
 
     Orcs(double x, double y,ImageView orcImg)
     {

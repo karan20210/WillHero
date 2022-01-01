@@ -6,6 +6,7 @@ import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.ResourceBundle;
 
 import javafx.collections.ObservableList;
@@ -89,9 +90,11 @@ public class LoadMenuController implements Initializable {
             ObjectInputStream in = new ObjectInputStream(file);
             ArrayList<HashMap<GUIController, ArrayList<GameObjects>>> s = (ArrayList<HashMap<GUIController, ArrayList<GameObjects>>>)in.readObject();
             for(HashMap<GUIController, ArrayList<GameObjects>> a: s) {
-                for(GUIController i: a.keySet())
+                Iterator i = a.keySet().iterator();
+                while (i.hasNext())
                 {
-                    Box.getChildren().add(new slot(i.getGameName(), s));
+                    GUIController temp = (GUIController) i.next();
+                    Box.getChildren().add(new slot(temp.getGameName(), s));
                     no_of_saves++;
                 }
             }

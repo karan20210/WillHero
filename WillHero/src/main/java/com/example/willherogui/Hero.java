@@ -9,7 +9,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
 public class Hero extends GameObjects implements Movable
-{   
+{
+    private static Hero heroObj = null;
     // private Pane heroBox;
     private transient ImageView heroImg;
     private boolean alive;
@@ -29,12 +30,19 @@ public class Hero extends GameObjects implements Movable
 
     private transient TranslateTransition hJump;
 
-    Hero(double x, double y)
+    private Hero(double x, double y)
     {
         super(x,y);
         alive = true;
         currentCoins = 0;
         score = 0;
+    }
+
+    public static Hero getInstance(double x, double y)
+    {
+        if(heroObj == null)
+            heroObj = new Hero(x, y);
+        return heroObj;
     }
 
     public void setImg(ImageView heroImg){
