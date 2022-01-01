@@ -79,7 +79,7 @@
                   <Font name="Chalkboard" size="21.0" />
                </font>
             </Label>
-            <Label layoutX="31.0" layoutY="303.0" text="If you die, you can resurrect by spending 15 coins">
+            <Label layoutX="31.0" layoutY="329.0" text="If you die, you can resurrect by spending 15 coins">
                <font>
                   <Font name="Chalkboard" size="20.0" />
                </font>
@@ -103,6 +103,11 @@
             <Label layoutX="124.0" layoutY="166.0" text="pushing them into the abyss">
                <font>
                   <Font name="Chalkboard" size="21.0" />
+               </font>
+            </Label>
+            <Label layoutX="31.0" layoutY="297.0" text="You can use freeze button to stop all orcs for 40 coins">
+               <font>
+                  <Font name="Chalkboard" size="18.0" />
                </font>
             </Label>
          </children>

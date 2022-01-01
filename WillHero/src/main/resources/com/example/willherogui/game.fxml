@@ -656,5 +656,14 @@
             </Label>
          </children>
       </Pane>
+      <Button fx:id="freezeButton" layoutX="27.0" layoutY="423.0" mnemonicParsing="false" onAction="#freeze" style="-fx-background-color: transparent;">
+         <graphic>
+            <ImageView fitHeight="49.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Images/Freeze.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
     </children>
 </Pane>

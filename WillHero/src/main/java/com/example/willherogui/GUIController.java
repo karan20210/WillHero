@@ -158,6 +158,9 @@ public class GUIController implements Initializable, Serializable {
     @FXML
     private transient Label winCoinText;
 
+    @FXML
+    private transient Button freezeButton;
+
     //Sounds
     private transient MediaPlayer weaponSound;
     private transient MediaPlayer coinChestSound;
@@ -165,7 +168,7 @@ public class GUIController implements Initializable, Serializable {
    
 
     //Transitions
-    transient TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove, axeMove, knifeMove, axeJump, knifeJump;
+    transient TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove, axeMove, knifeMove, axeJump, knifeJump, freezeButtonMove;
     transient HashMap<Orcs, TranslateTransition> orcJumps = new HashMap<>();
     transient ArrayList<TranslateTransition> orcBoxJumps = new ArrayList<TranslateTransition>();
     transient RotateTransition rotate;
@@ -696,6 +699,39 @@ public class GUIController implements Initializable, Serializable {
     }
 
     @FXML
+    private void freeze(ActionEvent event)
+    {
+        game.requestFocus();
+        if(hero1.getCurrentCoins() > 40)
+        {
+            int c = Integer.valueOf(coinsCollected.getText());
+            c = c-40;
+            coinsCollected.setText(Integer.toString(c));
+            hero1.setCurrentCoins(c);
+            for(ImageView i: orcsInGame.keySet())
+            {
+                if(orcsInGame.get(i).isAlive()) {
+                    orcsInGame.get(i).pauseJump();
+                }
+            }
+            new java.util.Timer().schedule(
+                    new java.util.TimerTask() {
+                        @Override
+                        public void run() {
+                            for(ImageView i: orcsInGame.keySet())
+                            {
+                                if(orcsInGame.get(i).isAlive()) {
+                                    orcsInGame.get(i).resumeJump();
+                                }
+                            }
+                        }
+                    }, 5000
+            );
+        }
+
+    }
+
+    @FXML
     private void moveMenus(int x)
     {
         pauseButtonMove = new TranslateTransition();
@@ -774,6 +810,13 @@ public class GUIController implements Initializable, Serializable {
         resurrectMenuMove.setByX(x);
         resurrectMenuMove.setCycleCount(1);
         resurrectMenuMove.play();
+
+        freezeButtonMove = new TranslateTransition();
+        freezeButtonMove.setDuration(Duration.millis(150));
+        freezeButtonMove.setNode(freezeButton);
+        freezeButtonMove.setByX(x);
+        freezeButtonMove.setCycleCount(1);
+        freezeButtonMove.play();
 
     }
 
@@ -934,6 +977,7 @@ public class GUIController implements Initializable, Serializable {
         a.gameOverMenu.setTranslateX(a.hero.getTranslateX());
         a.resurrectMenu.setTranslateX(a.hero.getTranslateX());
         a.tapToStart.setTranslateX(a.hero.getTranslateX());
+        a.freezeButton.setTranslateX(a.hero.getTranslateX());
 
 
         a.heroInGame.get(a.hero).setCurrentCoins(loadedHero.getCurrentCoins());
@@ -1019,6 +1063,7 @@ public class GUIController implements Initializable, Serializable {
         volumeButtons.setTranslateX(position);
         coinsCollected.setTranslateX(position);
         coinsCollectedImg.setTranslateX(position);
+        freezeButton.setTranslateX(position);
         score.setTranslateX(position);
         hero.setTranslateX(position-70);
         helmet.setTranslateX(position-70);        
@@ -1035,6 +1080,7 @@ public class GUIController implements Initializable, Serializable {
             {
                 c = c-15;
                 coinsCollected.setText(Integer.toString(c));
+                hero1.setCurrentCoins(c);
                 resurrectMenu.setOpacity(0);
                 resurrectMenu.setDisable(true);
                 previous(heroXbeforeFalling);
