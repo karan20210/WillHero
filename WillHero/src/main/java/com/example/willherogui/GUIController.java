@@ -171,7 +171,7 @@ public class GUIController implements Initializable, Serializable {
     transient TranslateTransition hJump, jump,fall, hmoveRight, moveRight, sceneMove, pauseMenuMove, pauseButtonMove, scoreMove, orcJump, coinsCollectedMove, coinsCollectedImgMove, saveMenuMove, weaponTabMove, volOnMove, gameOverMenuMove, resurrectMenuMove, axeMove, knifeMove, axeJump, knifeJump, freezeButtonMove;
     transient HashMap<Orcs, TranslateTransition> orcJumps = new HashMap<>();
     transient ArrayList<TranslateTransition> orcBoxJumps = new ArrayList<TranslateTransition>();
-    transient RotateTransition rotate;
+    transient RotateTransition rotate, freezeRotate;
     transient FadeTransition ft;
 
     //Useful boolean values
@@ -714,6 +714,13 @@ public class GUIController implements Initializable, Serializable {
                     orcsInGame.get(i).pauseJump();
                 }
             }
+
+            rotate = new RotateTransition(Duration.millis(5000), freezeButton);
+            rotate.setByAngle(360);
+            rotate.setCycleCount(Animation.INDEFINITE);
+            rotate.setInterpolator(Interpolator.LINEAR);
+            rotate.play();
+
             new java.util.Timer().schedule(
                     new java.util.TimerTask() {
                         @Override
@@ -723,6 +730,7 @@ public class GUIController implements Initializable, Serializable {
                                 if(orcsInGame.get(i).isAlive()) {
                                     orcsInGame.get(i).resumeJump();
                                 }
+                                rotate.pause();
                             }
                         }
                     }, 5000
