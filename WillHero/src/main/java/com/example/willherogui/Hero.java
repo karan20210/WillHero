@@ -42,6 +42,9 @@ public class Hero extends GameObjects implements Movable
     {
         if(heroObj == null)
             heroObj = new Hero(x, y);
+        heroObj.setCurrentCoins(0);
+        heroObj.setAlive(true);
+        heroObj.setScore(0);
         return heroObj;
     }
 

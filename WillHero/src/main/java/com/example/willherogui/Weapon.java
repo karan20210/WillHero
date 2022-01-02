@@ -15,6 +15,11 @@ public abstract class Weapon extends GameObjects
     private int level;
     private int damage;
     private int timesFired;
+
+    public ImageView getWeaponImg() {
+        return weaponImg;
+    }
+
     private transient ImageView weaponImg;
     private transient Pane helmet;
     private boolean fired;

@@ -26,6 +26,10 @@ public abstract class Orcs extends GameObjects implements Movable, Collision
         this.orcImg=orcImg;
     }
 
+    public ImageView getOrcImg() {
+        return orcImg;
+    }
+
     Orcs(double x, double y, ImageView orcImg, int h)
     {
         super(x,y);
